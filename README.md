@@ -38,7 +38,7 @@ This project is a collaborative web development effort to create a comprehensive
 ### Setup
 1. Clone the repository:
    ```
-   git clone https://github.com/hamiltonnBC/CS_TA_Website.git
+   git clone https://github.com/BC-CS-Website-Team/CS_TA_Website.git
    ```
 2. Navigate to the project directory:
    ```
@@ -92,11 +92,11 @@ We welcome contributions from all team members, regardless of experience level. 
 - [Git and GitHub for Beginners](https://www.freecodecamp.org/news/git-and-github-for-beginners/)
 
 ## Project Management
-We use GitHub Projects for task management. Check the [project board](https://github.com/hamiltonnBC/CS_TA_Website/projects) for current tasks and their status.
+We use GitHub Projects for task management. Check the [project board](https://github.com/BC-CS-Website-Team/CS_TA_Website/projects) for current tasks and their status.
 
 ## Support
 If you need help or have questions, please:
-1. Check the existing [issues](https://github.com/hamiltonnBC/CS_TA_Website/issues) for similar problems or questions.
+1. Check the existing [issues](https://github.com/BC-CS-Website-Team/CS_TA_Website/issues) for similar problems or questions.
 2. If your issue isn't addressed, create a new issue with a descriptive title and detailed description.
 3. For urgent matters, contact Nicholas Hamilton at hamiltonn@berea.edu
 
