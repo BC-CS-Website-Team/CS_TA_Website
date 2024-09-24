@@ -58,7 +58,7 @@ This is a static website, so there's no need for a server or build process to ru
 
 For a more dynamic development experience, you can use a simple local server:
 1. If you have Python installed, you can run:
-   - For Python 3.x: `python -m http.server`
+   - For Python 3.x: `python -m http.server` You may need to type "python3"
    - For Python 2.x: `python -m SimpleHTTPServer`
 2. Then open `http://localhost:8000` in your browser.
 
