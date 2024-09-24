@@ -6,7 +6,7 @@ This project is a collaborative web development effort to create a comprehensive
 ## Features
 - Home page with program overview
 - Committee pages (Tech Career Dev, Creative Space, Stars)
-- Clubs information page
+- Clubs information page (NSBE, Code Together, Girls Who Code)
 - TA profiles page
 - Contributions page for program impact
 - Alumni showcase
