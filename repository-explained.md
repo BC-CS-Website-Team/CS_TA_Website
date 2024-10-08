@@ -4,35 +4,47 @@
 
 ```
 .
-├──  CONTRIBUTING.md
-├──  index.html
-├──  README.md
-├──  scripts
-│  └──  build.js
-└──  src
-   ├──  components
-   │  ├──  footer.html
-   │  ├──  header.html
-   │  └──  navigation.html
-   ├──  css
-   │  ├──  creative-space.css
-   │  ├──  main.css
-   │  ├──  navigation.css
-   │  └──  responsive.css
-   ├──  js
-   │  ├──  main.js
-   │  ├──  navigation.js
-   │  └──  utils.js
-   └──  pages
-      ├──  alumni.html
-      ├──  career-dev.html
-      ├──  clubs.html
-      ├──  contributions.html
-      ├──  creative-space.html
-      ├──  diversity.html
-      ├──  index.html
-      ├──  meet-programmers.html
-      └──  meet-tas.html
+├── CONTRIBUTING.md
+├── index.html
+├── README.md
+├── scripts
+│   └── build.js
+└── src
+    ├── components
+    │   ├── footer.html
+    │   ├── header.html
+    │   └── navigation.html
+    ├── css
+    │   ├── career-dev.css
+    │   ├── creative-space.css
+    │   ├── diversity.css
+    │   ├── main.css
+    │   ├── navigation.css
+    │   └── responsive.css
+    ├── js
+    │   ├── main.js
+    │   ├── navigation.js
+    │   └── utils.js
+    ├── images
+    │   └── resources-svgrepo-com.svg
+    └── pages
+        ├── alumni.html
+        ├── career-dev
+        │   ├── index.html
+        │   ├── career-resources.html
+        │   ├── conferences.html
+        │   └── internship-opportunities.html
+        ├── clubs.html
+        ├── contributions.html
+        ├── creative-space
+        │   ├── index.html
+        │   └── workshops.html
+        ├── diversity
+        │   ├── index.html
+        │   ├── diversity-resources.html
+        │   └── world-map.html
+        ├── meet-programmers.html
+        └── meet-tas.html
 ```
 
 ## Detailed Explanation
@@ -59,7 +71,9 @@ Contains the source code for the website.
 
 #### `css` Directory
 
-- `creative-space.css`: Specific styles for the creative space page.
+- `career-dev.css`: Specific styles for the career development pages.
+- `creative-space.css`: Specific styles for the creative space pages.
+- `diversity.css`: Specific styles for the diversity pages.
 - `main.css`: Global styles applied across all pages.
 - `navigation.css`: Styles specific to the navigation component.
 - `responsive.css`: Styles for making the website responsive across different devices.
@@ -70,16 +84,29 @@ Contains the source code for the website.
 - `navigation.js`: JavaScript specific to navigation functionality.
 - `utils.js`: Utility functions used across the website.
 
+#### `images` Directory
+
+- Contains image assets used throughout the website.
+
 #### `pages` Directory
 
-Contains individual HTML files for each page of the website:
+Contains individual HTML files and subdirectories for each section of the website:
 
 - `alumni.html`: Page showcasing alumni of the CS TA program.
-- `career-dev.html`: Information about career development opportunities.
+- `career-dev/`: Directory for career development pages.
+  - `index.html`: Main career development page.
+  - `career-resources.html`: Information about career resources.
+  - `conferences.html`: Information about relevant conferences.
+  - `internship-opportunities.html`: List of internship opportunities.
 - `clubs.html`: Information about CS-related clubs.
 - `contributions.html`: Highlights contributions made by TAs or to the program.
-- `creative-space.html`: Showcases creative projects or ideas.
-- `diversity.html`: Information about diversity initiatives in the program.
+- `creative-space/`: Directory for creative space pages.
+  - `index.html`: Main creative space page.
+  - `workshops.html`: Information about creative workshops.
+- `diversity/`: Directory for diversity pages.
+  - `index.html`: Main diversity page.
+  - `diversity-resources.html`: Information about diversity resources.
+  - `world-map.html`: World map showing student origins.
 - `meet-programmers.html`: Introduces programmers involved in the program.
 - `meet-tas.html`: Introduces the current Teaching Assistants.
 
@@ -88,61 +115,37 @@ Contains individual HTML files for each page of the website:
 ### HTML Files
 
 - `index.html` (in root): The homepage of the website.
-- Pages in `src/pages/`: Each file represents a different page of the website, focusing on specific aspects of the CS TA program.
+- Pages in `src/pages/`: Each file or subdirectory represents a different section of the website, focusing on specific aspects of the CS TA program.
 
 ### CSS Files
 
-- `main.css`: Contains global styles applied to all pages, including:
-  - Basic reset styles
-  - Typography settings
-  - Layout structures
-  - Common component styles
-- `creative-space.css`: Specific styles for the creative space page, like project layouts or unique color schemes.
-- `navigation.css`: Styles for the navigation menu, including layout, colors, and hover effects.
-- `responsive.css`: Contains media queries and flexible layouts to ensure the website looks good on all device sizes.
+- `main.css`: Contains global styles applied to all pages.
+- Section-specific CSS files (e.g., `career-dev.css`, `creative-space.css`, `diversity.css`): Contain styles specific to each main section of the website.
+- `navigation.css`: Styles for the navigation menu.
+- `responsive.css`: Contains media queries and flexible layouts for responsiveness.
 
 ### JavaScript Files
 
-- `main.js`: Handles general website functionality, such as:
-  - Initializing components
-  - Managing global state
-  - Handling common interactions
-- `navigation.js`: Manages navigation-specific functionality:
-  - Highlighting the current page in the menu
-  - Handling mobile menu toggle
-  - Smooth scrolling to sections
-- `utils.js`: Contains utility functions that might be used across different scripts, such as:
-  - Date formatting
-  - Data validation
-  - Helper functions for DOM manipulation
+- `main.js`: Handles general website functionality.
+- `navigation.js`: Manages navigation-specific functionality.
+- `utils.js`: Contains utility functions used across different scripts.
 
 ### Component Files
 
-These HTML snippets (`footer.html`, `header.html`, `navigation.html`) are used to maintain consistency across pages and make updates easier. 
+The HTML snippets in the `components` directory (`footer.html`, `header.html`, `navigation.html`) are used to maintain consistency across pages and make updates easier.
 
 ### `build.js`
 
-This script can be used for tasks like:
-- Minifying CSS and JavaScript
-- Optimizing images
-- Generating a production-ready version of the website
+This script can be used for tasks like minifying CSS and JavaScript, optimizing images, and generating a production-ready version of the website.
 
 ### `CONTRIBUTING.md`
 
-Provides guidelines for TAs or other contributors on how to:
-- Set up the development environment
-- Make changes to the codebase
-- Submit pull requests
-- Follow coding standards
+Provides guidelines for TAs or other contributors on how to set up the development environment, make changes to the codebase, submit pull requests, and follow coding standards.
 
 ### `README.md`
 
-- Offers an overview of the project
-- Provides setup instructions
-- Lists features and project structure
+Offers an overview of the project, provides setup instructions, and lists features and project structure.
 
 ## Project Structure Insights
 
-This structure displays a static website with multiple pages, using vanilla HTML, CSS, and JavaScript. The separation of concerns (HTML for structure, CSS for presentation, JS for behavior) is well-maintained. The use of component files (`header.html`, `footer.html`, `navigation.html`) is an attempt to keep the codebase DRY (Don't Repeat Yourself) and maintainable.
-
-
+This structure represents a static website with multiple pages and sections, using vanilla HTML, CSS, and JavaScript. The separation of concerns (HTML for structure, CSS for presentation, JS for behavior) is well-maintained. The use of component files and the organization of pages into subdirectories keeps the codebase DRY (Don't Repeat Yourself) and maintainable. The structure with subdirectories for main sections (career-dev, creative-space, diversity) allows for better organization and scalability.
