@@ -51,92 +51,74 @@
 
 ### Root Directory
 
-- `CONTRIBUTING.md`: Guidelines for contributors to the project.
-- `index.html`: The main entry point of the website.
-- `README.md`: Project documentation and setup instructions.
+- `index.html`: The main entry point of the website. It includes links to the main CSS files (`main.css` and `responsive.css`) and JavaScript files (`main.js` and `navigation.js`).
 
-### `scripts` Directory
+### Committee Folders and Index Files
 
-- `build.js`: Script for building or bundling the project (if needed).
+The website is organized into three main committee sections, each with its own folder and index file:
 
-### `src` Directory
+1. Career Development (`src/pages/career-dev/`)
+   - `index.html`: Main page for career development resources.
+   - Uses `career-dev.css` for specific styling.
 
-Contains the source code for the website.
+2. Creative Space (`src/pages/creative-space/`)
+   - `index.html`: Main page for creative projects and initiatives.
+   - Uses `creative-space.css` for specific styling.
 
-#### `components` Directory
+3. Diversity (`src/pages/diversity/`)
+   - `index.html`: Main page for diversity initiatives and resources.
+   - Uses `diversity.css` for specific styling.
 
-- `footer.html`: Contains the HTML for the website's footer.
-- `header.html`: Contains the HTML for the website's header.
-- `navigation.html`: Contains the HTML for the website's navigation menu.
+Each index file follows a similar structure:
+- Includes links to `main.css`, `responsive.css`, and its specific CSS file.
+- Contains a sidebar navigation specific to that section.
+- Includes the main content area.
+- Links to `main.js` and `navigation.js` for functionality.
 
-#### `css` Directory
+### CSS Connections
 
-- `career-dev.css`: Specific styles for the career development pages.
-- `creative-space.css`: Specific styles for the creative space pages.
-- `diversity.css`: Specific styles for the diversity pages.
-- `main.css`: Global styles applied across all pages.
-- `navigation.css`: Styles specific to the navigation component.
-- `responsive.css`: Styles for making the website responsive across different devices.
+- `main.css`: Applied to all pages, providing global styles.
+- `responsive.css`: Applied to all pages, ensuring responsive design across devices.
+- Section-specific CSS files (e.g., `career-dev.css`, `creative-space.css`, `diversity.css`):
+  - Applied only to pages within their respective sections.
+  - Contain styles for the sidebar navigation and section-specific elements.
 
-#### `js` Directory
+### JavaScript Connections
 
-- `main.js`: Main JavaScript file for general website functionality.
-- `navigation.js`: JavaScript specific to navigation functionality.
-- `utils.js`: Utility functions used across the website.
+- `main.js`: Linked in all HTML files, provides general functionality across the site.
+- `navigation.js`: Linked in all HTML files, handles:
+  - Loading of header, footer, and main navigation components.
+  - Highlighting the current page in the navigation.
+- `utils.js`: Not directly linked in HTML files, but may be imported by other JavaScript files for utility functions.
 
-#### `images` Directory
+### Components
 
-- Contains image assets used throughout the website.
+- `header.html`, `footer.html`, `navigation.html`: These components are loaded dynamically by `navigation.js` and inserted into every page, ensuring consistency across the site.
 
-#### `pages` Directory
+### Other Pages
 
-Contains individual HTML files and subdirectories for each section of the website:
+- `alumni.html`, `clubs.html`, `contributions.html`, `meet-programmers.html`, `meet-tas.html`: These standalone pages follow a similar structure to the index files but without section-specific sidebars.
 
-- `alumni.html`: Page showcasing alumni of the CS TA program.
-- `career-dev/`: Directory for career development pages.
-  - `index.html`: Main career development page.
-  - `career-resources.html`: Information about career resources.
-  - `conferences.html`: Information about relevant conferences.
-  - `internship-opportunities.html`: List of internship opportunities.
-- `clubs.html`: Information about CS-related clubs.
-- `contributions.html`: Highlights contributions made by TAs or to the program.
-- `creative-space/`: Directory for creative space pages.
-  - `index.html`: Main creative space page.
-  - `workshops.html`: Information about creative workshops.
-- `diversity/`: Directory for diversity pages.
-  - `index.html`: Main diversity page.
-  - `diversity-resources.html`: Information about diversity resources.
-  - `world-map.html`: World map showing student origins.
-- `meet-programmers.html`: Introduces programmers involved in the program.
-- `meet-tas.html`: Introduces the current Teaching Assistants.
+## How It All Connects
 
-## File Purposes and Effects
+1. When a user accesses any page:
+   - The HTML file is loaded, which includes links to the necessary CSS and JavaScript files.
+   - `main.js` and `navigation.js` are executed.
 
-### HTML Files
+2. `navigation.js`:
+   - Loads the header, footer, and main navigation components from the `components` directory.
+   - Inserts these components into the appropriate places in the HTML.
+   - Highlights the current page in the navigation menu.
 
-- `index.html` (in root): The homepage of the website.
-- Pages in `src/pages/`: Each file or subdirectory represents a different section of the website, focusing on specific aspects of the CS TA program.
+3. For committee pages (Career Dev, Creative Space, Diversity):
+   - The section-specific CSS file styles the sidebar and any unique elements.
+   - The sidebar provides easy navigation within that section.
 
-### CSS Files
+4. Global styles from `main.css` and responsive designs from `responsive.css` are applied across all pages, ensuring a consistent look and feel.
 
-- `main.css`: Contains global styles applied to all pages.
-- Section-specific CSS files (e.g., `career-dev.css`, `creative-space.css`, `diversity.css`): Contain styles specific to each main section of the website.
-- `navigation.css`: Styles for the navigation menu.
-- `responsive.css`: Contains media queries and flexible layouts for responsiveness.
+5. Any interactive elements or dynamic content are handled by the JavaScript files, with `main.js` managing global interactions and `navigation.js` handling navigation-specific functionality.
 
-### JavaScript Files
-
-- `main.js`: Handles general website functionality.
-- `navigation.js`: Manages navigation-specific functionality.
-- `utils.js`: Contains utility functions used across different scripts.
-
-### Component Files
-
-The HTML snippets in the `components` directory (`footer.html`, `header.html`, `navigation.html`) are used to maintain consistency across pages and make updates easier.
-
-### `build.js`
-
-This script can be used for tasks like minifying CSS and JavaScript, optimizing images, and generating a production-ready version of the website.
+This structure allows for easy maintenance and scalability. Each committee section can be updated independently, while still maintaining consistency with the overall site design and functionality.
 
 ### `CONTRIBUTING.md`
 
