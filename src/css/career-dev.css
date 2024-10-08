@@ -1,0 +1,71 @@
+/* Career Development Styles - Vertical Stack Sidebar */
+
+.career-dev-container {
+    display: flex;
+    margin: 0 -15px;
+}
+
+.career-dev-sidebar {
+    flex: 0 0 200px;
+    padding: 15px;
+    background-color: var(--secondary-blue);
+}
+
+.career-dev-sidebar nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.career-dev-sidebar nav ul li {
+    margin-bottom: 10px;
+}
+
+.career-dev-sidebar nav ul li a {
+    display: block;
+    padding: 10px 15px;
+    background-color: var(--primary-blue);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.career-dev-sidebar nav ul li a:hover,
+.career-dev-sidebar nav ul li a.active {
+    background-color: var(--white);
+    color: var(--primary-blue);
+}
+
+.career-dev-content {
+    flex: 1;
+    min-width: 0;
+    padding: 0 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .career-dev-container {
+        flex-direction: column;
+    }
+
+    .career-dev-sidebar {
+        flex: 0 0 100%;
+        margin-bottom: 20px;
+    }
+
+    .career-dev-sidebar nav ul {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .career-dev-sidebar nav ul li {
+        flex: 0 0 48%;
+        margin-bottom: 10px;
+    }
+}

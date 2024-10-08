@@ -1,39 +1,17 @@
-.creative-space-header {
-    background-color: #4a90e2;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
+/* Diversity Styles */
 
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.project-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-
-
-/*Part below is for the sidebar*/
-.creative-space-container {
+.diversity-container {
     display: flex;
     margin: 0 -15px;
 }
 
-.creative-space-sidebar {
+.diversity-sidebar {
     flex: 0 0 200px;
     padding: 15px;
     background-color: var(--secondary-blue);
 }
 
-.creative-space-sidebar nav ul {
+.diversity-sidebar nav ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -41,11 +19,11 @@
     flex-direction: column;
 }
 
-.creative-space-sidebar nav ul li {
+.diversity-sidebar nav ul li {
     margin-bottom: 10px;
 }
 
-.creative-space-sidebar nav ul li a {
+.diversity-sidebar nav ul li a {
     display: block;
     padding: 10px 15px;
     background-color: var(--primary-blue);
@@ -58,62 +36,63 @@
     font-size: 0.9rem;
 }
 
-.creative-space-sidebar nav ul li a:hover,
-.creative-space-sidebar nav ul li a.active {
+.diversity-sidebar nav ul li a:hover,
+.diversity-sidebar nav ul li a.active {
     background-color: var(--white);
     color: var(--primary-blue);
 }
 
-.creative-space-content {
+.diversity-content {
     flex: 1;
     min-width: 0;
     padding: 0 15px;
 }
 
-.creative-space-content h1 {
+.diversity-content h1 {
     color: var(--primary-blue);
     margin-top: 0;
 }
 
-.creative-space-content h2,
-.creative-space-content h3 {
+.diversity-content h2,
+.diversity-content h3 {
     color: var(--primary-blue);
 }
 
-.creative-space-content ul {
+.diversity-content ul {
     padding-left: 20px;
 }
 
-.creative-space-content li {
+.diversity-content li {
     margin-bottom: 10px;
 }
 
-.creative-space-content a {
+.diversity-content a {
     color: var(--secondary-blue);
     text-decoration: none;
 }
 
-.creative-space-content a:hover {
+.diversity-content a:hover {
     text-decoration: underline;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .creative-space-container {
+    .diversity-container {
         flex-direction: column;
     }
 
-    .creative-space-sidebar {
+    .diversity-sidebar {
         flex: 0 0 100%;
         margin-bottom: 20px;
     }
 
-    .creative-space-sidebar nav ul {
+    .diversity-sidebar nav ul {
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: space-between;
     }
 
-    .creative-space-sidebar nav ul li {
+    .diversity-sidebar nav ul li {
         flex: 0 0 48%;
         margin-bottom: 10px;
     }
