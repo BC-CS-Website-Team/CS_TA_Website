@@ -1,22 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Determine the correct path based on the current page
-    const path = window.location.pathname;
-    const isHomePage = path === "/" || path.endsWith("index.html");
-    const componentPath = isHomePage ? 'src/components/' : '../../src/components/';
+    // Add any global JavaScript functionality here
+    console.log('Main script loaded');
 
-    // Function to load component
-    function loadComponent(id, file) {
-        fetch(componentPath + file)
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById(id).innerHTML = data;
-            })
-            .catch(error => console.error(`Error loading ${file}:`, error));
-    }
-
-    // Load header
-    loadComponent('main-header', 'header.html');
-
-    // Load footer
-    loadComponent('main-footer', 'footer.html');
+    // Example: Add smooth scrolling to all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
 });
