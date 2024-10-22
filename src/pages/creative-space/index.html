@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="../../css/responsive.css">
     <link rel="stylesheet" href="../../css/creative-space.css">
+    <style>
+        /* Add the following styles for the carousel */
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+        }
+        .carousel img {
+            display: none;
+            width: 100%;
+            height: auto;
+        }
+        .carousel img:first-child {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <header id="main-header"></header>
@@ -24,7 +40,17 @@
                 </aside>
                 <div class="creative-space-content">
                     <h1>Creative Space</h1>
-                    <p>Creative Space Designs. This is for demonstration</p>
+                    <h2>Who are we?</h2>
+                    <p>Creative Space Designs. Our committee's purpose is to make the CMIT building feel welcoming and more inspiring.</p>
+
+                    <!-- Image Carousel -->
+                    <h2>Gallery</h2>
+                    <div class="carousel">
+                        <img src="../../images/design1.jpg" alt="Design 1">
+                        <img src="../../images/design2.jpg" alt="Design 2">
+                        <img src="../../images/design3.jpg" alt="Design 3">
+                    </div>
+
                     <!-- Add more content here -->
                 </div>
             </div>
@@ -33,5 +59,20 @@
     <footer id="main-footer"></footer>
     <script src="../../js/main.js"></script>
     <script src="../../js/navigation.js"></script>
+
+    <script>
+        // Add the following JavaScript for carousel functionality
+        let currentImageIndex = 0;
+        let images = document.querySelectorAll('.carousel img');
+
+        function showNextImage() {
+            images[currentImageIndex].style.display = 'none';
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            images[currentImageIndex].style.display = 'block';
+        }
+
+        // Change image every 3 seconds
+        setInterval(showNextImage, 3000);
+    </script>
 </body>
 </html>
