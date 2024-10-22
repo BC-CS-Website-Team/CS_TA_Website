@@ -1,0 +1,23 @@
+{
+  "name": "cs_ta_website",
+  "version": "1.0.0",
+  "description": "This project is a collaborative web development effort to create a comprehensive website for our Computer Science Teaching Assistant (TA) program. It serves as both a learning experience for TAs of various skill levels and a practical tool for showcasing our program.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "parcel build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7"
+  }
+}
