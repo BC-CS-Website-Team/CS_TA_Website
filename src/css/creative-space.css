@@ -18,3 +18,21 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
+
+.header {
+    text-align: center;
+}
+
+.container{
+    margin-top: 5vh;
+}
+
+.img-thumbnail{
+    width: 500px;
+    height: 400px;
+}
+
+.list-group{
+    width: 55vh;
+    margin: 5vh 0 0 10vh;
+}
