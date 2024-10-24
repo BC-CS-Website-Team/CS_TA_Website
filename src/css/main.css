@@ -117,12 +117,22 @@ footer {
     }
 }
 
-.aspect-w-3 {
+.staff-image {
+    width: 100%; /* Set the width as needed */
+    height: 0;
+    padding-bottom: 133.33%; /* 4 / 3 aspect ratio */
     position: relative;
-    padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
-    --tw-aspect-w: 3
+    overflow: hidden;
 }
 
-.aspect-h-4 {
-    --tw-aspect-h: 4
+.staff-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* This ensures the image covers the container */
 }
