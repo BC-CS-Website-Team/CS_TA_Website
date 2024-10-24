@@ -116,3 +116,13 @@ footer {
         margin: 10px 0;
     }
 }
+
+.aspect-w-3 {
+    position: relative;
+    padding-bottom: calc(var(--tw-aspect-h) / var(--tw-aspect-w) * 100%);
+    --tw-aspect-w: 3
+}
+
+.aspect-h-4 {
+    --tw-aspect-h: 4
+}
