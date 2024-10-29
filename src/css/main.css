@@ -117,19 +117,22 @@ footer {
     }
 }
 
-/* .staff-image {
-    width: 100%; /* Set the width as needed 
-    height: 0;
-    padding-bottom: 133.33%; /* 4 / 3 aspect ratio 
-    position: relative;
-    overflow: hidden;
-} */
-
 .staff-grid {
     display: grid;
     row-gap: 10px;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
 }
+
 .staff-image {
-    width: 120px;
+    width: 200px;
+    height: 300px;
+    border-radius: 5px; /* Optional: adds rounded corners */
+}
+
+.staff-border {
+    border: 2px solid #000; /* Solid black border */
+    border-radius: 10px; /* Optional: adds rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: adds a shadow effect */
+    padding: 5px; /* Optional: adds space between the border and content */
+    margin: 5px; /* Optional: adds space outside the border */
 }
