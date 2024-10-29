@@ -1,5 +1,4 @@
-/* Career Development Styles - Vertical Stack Sidebar */
-
+/*Career Development Styles - Vertical Stack Sidebar*/
 .career-dev-container {
     display: flex;
     margin: 0 -15px;
@@ -48,24 +47,89 @@
     padding: 0 15px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .career-dev-container {
-        flex-direction: column;
-    }
+/* Resource Section Styling */
+.resources {
+    max-width: 800px;
+    margin: 0 auto;
+}
 
-    .career-dev-sidebar {
-        flex: 0 0 100%;
-        margin-bottom: 20px;
-    }
+.career-dev-content p {
+    color: var(--primary-blue);
+}
 
-    .career-dev-sidebar nav ul {
-        flex-direction: row;
-        justify-content: space-between;
-    }
+h2 {
+    color: var(--primary-blue);
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+h3 {
+    color: #ffffff;
+    background-color: var(--primary-blue);
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
 
-    .career-dev-sidebar nav ul li {
-        flex: 0 0 48%;
-        margin-bottom: 10px;
-    }
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+li {
+    margin: 10px 0;
+}
+.dropdown-content a{
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+.dropdown-content a:hover{
+    text-decoration: underline;
+}
+.careerintern a{
+    color: #ffffff;
+    text-decoration: none;
+} 
+.careerintern a:hover{
+    text-decoration: underline;
+}
+
+/* Dropdown Styling */
+.dropdown-content {
+    display: none;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+.dropdown-content.active {
+    max-height: 500px; 
+  }
+.dropdown-content li {
+    margin: 8px 0;
+    opacity: 0;
+    transform: translateY(-10px);  /* Start slightly above final position */
+}
+
+.dropdown-content.active li {
+    opacity: 1;
+    transform: translateY(0);  /* Move to final position */
+}
+
+
+.dropdown-toggle::after {
+    content: '▼';
+    font-size: 0.8em;
+    display: inline-block; 
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-toggle.active::after {
+    transform: rotate(270deg);
+}
+
+.dropdown-toggle.active + .dropdown-content {
+    display: block;
 }
