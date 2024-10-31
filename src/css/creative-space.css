@@ -19,8 +19,6 @@
     padding: 20px;
 }
 
-
-
 /*Part below is for the sidebar*/
 .creative-space-container {
     display: flex;
@@ -118,3 +116,50 @@
         margin-bottom: 10px;
     }
 }
+
+/* Grid layout */
+.grid {
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* Grid item */
+.grid-item {
+    text-align: center;
+}
+
+/* Image styling */
+.grid-item img {
+    width: 175px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Description styling */
+.grid-item .description {
+    margin-top: 1%;
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Large screens (desktops) */
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Extra large screens */
+@media (min-width: 1300px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
