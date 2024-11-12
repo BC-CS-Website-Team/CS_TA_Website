@@ -11,4 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+
+    const dropdowns = document.querySelectorAll('.dropdown-toggle');
+
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener('click', function() {
+        // Toggle active class for the arrow rotation
+        this.classList.toggle('active');
+        // Toggle the visibility of the dropdown content with CSS
+        const content = this.nextElementSibling;
+        content.classList.toggle('active');
+      });
+    });
 });
+
