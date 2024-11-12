@@ -1,5 +1,4 @@
-/* Career Development Styles - Vertical Stack Sidebar */
-
+/*Career Development Styles - Vertical Stack Sidebar*/
 .career-dev-container {
     display: flex;
     margin: 0 -15px;
@@ -48,24 +47,97 @@
     padding: 0 15px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .career-dev-container {
-        flex-direction: column;
-    }
-
-    .career-dev-sidebar {
-        flex: 0 0 100%;
-        margin-bottom: 20px;
-    }
-
-    .career-dev-sidebar nav ul {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .career-dev-sidebar nav ul li {
-        flex: 0 0 48%;
-        margin-bottom: 10px;
-    }
+/* Resource Section Styling */
+.resources {
+    max-width: 800px;
+    margin: 0 auto;
 }
+
+.career-dev-content p {
+    color: var(--primary-blue);
+}
+
+h2 {
+    color: var(--primary-blue);
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    color: #ffffff;
+    background-color: var(--primary-blue);
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+li {
+    margin: 10px 0;
+}
+
+.dropdown-content a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    text-decoration: underline;
+}
+
+.careerintern a {
+    color: #ffffff;
+    text-decoration: none;
+} 
+
+.careerintern a:hover {
+    text-decoration: underline;
+}
+
+/* Dropdown Styling */
+.dropdown-content {
+    max-height: 0;  /* Changed from display: none */
+    overflow: hidden;  /* Added to hide content when collapsed */
+    padding-left: 20px;
+    margin-top: 5px;
+    transition: max-height 0.5s ease-out;  /* Added transition */
+}
+
+.dropdown-content.active {
+    max-height: 500px;
+    transition: max-height 0.5s ease-in;
+}
+
+.dropdown-content li {
+    margin: 8px 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;  /* Added transition */
+}
+
+.dropdown-content.active li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdown-toggle::after {
+    content: '▼';
+    font-size: 0.8em;
+    display: inline-block; 
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-toggle.active::after {
+    transform: rotate(270deg);
+}
+
