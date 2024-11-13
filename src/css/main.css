@@ -137,3 +137,24 @@ footer {
     margin: 5px; 
     text-align: center;
 }
+
+.contrib-link {
+    color:#FFFFFF;
+}
+table.center-table {
+    border-collapse:collapse;
+    margin:auto;
+    /*border: 2px solid #000;*/
+    width:60%;
+    text-align: center;
+}
+table.center-table td:first-child, th:first-child{
+    border-right: 2px solid black;
+}
+table.center-table tr {
+    border-top: 2px solid black;
+}
+table.center-table tr:first-child {
+    border-bottom: 2px solid black;
+    border-top: none;
+}
