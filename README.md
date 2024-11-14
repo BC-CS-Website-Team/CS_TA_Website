@@ -10,19 +10,31 @@ This project is a collaborative web development effort to create a comprehensive
 - TA profiles page
 - Contributions page for program impact
 - Alumni showcase
+- Evening Lab information and schedules
 - Responsive design for mobile and desktop viewing
 
-## Project Structure (Initial)
+## Project Structure
 ```
 .
 ├── assets/
 ├── src/
 │   ├── components/
+│   │   ├── footer.html
+│   │   ├── header.html
+│   │   └── navigation.html
 │   ├── css/
+│   │   ├── main.css
+│   │   └── responsive.css
 │   ├── images/
 │   ├── js/
+│   │   ├── main.js
+│   │   └── navigation.js
 │   └── pages/
+│       ├── evening-lab.html
+│       ├── alumni.html
+│       └── ...
 ├── scripts/
+│   └── server.py
 ├── tests/
 ├── index.html
 └── README.md
@@ -32,6 +44,7 @@ This project is a collaborative web development effort to create a comprehensive
 
 ### Prerequisites
 - Git
+- Python 3.x
 - A modern web browser
 - Text editor (e.g., VSCode, etc.)
 
@@ -44,33 +57,45 @@ This project is a collaborative web development effort to create a comprehensive
    ```
    cd CS_TA_Website
    ```
-3. Open `index.html` in your web browser to view the site locally.
 
 ### Running the Site
-This is a static website, so there's no need for a server or build process to run it locally. Simply:
+We provide two options for running the site locally:
 
-1. Open the `index.html` file in your web browser.
-2. You can do this by double-clicking the file in your file explorer, or by dragging and dropping it into an open browser window.
-3. To see changes as you work:
-   - Edit the HTML, CSS, or JavaScript files in your text editor.
-   - Save the changes.
-   - Refresh the page in your browser to see the updates.
+#### Option 1: Using our Custom Server (Recommended)
+1. From the project root, run:
+   ```bash
+   python scripts/server.py
+   ```
+2. You'll see a clickable link in your terminal to access the site at `http://localhost:8000`
+3. The server will provide timestamped logs of all requests
+4. Press Ctrl+C to stop the server
 
-For a more dynamic development experience, you can use a simple local server:
-1. If you have Python installed, you can run:
-   - For Python 3.x: `python3 -m http.server`
-   - For Python 2.x: `python -m SimpleHTTPServer`
-2. Then open `http://localhost:8000` in your browser.
+#### Option 2: Basic Python Server
+1. From the project root, run:
+   ```bash
+   python -m http.server 8000
+   ```
+2. Open `http://localhost:8000` in your browser
 
-Alternatively, you can use extensions in your code editor (like "Live Server" in VSCode) to create a local server with live reloading.
+#### Option 3: Direct File Access
+You can also open `index.html` directly in your web browser, but some features may not work correctly without a server.
+
+#### Development Workflow
+When making changes:
+1. Start the server using Option 1 or 2 above
+2. Edit the HTML, CSS, or JavaScript files in your text editor
+3. Save the changes
+4. Refresh the page in your browser to see the updates
+
+For VSCode users, you can alternatively use the "Live Server" extension.
 
 ## Development Workflow
 1. Create a new branch for your feature or bug fix:
    ```
    git checkout -b feature/your-feature-name
    ```
-2. Make your changes in the appropriate files.
-3. Test your changes locally by opening the relevant HTML files in your browser.
+2. Make your changes in the appropriate files
+3. Test your changes locally using one of the server options above
 4. Commit your changes:
    ```
    git add .
@@ -80,7 +105,7 @@ Alternatively, you can use extensions in your code editor (like "Live Server" in
    ```
    git push origin feature/your-feature-name
    ```
-6. Create a Pull Request on GitHub for review.
+6. Create a Pull Request on GitHub for review
 
 ## Contributing
 We welcome contributions from all team members, regardless of experience level. Please read our CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
@@ -96,8 +121,8 @@ We use GitHub Projects for task management. Check the [project board](https://gi
 
 ## Support
 If you need help or have questions, please:
-1. Check the existing [issues](https://github.com/BC-CS-Website-Team/CS_TA_Website/issues) for similar problems or questions.
-2. If your issue isn't addressed, create a new issue with a descriptive title and detailed description.
+1. Check the existing [issues](https://github.com/BC-CS-Website-Team/CS_TA_Website/issues) for similar problems or questions
+2. If your issue isn't addressed, create a new issue with a descriptive title and detailed description
 3. For urgent matters, contact Nicholas Hamilton at hamiltonn@berea.edu
 
 ---
