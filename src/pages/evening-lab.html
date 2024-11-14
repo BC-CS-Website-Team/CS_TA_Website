@@ -4,9 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS TA Program - Evening Lab</title>
-    <!-- Update CSS paths -->
+    <!-- CSS files -->
     <link rel="stylesheet" href="/src/css/main.css">
     <link rel="stylesheet" href="/src/css/responsive.css">
+    <style>
+        .calendar-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .calendar-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .calendar-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 600px;
+        }
+
+        .calendar-instructions {
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
     <header id="main-header"></header>
@@ -14,10 +46,27 @@
     <main>
         <h1>Evening Lab</h1>
         <p>Information about our evening lab program and schedules.</p>
-        <!-- Add more content about evening lab here -->
+
+        <div class="calendar-container">
+            <div class="calendar-instructions">
+                <h2>TA Evening Lab Schedule</h2>
+                <p>Evening lab sessions are held in the computer lab in the CMIT Room 316. TAs are available to help students with their assignments and answer questions.</p>
+                <p>This calendar shows all evening lab sessions and TA availability. TAs can edit this calendar to update their availability and schedule changes.</p>
+            </div>
+
+            <div class="calendar-wrapper">
+                <!-- Replace the src URL below with your actual shared calendar embed URL from Outlook -->
+                <iframe src="https://outlook.office365.com/owa/calendar/052f7c3b37654ac5827d0ea10072514c@berea.edu/6e2e2496243041e390077d0af6e5ecdc510102754711076683/calendar.html"
+                        frameborder="0"
+                        scrolling="no"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
     </main>
     <footer id="main-footer"></footer>
-    <!-- Update JavaScript paths -->
+
+    <!-- JavaScript files -->
     <script src="/src/js/main.js"></script>
     <script src="/src/js/navigation.js"></script>
 </body>
