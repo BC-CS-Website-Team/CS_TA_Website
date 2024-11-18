@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS TA Program - Student Origins</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/diversity.css">
+    <style>
+        .map-container {
+            margin: 2rem 0;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-intro {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-left: 4px solid #0066cc;
+            border-radius: 4px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .stat-box {
+            padding: 1rem;
+            text-align: center;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 800px;
+            border: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .data-source {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 1rem;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header"></header>
+    <nav id="main-nav"></nav>
+    <main>
+        <div class="container">
+            <div class="diversity-container">
+                <aside class="diversity-sidebar">
+                    <nav>
+                        <ul>
+                            <li><a href="index.html">Overview</a></li>
+                            <li><a href="diversity-resources.html">Resources</a></li>
+                            <li><a href="world-map.html" class="active">Student Origins</a></li>
+                            <li><a href="ways.html">How to increase Diversity</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                <div class="diversity-content">
+                    <h1>Global Student Distribution</h1>
+
+                    <div class="map-container">
+                        <div class="map-intro">
+                            <h2>About This Visualization</h2>
+                            <p>This interactive map visualizes the global distribution of Berea College students as of Fall 2023. The data was provided by the Office of Institutional Research and Assessment, demonstrating our institution's commitment to fostering a diverse and inclusive learning environment.</p>
+                            <p>The visualization highlights the international reach of Berea College's educational mission, showing how our community brings together students from across the globe.</p>
+                        </div>
+
+                        <div class="stats-container">
+                            <!-- Placeholder stat boxes - to be filled with actual data -->
+                            <div class="stat-box">
+                                <div class="stat-number">[X]</div>
+                                <div class="stat-label">Total Countries Represented</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">[X]</div>
+                                <div class="stat-label">International Students</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">[X]%</div>
+                                <div class="stat-label">International Student Percentage</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">[X]</div>
+                                <div class="stat-label">Continents Represented</div>
+                            </div>
+                        </div>
+
+                        <iframe
+                            src="student_origins_map.html"
+                            class="map-frame"
+                            title="Interactive World Map of Student Origins">
+                        </iframe>
+
+                        <div class="data-source">
+                            Source: Office of Institutional Research and Assessment, Berea College (Fall 2023)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer id="main-footer"></footer>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/navigation.js"></script>
+</body>
+</html>
