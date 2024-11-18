@@ -48,6 +48,7 @@
 }
 
 /* Resource Section Styling */
+
 .resources {
     max-width: 800px;
     margin: 0 auto;
@@ -56,7 +57,6 @@
 .career-dev-content p {
     color: var(--primary-blue);
 }
-
 h2 {
     color: var(--primary-blue);
     border-bottom: 2px solid #e5e7eb;
@@ -85,46 +85,74 @@ li {
     margin: 10px 0;
 }
 
+.careerintern {
+    background-color: var(--primary-blue); /* Default blue background */
+    border: 3px solid transparent;
+    border-radius: 5px; /* Optional: rounded corners */
+    padding: 10px; /* Optional: consistent spacing */
+    transition: all 0.3s ease; /* Smooth transitions */
+}
+.careerintern:hover{
+    background-color: var(--white);
+    color: var(--primary-blue);
+    border: 3px solid var(--primary-blue); /* Optional for a border highlight */
+    border-radius: 5px;
+}
+
+.careerintern a{
+    color: inherit; 
+    text-decoration: none;
+}
+.careerintern a:hover {
+    color: var(--primary-blue);
+    text-decoration: underline;
+}
+
+/* Dropdown Styling */
+
 .dropdown-content a {
     color: var(--primary-blue);
     text-decoration: none;
+}
+
+.dropdown-toggle{
+    border: 3px solid transparent;
+    position: relative;
+    padding-right: 30px;
+}
+
+.dropdown-toggle:hover{
+    background-color: var(--white);
+    color: var(--primary-blue);
+    border: 3px solid var(--primary-blue); 
+    border-radius: 5px;
 }
 
 .dropdown-content a:hover {
     text-decoration: underline;
 }
 
-.careerintern a {
-    color: #ffffff;
-    text-decoration: none;
-} 
-
-.careerintern a:hover {
-    text-decoration: underline;
-}
-
-/* Dropdown Styling */
 .dropdown-content {
-    max-height: 0;  /* Changed from display: none */
-    overflow: hidden;  /* Added to hide content when collapsed */
+    max-height: 0; 
+    overflow: hidden;  
     padding-left: 20px;
     margin-top: 5px;
-    transition: max-height 0.5s ease-out;  /* Added transition */
+    transition: max-height 0.5s ease-out;  
 }
-
 .dropdown-content.active {
     max-height: 500px;
     transition: max-height 0.5s ease-in;
+    border: 3px solid var(--primary-blue); 
 }
 
 .dropdown-content li {
     margin: 8px 0;
     opacity: 0;
     transform: translateY(-10px);
-    transition: all 0.3s ease;  /* Added transition */
+    transition: all 0.3s ease;  
 }
 
-.dropdown-content.active li {
+.dropdown-content.active li{
     opacity: 1;
     transform: translateY(0);
 }
@@ -133,7 +161,8 @@ li {
     content: '▼';
     font-size: 0.8em;
     display: inline-block; 
-    margin-left: 8px;
+    position: absolute;
+    right: 20px;
     transition: transform 0.3s ease;
 }
 
