@@ -48,7 +48,6 @@
 }
 
 /* Resource Section Styling */
-
 .resources {
     max-width: 800px;
     margin: 0 auto;
@@ -57,6 +56,7 @@
 .career-dev-content p {
     color: var(--primary-blue);
 }
+
 h2 {
     color: var(--primary-blue);
     border-bottom: 2px solid #e5e7eb;
@@ -65,14 +65,23 @@ h2 {
 }
 
 h3 {
-    color: #ffffff;
-    background-color: var(--primary-blue);
+    color: white !important; /* Ensures white color for all h3 text */
+    background-color: var(--primary-blue); /* Keeps the correct background */
     margin: 0;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     position: relative;
     transition: all 0.3s ease;
+}
+
+h3 a {
+    color: inherit; /* Ensures the link inherits the h3 color */
+    text-decoration: none;
+}
+
+h3 a:hover {
+    text-decoration: underline; /* Optional for hover effect on links */
 }
 
 ul {
@@ -85,74 +94,46 @@ li {
     margin: 10px 0;
 }
 
-.careerintern {
-    background-color: var(--primary-blue); /* Default blue background */
-    border: 3px solid transparent;
-    border-radius: 5px; /* Optional: rounded corners */
-    padding: 10px; /* Optional: consistent spacing */
-    transition: all 0.3s ease; /* Smooth transitions */
-}
-.careerintern:hover{
-    background-color: var(--white);
-    color: var(--primary-blue);
-    border: 3px solid var(--primary-blue); /* Optional for a border highlight */
-    border-radius: 5px;
-}
-
-.careerintern a{
-    color: inherit; 
-    text-decoration: none;
-}
-.careerintern a:hover {
-    color: var(--primary-blue);
-    text-decoration: underline;
-}
-
-/* Dropdown Styling */
-
 .dropdown-content a {
     color: var(--primary-blue);
     text-decoration: none;
-}
-
-.dropdown-toggle{
-    border: 3px solid transparent;
-    position: relative;
-    padding-right: 30px;
-}
-
-.dropdown-toggle:hover{
-    background-color: var(--white);
-    color: var(--primary-blue);
-    border: 3px solid var(--primary-blue); 
-    border-radius: 5px;
 }
 
 .dropdown-content a:hover {
     text-decoration: underline;
 }
 
+.careerintern a {
+    color: #ffffff;
+    text-decoration: none;
+} 
+
+.careerintern a:hover {
+    text-decoration: underline;
+}
+
+/* Dropdown Styling */
 .dropdown-content {
-    max-height: 0; 
-    overflow: hidden;  
+    max-height: 0;  /* Changed from display: none */
+    overflow: hidden;  /* Added to hide content when collapsed */
     padding-left: 20px;
     margin-top: 5px;
-    transition: max-height 0.5s ease-out;  
+    transition: max-height 0.5s ease-out;  /* Added transition */
 }
+
 .dropdown-content.active {
     max-height: 500px;
     transition: max-height 0.5s ease-in;
-    border: 3px solid var(--primary-blue); 
 }
 
 .dropdown-content li {
     margin: 8px 0;
     opacity: 0;
     transform: translateY(-10px);
-    transition: all 0.3s ease;  
+    transition: all 0.3s ease;  /* Added transition */
 }
 
-.dropdown-content.active li{
+.dropdown-content.active li {
     opacity: 1;
     transform: translateY(0);
 }
@@ -161,8 +142,7 @@ li {
     content: '▼';
     font-size: 0.8em;
     display: inline-block; 
-    position: absolute;
-    right: 20px;
+    margin-left: 8px;
     transition: transform 0.3s ease;
 }
 
