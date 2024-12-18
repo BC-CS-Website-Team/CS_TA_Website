@@ -1,5 +1,4 @@
-/* Sidebar * Main Styles */
-
+/*Main Styles - Vertical Stack Sidebar*/
 .main-container {
     display: flex;
     margin: 0 -15px;
@@ -46,54 +45,4 @@
     flex: 1;
     min-width: 0;
     padding: 0 15px;
-}
-
-.main-content h1 {
-    color: var(--primary-blue);
-    margin-top: 0;
-}
-
-.main-content h2,
-.main-content h3 {
-    color: var(--primary-blue);
-}
-
-.main-content ul {
-    padding-left: 20px;
-}
-
-.main-content li {
-    margin-bottom: 10px;
-}
-
-.main-content a {
-    color: var(--secondary-blue);
-    text-decoration: none;
-}
-
-.main-content a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .main-container {
-        flex-direction: column;
-    }
-
-    .main-sidebar {
-        flex: 0 0 100%;
-        margin-bottom: 20px;
-    }
-
-    .main-sidebar nav ul {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .main-sidebar nav ul li {
-        flex: 0 0 48%;
-        margin-bottom: 10px;
-    }
 }
