@@ -1,133 +1,183 @@
-# CS TA Website Project Structure Explanation
+# CS TA Website Repository Structure and Documentation
 
-## Project Structure Overview
+## Overview
+This document explains the structure, organization, and interconnections of the CS TA Website repository. It includes details about component relationships, file dependencies, and how to run the application.
 
+## Directory Structure
 ```
-.
-├── CONTRIBUTING.md
-├── index.html
+CS_TA_Website/
+├── src/
+│   ├── components/
+│   │   ├── footer.html
+│   │   ├── header.html
+│   │   └── navigation.html
+│   │
+│   ├── css/
+│   │   ├── career-dev.css
+│   │   ├── creative-space.css
+│   │   ├── diversity-resources.css
+│   │   ├── evening-lab.css
+│   │   ├── internship_opportunity.css
+│   │   ├── main.css
+│   │   ├── meet_ta.css
+│   │   ├── navigation.css
+│   │   ├── responsive.css
+│   │   └── sidebar_and_containers.css
+│   │
+│   ├── images/
+│   │   ├── [image files]
+│   │   └── images_for_diversity_directory/
+│   │       └── [image files]
+│   │
+│   ├── js/
+│   │   ├── JavaScriptInstructions.js
+│   │   ├── main.js
+│   │   ├── navigation.js
+│   │   └── utils.js
+│   │
+│   └── pages/
+│       ├── alumni.html
+│       ├── career-dev/
+│       │   ├── career-resources.html
+│       │   ├── carrer-dev-pic/
+│       │   │   └── [image files]
+│       │   ├── conferences.html
+│       │   ├── index.css
+│       │   ├── index.html
+│       │   └── internship-opportunities.html
+│       │
+│       ├── classes/
+│       │   ├── classes-sidebar.html
+│       │   ├── classes.html
+│       │   ├── classes.js
+│       │   └── [class HTML files]
+│       │
+│       ├── clubs.html
+│       ├── committees/
+│       │   ├── career-dev-committee/
+│       │   ├── committees-sidebar.html
+│       │   ├── committees.html
+│       │   ├── committees.js
+│       │   ├── creative-space/
+│       │   │   ├── index.html
+│       │   │   ├── TeamPics/
+│       │   │   └── workshops.html
+│       │   ├── diversity/
+│       │   │   ├── diversity-resources.html
+│       │   │   ├── index.html
+│       │   │   ├── student_origins_map.html
+│       │   │   └── ways.html
+│       │   └── tech-ethics/
+│       │
+│       ├── contributions.html
+│       ├── contributors.html
+│       ├── evening-lab.html
+│       ├── meet-the-team/
+│       │   ├── meet-makerspace-tas.html
+│       │   ├── meet-programmers.html
+│       │   ├── meet-robotics.html
+│       │   ├── meet-tas.html
+│       │   ├── meet-the-team-sidebar.html
+│       │   ├── meet-the-team.html
+│       │   └── meet-the-team.js
+│       │
+│       └── student-projects/
+│           ├── student-projects.html
+│           └── world-map.html
+│
+├── .gitignore
 ├── README.md
-├── scripts
-│   └── build.js
-└── src
-    ├── components
-    │   ├── footer.html
-    │   ├── header.html
-    │   └── navigation.html
-    ├── css
-    │   ├── career-dev.css
-    │   ├── creative-space.css
-    │   ├── diversity.css
-    │   ├── main.css
-    │   ├── navigation.css
-    │   └── responsive.css
-    ├── js
-    │   ├── main.js
-    │   ├── navigation.js
-    │   └── utils.js
-    ├── images
-    │   └── resources-svgrepo-com.svg
-    └── pages
-        ├── alumni.html
-        ├── career-dev
-        │   ├── index.html
-        │   ├── career-resources.html
-        │   ├── conferences.html
-        │   └── internship-opportunities.html
-        ├── clubs.html
-        ├── contributions.html
-        ├── creative-space
-        │   ├── index.html
-        │   └── workshops.html
-        ├── diversity
-        │   ├── index.html
-        │   ├── diversity-resources.html
-        │   └── world-map.html
-        ├── meet-programmers.html
-        └── meet-tas.html
+├── index.html
+└── server.py
 ```
 
-## Detailed Explanation
+## Core Components and Connections
 
-### Root Directory
+### CSS Structure and Relationships
+- **Global Styles**
+  - `main.css`: Applied to all pages, providing base styles
+  - `responsive.css`: Ensures responsive design across all devices
+  - `sidebar_and_containers.css`: Provides consistent container and sidebar styling
+- **Section-Specific Styles**
+  - Each section (career-dev, creative-space, etc.) has its own CSS file
+  - Section CSS files only apply to their respective pages
+  - Handle unique layouts and components specific to each section
 
-- `index.html`: The main entry point of the website. It includes links to the main CSS files (`main.css` and `responsive.css`) and JavaScript files (`main.js` and `navigation.js`).
+### JavaScript Integration
+- **Main Files**
+  - `main.js`: Loaded on all pages, provides core functionality
+  - `navigation.js`: Handles dynamic component loading and navigation state
+  - `utils.js`: Contains shared utility functions
+- **Section-Specific Scripts**
+  - Each major section (classes, meet-the-team) has its own JavaScript file
+  - Handles functionality specific to that section
+  - Imported only into relevant pages
 
-### Committee Folders and Index Files
+### Component System
+Components in `src/components/` are dynamically loaded:
+- `header.html`: Site-wide header
+- `footer.html`: Site-wide footer
+- `navigation.html`: Main navigation menu
+- All components are loaded by `navigation.js` and inserted into appropriate page locations
 
-The website is organized into three main committee sections, each with its own folder and index file:
+## Page Organization Patterns
 
-1. Career Development (`src/pages/career-dev/`)
-   - `index.html`: Main page for career development resources.
-   - Uses `career-dev.css` for specific styling.
+### Standard Section Structure
+Each major section should follow this pattern:
+1. Main page (e.g., `classes.html`)
+2. Sidebar file (e.g., `classes-sidebar.html`)
+3. Section JavaScript (e.g., `classes.js`)
+4. Individual content pages
 
-2. Creative Space (`src/pages/creative-space/`)
-   - `index.html`: Main page for creative projects and initiatives.
-   - Uses `creative-space.css` for specific styling.
-
-3. Diversity (`src/pages/diversity/`)
-   - `index.html`: Main page for diversity initiatives and resources.
-   - Uses `diversity.css` for specific styling.
-
-Each index file follows a similar structure:
-- Includes links to `main.css`, `responsive.css`, and its specific CSS file.
-- Contains a sidebar navigation specific to that section.
-- Includes the main content area.
-- Links to `main.js` and `navigation.js` for functionality.
-
-### CSS Connections
-
-- `main.css`: Applied to all pages, providing global styles.
-- `responsive.css`: Applied to all pages, ensuring responsive design across devices.
-- Section-specific CSS files (e.g., `career-dev.css`, `creative-space.css`, `diversity.css`):
-  - Applied only to pages within their respective sections.
-  - Contain styles for the sidebar navigation and section-specific elements.
-
-### JavaScript Connections
-
-- `main.js`: Linked in all HTML files, provides general functionality across the site.
-- `navigation.js`: Linked in all HTML files, handles:
-  - Loading of header, footer, and main navigation components.
-  - Highlighting the current page in the navigation.
-- `utils.js`: Not directly linked in HTML files, but may be imported by other JavaScript files for utility functions.
-
-### Components
-
-- `header.html`, `footer.html`, `navigation.html`: These components are loaded dynamically by `navigation.js` and inserted into every page, ensuring consistency across the site.
-
-### Other Pages
-
-- `alumni.html`, `clubs.html`, `contributions.html`, `meet-programmers.html`, `meet-tas.html`: These standalone pages follow a similar structure to the index files but without section-specific sidebars.
+### Current Implementation Status
+- **Fully Implemented**
+  - classes/
+  - meet-the-team/
+- **In Progress**
+  - committees/
+- **Needs Reorganization**
+  - career-dev/
 
 ## How It All Connects
 
-1. When a user accesses any page:
-   - The HTML file is loaded, which includes links to the necessary CSS and JavaScript files.
-   - `main.js` and `navigation.js` are executed.
+1. **Initial Page Load**
+   - HTML file loads with CSS and JavaScript links
+   - `main.js` and `navigation.js` execute
+   - Components are dynamically inserted
 
-2. `navigation.js`:
-   - Loads the header, footer, and main navigation components from the `components` directory.
-   - Inserts these components into the appropriate places in the HTML.
-   - Highlights the current page in the navigation menu.
+2. **Dynamic Component Loading**
+   - `navigation.js` fetches and inserts header, footer, and navigation
+   - Current page is highlighted in navigation
+   - Section-specific sidebars are loaded if applicable
 
-3. For committee pages (Career Dev, Creative Space, Diversity):
-   - The section-specific CSS file styles the sidebar and any unique elements.
-   - The sidebar provides easy navigation within that section.
+3. **Style Application**
+   - Global styles from `main.css` apply first
+   - Responsive styles from `responsive.css` apply
+   - Section-specific CSS applies last for customization
 
-4. Global styles from `main.css` and responsive designs from `responsive.css` are applied across all pages, ensuring a consistent look and feel.
+4. **JavaScript Functionality**
+   - `main.js` handles global interactions
+   - `navigation.js` manages navigation state
+   - Section-specific JavaScript handles local functionality
 
-5. Any interactive elements or dynamic content are handled by the JavaScript files, with `main.js` managing global interactions and `navigation.js` handling navigation-specific functionality.
+## Running the Application
 
-This structure allows for easy maintenance and scalability. Each committee section can be updated independently, while still maintaining consistency with the overall site design and functionality.
+To run locally:
+1. Open terminal in root directory
+2. Run command: `python server.py`
+3. Access site through local server URL
 
-### `CONTRIBUTING.md`
+## Future Improvements
 
-Provides guidelines for TAs or other contributors on how to set up the development environment, make changes to the codebase, submit pull requests, and follow coding standards.
+1. **Structural Updates**
+   - Reorganize career-dev/ to match standard pattern
+   - Complete committees/ reorganization
+   - Ensure consistent sidebar implementation
 
-### `README.md`
+2. **Component System**
+   - Consider implementing a more robust component loading system
+   - Standardize component integration across sections
 
-Offers an overview of the project, provides setup instructions, and lists features and project structure.
+3. **Documentation**
+   - Maintain up-to-date documentation of component relationships
 
-## Project Structure Insights
-
-This structure represents a static website with multiple pages and sections, using vanilla HTML, CSS, and JavaScript. The separation of concerns (HTML for structure, CSS for presentation, JS for behavior) is well-maintained. The use of component files and the organization of pages into subdirectories keeps the codebase DRY (Don't Repeat Yourself) and maintainable. The structure with subdirectories for main sections (career-dev, creative-space, diversity) allows for better organization and scalability.
