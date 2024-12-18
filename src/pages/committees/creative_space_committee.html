@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS TA Program - Creative Space</title>
-    <link rel="stylesheet" href="../../../css/main.css">
-    <link rel="stylesheet" href="../../../css/responsive.css">
-    <link rel="stylesheet" href="../../../css/creative-space.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/responsive.css">
+    <link rel="stylesheet" href="../../css/sidebar_and_containers.css">
+    <link rel="stylesheet" href="../../css/creative-space.css">
     <style>
-        /* Add the following styles for the carousel */
         .carousel {
             position: relative;
             max-width: 100%;
@@ -27,25 +26,15 @@
         }
     </style>
 </head>
-
 <body>
     <header id="main-header"></header>
     <nav id="main-nav"></nav>
     <main>
         <div class="container">
-            <div class="creative-space-container">
-                <aside class="creative-space-sidebar">
-                    <nav>
-                        <ul>
-                            <li><a href="../committees.html" class="active">Overview</a></li>
-                            <li><a href="../tech-ethics.html">Tech Ethics Committee</a></li>
-                            <li><a href="../career-dev.html">Tech Career Development</a></li>
-                            <li><a href="../diversity/index.html">Diversity in STEM</a></li>
-                            <li><a href="index.html">Creative Space</a></li>
-                        </ul>
-                    </nav>
-                </aside>
-                <div class="creative-space-content">
+            <div class="main-container">
+                <div id="sidebar-container"></div>
+
+                <div class="main-content">
                     <h1>Creative Space Committee</h1>
                     <h2>Our Mission: </h2>
                     <p>
@@ -53,50 +42,40 @@
                         College's Computer Science classrooms and lab room into inspiring, educational, and inclusive
                         spaces. Working collaboratively with faculty and staff, our committee will design, create, and
                         implement visual elements that enhance learning, promote inclusivity, and foster creativity
-                        within
-                        the Computer Science department.
+                        within the Computer Science department.
                     </p>
 
                     <h2>Meet The Committee Members: </h2>
                     <div class="grid">
                         <div class="grid-item">
-                            <img src="TeamPics/Bryanna.png" alt="Bryanna">
+                            <img src="creative-space-committee/TeamPics/Bryanna.png" alt="Bryanna">
                             <div class="description">Bryanna</div>
                         </div>
                         <div class="grid-item">
-                            <img src="TeamPics/David.png" alt="David">
+                            <img src="creative-space-committee/TeamPics/David.png" alt="David">
                             <p class="description">David</p>
                         </div>
                         <div class="grid-item">
-                            <img src="TeamPics/Berhane.png" alt="Berhane">
+                            <img src="creative-space-committee/TeamPics/Berhane.png" alt="Berhane">
                             <p class="description">Berhane</p>
                         </div>
                         <div class="grid-item">
-                            <img src="TeamPics/Gandalf.png" alt="Gandalf">
+                            <img src="creative-space-committee/TeamPics/Gandalf.png" alt="Gandalf">
                             <p class="description">Alys</p>
                         </div>
                         <div class="grid-item">
-                            <img src="TeamPics/Dylan.jpg" alt="Gandalf">
+                            <img src="creative-space-committee/TeamPics/Dylan.jpg" alt="Dylan">
                             <p class="description">Dylan</p>
                         </div>
                         <div class="grid-item">
-                            <img src="TeamPics/Naury.jpg" alt="Gandalf">
+                            <img src="creative-space-committee/TeamPics/Naury.jpg" alt="Naury">
                             <p class="description">Nauryzbek</p>
                         </div>
                         <div class="grid-item">
-                            <img src="TeamPics/Cade.jpg" alt="Gandalf">
+                            <img src="creative-space-committee/TeamPics/Cade.jpg" alt="Cade">
                             <p class="description">Cade</p>
                         </div>
                     </div>
-
-
-                    <!-- Image Carousel -->
-                    <!-- <h2>Gallery: </h2>
-                    <div class="carousel">
-                        <img src="../../images/design1.jpg" alt="Design 1">
-                        <img src="../../images/design2.jpg" alt="Design 2">
-                        <img src="../../images/design3.jpg" alt="Design 3">
-                    </div> -->
 
                     <h2> Contact us at: </h2>
                     <p> ericksonb@berea.edu </p>
@@ -104,39 +83,38 @@
                     <div>
                         <h1 className="send_email_text">Send Email</h1>
                         <form action="https://formspree.io/f/xjkvorea" method="POST">
-                          <input
-                            type="text"
-                            name="Name"
-                            placeholder="Full Name"
-                            required
-                          />
-                          <input
-                            type="email"
-                            name="Email"
-                            placeholder="Your Email"
-                            required
-                          />
-                          <textarea
-                            name="Message"
-                            placeholder="Message"
-                            required
-                          ></textarea>
-                          <button type="submit">
-                            Send
-                          </button>
+                            <input
+                                type="text"
+                                name="Name"
+                                placeholder="Full Name"
+                                required
+                            />
+                            <input
+                                type="email"
+                                name="Email"
+                                placeholder="Your Email"
+                                required
+                            />
+                            <textarea
+                                name="Message"
+                                placeholder="Message"
+                                required
+                            ></textarea>
+                            <button type="submit">
+                                Send
+                            </button>
                         </form>
-                      </div>
-                    <!-- Add more content here -->
+                    </div>
                 </div>
             </div>
         </div>
     </main>
     <footer id="main-footer"></footer>
-    <script src="../../../js/main.js"></script>
-    <script src="../../../js/navigation.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/navigation.js"></script>
+    <script src="committees.js"></script>
 
     <script>
-        // Add the following JavaScript for carousel functionality
         let currentImageIndex = 0;
         let images = document.querySelectorAll('.carousel img');
 
@@ -146,10 +124,7 @@
             images[currentImageIndex].style.display = 'block';
         }
 
-        // Change image every 3 seconds
         setInterval(showNextImage, 3000);
     </script>
-
 </body>
-
 </html>
