@@ -1,17 +1,17 @@
-/* Diversity Styles */
+/* Sidebar * Main Styles */
 
-.diversity-container {
+.main-container {
     display: flex;
     margin: 0 -15px;
 }
 
-.diversity-sidebar {
+.main-sidebar {
     flex: 0 0 200px;
     padding: 15px;
     background-color: var(--secondary-blue);
 }
 
-.diversity-sidebar nav ul {
+.main-sidebar nav ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -19,11 +19,11 @@
     flex-direction: column;
 }
 
-.diversity-sidebar nav ul li {
+.main-sidebar nav ul li {
     margin-bottom: 10px;
 }
 
-.diversity-sidebar nav ul li a {
+.main-sidebar nav ul li a {
     display: block;
     padding: 10px 15px;
     background-color: var(--primary-blue);
@@ -36,63 +36,63 @@
     font-size: 0.9rem;
 }
 
-.diversity-sidebar nav ul li a:hover,
-.diversity-sidebar nav ul li a.active {
+.main-sidebar nav ul li a:hover,
+.main-sidebar nav ul li a.active {
     background-color: var(--white);
     color: var(--primary-blue);
 }
 
-.diversity-content {
+.main-content {
     flex: 1;
     min-width: 0;
     padding: 0 15px;
 }
 
-.diversity-content h1 {
+.main-content h1 {
     color: var(--primary-blue);
     margin-top: 0;
 }
 
-.diversity-content h2,
-.diversity-content h3 {
+.main-content h2,
+.main-content h3 {
     color: var(--primary-blue);
 }
 
-.diversity-content ul {
+.main-content ul {
     padding-left: 20px;
 }
 
-.diversity-content li {
+.main-content li {
     margin-bottom: 10px;
 }
 
-.diversity-content a {
+.main-content a {
     color: var(--secondary-blue);
     text-decoration: none;
 }
 
-.diversity-content a:hover {
+.main-content a:hover {
     text-decoration: underline;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .diversity-container {
+    .main-container {
         flex-direction: column;
     }
 
-    .diversity-sidebar {
+    .main-sidebar {
         flex: 0 0 100%;
         margin-bottom: 20px;
     }
 
-    .diversity-sidebar nav ul {
+    .main-sidebar nav ul {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
     }
 
-    .diversity-sidebar nav ul li {
+    .main-sidebar nav ul li {
         flex: 0 0 48%;
         margin-bottom: 10px;
     }
