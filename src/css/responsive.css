@@ -1,0 +1,45 @@
+/* responsive.css */
+@media (max-width: 768px) {
+    /* Container responsiveness */
+    .container {
+        width: 95%;
+    }
+
+    /* Navigation responsiveness */
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    /* Staff grid responsiveness */
+    .staff-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Table responsiveness */
+    table.center-table {
+        width: 90%;
+        font-size: 0.9rem;
+    }
+
+    /* Content area responsiveness */
+    .content {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    /* Staff grid for tablets */
+    .staff-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Table adjustments for tablets */
+    table.center-table {
+        width: 80%;
+    }
+}
