@@ -1,19 +1,17 @@
-/* Main Navigation Styles */
 .nav-list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     align-items: center;
-    max-width: 1200px;  /* Makes nav bar less wide */
-    margin: 0 auto;     /* Centers the nav bar */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .nav-list > li {
     position: relative;
 }
 
-/* Logo Styles */
 .nav-logo {
     display: flex;
     align-items: center;
@@ -21,21 +19,19 @@
 }
 
 .nav-logo-img {
-    height: 60px;  /* Increased from 40px */
+    height: 60px;
     width: auto;
     object-fit: contain;
 }
 
-/* Link Styles */
 .nav-link {
     display: flex;
     align-items: center;
-    padding: 0.75rem;  /* Reduced from 1rem to make nav more compact */
+    padding: 0.75rem;
     text-decoration: none;
     transition: background-color 0.3s;
 }
 
-/* Icon Styles */
 .nav-link i {
     margin-right: 0.5rem;
 }
@@ -44,13 +40,12 @@
     margin-left: 0.5rem;
 }
 
-/* Dropdown Styles */
 .dropdown-content {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #f9f9f9;
+    background-color: #ffffff;  /* Changed from #f9f9f9 to clean white */
     min-width: 200px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     z-index: 1000;
@@ -71,11 +66,11 @@
 
 /* Hover and Active States */
 .nav-link:hover {
-    background-color: #444;
+    background-color: #34495e;  /* Changed from #444 to blue-gray */
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd;
+    background-color: #f7f9fc;  /* Changed from #ddd to light blue-gray */
 }
 
 .dropdown:hover .dropdown-content {
@@ -83,9 +78,9 @@
 }
 
 .nav-link.active {
-    background-color: #555;
+    background-color: #3498db;  /* Changed from #4a90e2 to bright blue */
 }
 
 .dropdown-content a.active {
-    background-color: #e0e0e0;
+    background-color: #f0f7ff;  /* Light blue tint remains the same */
 }
