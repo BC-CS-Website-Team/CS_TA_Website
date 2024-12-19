@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Get the current path to determine depth
     const path = window.location.pathname;
-    const isSubDirectory = path.includes('/creative-space-committee/') || path.includes('/diversity-in-stem-committee/') || path.includes('/tech-ethics/') || path.includes('/career-dev-committee/');
+    const isSubDirectory = path.includes('/creative-space-committee/') || path.includes('/diversity-in-stem-committee/') || path.includes('/tech-ethics/') || path.includes('/career-development-pages-committee/');
 
     // Adjust path based on whether we're in a subdirectory
     const sidebarPath = isSubDirectory ? '../committees-sidebar.html' : 'committees-sidebar.html';
