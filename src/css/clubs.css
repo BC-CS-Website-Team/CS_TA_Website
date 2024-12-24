@@ -85,24 +85,24 @@ h1 {
 }
 
 .diversity-clubs{
-    border: 3px solid var(--secondary-blue); 
+    border: 3px solid var(--primary-blue); 
     padding: 20px;
     border-radius: 15px;
     margin-bottom: 40px;
 }
 
 /* text inside dropdown */
-.dropdown-content a:hover {
+.dropdown-stuff a:hover {
     text-decoration: underline;
 }
 
-.dropdown-content a {
+.dropdown-stuff a {
     color: var(--primary-blue);
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content {
+.dropdown-stuff {
     max-height: 0; 
     overflow: hidden;  
     padding-left: 20px;
@@ -111,7 +111,7 @@ h1 {
     border-radius: 10px;
 }
 
-.dropdown-content.active {
+.dropdown-stuff.active {
     max-height: 500px;
     transition: max-height 0.5s ease-in;
     border: 3px solid var(--primary-blue); 
@@ -120,14 +120,14 @@ h1 {
     border-radius: 0  0 10px 10px;
 }
 
-.dropdown-content li {
+.dropdown-stuff li {
     margin: 8px 0;
     opacity: 0;
     transform: translateY(-10px);
     transition: all 0.3s ease;  
 }
 
-.dropdown-content.active li{
+.dropdown-stuff.active li{
     opacity: 1;
     transform: translateY(0);
 }
