@@ -1,0 +1,183 @@
+:root {
+    --primary-blue: #29516d;
+    --secondary-blue: #5c8eb0;
+    --white: #ffffff;
+    --light-gray: #f4f4f4;
+    --dark-gray: #333333;
+    --highlight-blue: #007BFF;
+    --border-radius: 5px;
+    --transition-duration: 0.3s;
+}
+
+.career-dev-container {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+    padding: 0 15px;
+}
+
+.career-dev-sidebar {
+    flex: 0 0 200px;
+    background-color: var(--secondary-blue);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.career-dev-sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.career-dev-sidebar nav ul li a {
+    display: block;
+    padding: 10px 15px;
+    background-color: var(--primary-blue);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: background-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+}
+
+.career-dev-sidebar nav ul li a:hover,
+.career-dev-sidebar nav ul li a.active {
+    background-color: var(--white);
+    color: var(--primary-blue);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.career-dev-content {
+    flex: 1;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.career-dev-content h1,
+.career-dev-content h2,
+.career-dev-content h3,
+.career-dev-content p {
+    margin-bottom: 20px;
+    color: var(--primary-blue);
+}
+
+.resources {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.resources ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.resources ul li {
+    list-style: none; 
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style: none; 
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    list-style: none; /* Ensure no bullets globally for <li> elements */
+}
+
+h3 {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: all var(--transition-duration) ease;
+}
+
+h3 a {
+    color: var(--white);
+    text-decoration: none;
+}
+
+h3 a:hover {
+    text-decoration: underline;
+}
+
+.highlight-section {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.highlight-section:hover {
+    background-color: var(--highlight-blue);
+    text-decoration: underline;
+}
+
+.dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 5px;
+    padding-left: 20px;
+    transition: max-height var(--transition-duration) ease-out;
+}
+
+.dropdown-content.active {
+    max-height: 500px;
+    transition: max-height var(--transition-duration) ease-in;
+}
+
+.dropdown-content li {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all var(--transition-duration) ease;
+}
+
+.dropdown-content.active li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdown-toggle::after {
+    content: '▼';
+    font-size: 0.8em;
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    transition: transform var(--transition-duration) ease;
+}
+
+.dropdown-toggle.active::after {
+    transform: rotate(270deg);
+}
+
+.careerintern a {
+    color: var(--white);
+    text-decoration: none;
+    background-color: var(--primary-blue);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    display: inline-block;
+    transition: background-color var(--transition-duration) ease;
+}
+
+.careerintern a:hover {
+    background-color: var(--highlight-blue);
+    text-decoration: underline;
+}

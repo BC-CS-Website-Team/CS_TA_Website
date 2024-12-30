@@ -1,0 +1,222 @@
+.layer2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+}
+
+/* START STAFF GRID */
+.staff-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 10px;
+}
+
+.staff-image {
+  width: 200px;
+  height: 300px;
+  border-radius: 5px;
+}
+
+.staff-border {
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  margin: 5px;
+  text-align: center;
+}
+/* END STAFF GRID */
+
+/* START PHOTO CARD CSS */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.photo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 200px;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  border-color: #154F6C;
+}
+
+.photo-card img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.photo-card img:hover {
+  transform: scale(1.1);
+}
+
+.photo-card h3 {
+  text-align: center;
+  margin: 0;
+}
+/* END PHOTO CARD CSS */
+
+/* Staff Hours PopUp CSS Container */
+.popup-container {
+  position: fixed;
+  z-index: 3;
+  background: rgb(255, 255, 255);
+  border-radius: 30px;
+  border: 1px solid #29516d;
+  box-shadow: #6f6f6f 0px 0px 10px;
+  padding: 10px;
+  width: 90%;
+  max-width: 600px;
+  height: 90%;
+  max-height: 700px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* PopUp CSS Header (image and name) */
+.popup-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  font-size: 1.5rem;
+  color: #29516d;
+  font-weight: bold;
+}
+
+.popup-container img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #29516d;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.popup-photo-and-name {
+  padding: 10px;
+}
+
+/* PopUp Close Button */
+.icon-button {
+  z-index: 4;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  padding: 5px;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  transition: transform 0.3s ease;
+}
+
+.icon-button:hover {
+  transform: scale(1.2); /* Grows the button to 1.2x its original size */
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+}
+
+/* Week Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse; /* Ensures clean borders */
+  border: 2px solid #154F6C;
+  font-family: Arial, sans-serif; /* Better readability */
+  margin: 0 auto; /* Center the table on the page */
+}
+
+th, td {
+  text-align: center;
+  border: 1px solid #ddd; /* Add subtle border for cells */
+}
+
+td {
+  height: 180px;
+  width: 14.28%; /* Adjusted to 7 columns */
+}
+
+th {
+  background-color: #154F6C; /* Updated to match the border color */
+  color: white; /* Ensure text contrast for readability */
+  font-weight: bold;
+  padding: 10px; /* Slightly increased padding */
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f2f2f2;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Time Slot Grid Styles */
+.time-slot {
+  position: absolute;
+  width: 100%;
+  background-color: lightblue;
+  border: 1px solid #888;
+  font-size: 0.9em;
+  font-weight: bold;
+  color:#154F6C;
+  border-radius: 4px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  text-align: center;
+}
+
+.time-slot-grid {
+  position: relative;
+  display: block;
+  height: 180px;
+  width: auto;
+}
+
+.time-slot-grid td {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Course Tab Styles */
+.course-tab, .popup-links {
+  color: #154F6C;
+}
