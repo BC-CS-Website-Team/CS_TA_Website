@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS TA Program - Home</title>
+    <link rel="stylesheet" href="/CS_TA_Website/css/main.css">
+    <link rel="stylesheet" href="/CS_TA_Website/css/responsive.css">
+    <link rel="stylesheet" href="/CS_TA_Website/css/popup.css">
+</head>
+<body>
+    <header id="main-header"></header>
+
+    <nav id="main-nav"></nav>
+
+    <main>
+            <div class="container">
+                <div class="content">
+                    <h2>Welcome to the Student Computer Science Website!</h2>
+                    <p>Explore our website to learn about our initiatives and meet our team.</p>
+
+                    <h2> Computer Science Faculty & Staff </h2>
+                    <section class="photo-grid">
+                        <div class="photo-card">
+                            <img class="staff-image" src="/src/images/drHeggen1.jpeg" alt="Dr. Heggen"></img>
+                            <h3 id="Scott-Heggen">Dr. Scott Heggen</h3>
+                        </div>
+                        <div class="photo-card">
+                            <img src="/src/images/drPearce1.jpg" alt="Dr. Jan Pearce"></img>
+                            <h3 id="Jan-Pearce">Dr. Jan Pearce</h3>
+                        </div>
+                        <div class="photo-card">
+                            <img src="/src/images/drNakazawa1.jpg" alt="Dr. Mario Nakazawa"></img>
+                            <h3 id="Mario-Nakazawa">Dr. Mario Nakazawa</h3>
+                        </div>
+                        <div class="photo-card">
+                            <img src="/src/images/drJones1.jpg" alt="Dr. Jasmine Jones"></img>
+                            <h3 id="Jasmine-Jones">Dr. Jasmine Jones</h3>
+                        </div>
+                        <div class="photo-card">
+                            <img src="/src/images/drBoggs1.png" alt="Dr. Jacqueline Boggs"></img>
+                            <h3 id="Jacqueline-Boggs">Dr. Jacqueline "Jacci" Boggs</h3>
+                        </div>
+                        <div class="photo-card">
+                            <img src="/src/images/profWilborne1.jpeg" alt="Prof. Deanna Wilborne"></img>
+                            <h3 id="Deanna-Wilborne">Prof. Deanna Wilborne</h3>
+                        </div>
+                        <div class="photo-card">
+                            <img src="/src/images/brian1.png" alt="Brian Ramsey"></img>
+                            <h3 id="Brian-Ramsey">Brian Ramsey</h3>
+                        </div>
+                    </section>
+
+                    <h2>Computer Science TAs</h2>
+                    <a href="src/pages/meet-the-team/meet-tas.html" class="button">Meet Our TAs</a>
+
+                    <h2>Computer Science Courses</h2>
+                    <a href="src/pages/classes/classes.html" class="button">View Our Courses</a>
+                    <a href="https://berea.smartcatalogiq.com/en/current/catalog/departments-of-study/computer-science/computer-and-information-science-b-a/" target="_blank" title="Computer and Information Science B.A." class="button">View the Berea CS Course Catalog</a>
+
+                    <h2>The Computer Science Department</h2>
+                    <a href="https://www.berea.edu/academics/departments-programs/computer-science" target="_blank" title="Computer Science - Berea College" class="button">Info on the Computer Science Department</a>
+
+                    <h2>What is Computer Science?</h2>
+                    <p>&emsp; &ensp;
+                        Computer scientists have transformed the world we live in,
+                        and with a computer science degree, you can become the next leader in our
+                        technology-driven society. With four areas of concentration, hands-on
+                        curriculum,
+                        <a href="https://berea.smartcatalogiq.com/en/current/catalog/departments-of-study/computer-science/computer-and-information-science-b-a/" target="_blank" title="Computer and Information Science B.A.">(View classes here!)</a>
+                        a caring and accessible faculty, and numerous labor and
+                        co-curricular opportunities, you'll be ready to create the next great
+                        advancement in technology. Coming in 2024, our new technology building will
+                        support opportunities to explore advanced computing subjects in our
+                        interactive robotics and visualization lab, a makerspace designed to foster
+                        creativity and exploration, and a hands-on networking and security lab.
+                    </p>
+                    <p>&emsp; &ensp;
+                        We've designed an inclusive curriculum that begins with the
+                        basics of programming and data structures, and culminates with advanced
+                        topics in computer science and a capstone experience. The curriculum is also
+                        flexible enough to support students starting with no prior computing
+                        experience, as well as students who've taken computer science courses prior
+                        to Berea, meeting you where you are in your computing journey. With
+                        conferences, hack-a-thons, internships, research opportunities, and a robust
+                        labor program, students graduate from the computer science major with
+                        real-world, hands-on experience that makes them competitive in today's
+                        market.
+                    </p>
+                    <p> Find out more about the Computer Science department
+                        <a href="https://www.berea.edu/academics/departments-programs/computer-science" target="_blank" title="Computer Science - Berea College"> here!</a>
+                    </p>
+
+                    <p> Take a look at the course sequencing table 
+                        <a href="https://berea.smartcatalogiq.com/en/current/catalog/about-academics/course-sequencing-tables/computer-and-information-science/" target="_blank" title="Computer Science Course Sequencing Table"> here!</a>
+                        (it may be outdated)
+                    </p>
+                </div>
+            </div> 
+        <div class="layer2" hidden>
+            <div class="popup-container">
+                <div class="popup-content"></div>
+                <h2>Office Hours:</h2>
+                <div class="popup-hours">
+                    <!-- Schedule Table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sun</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                            </tr>
+                        </thead>
+                        <tbody class="weekly-hours"></tbody>
+                    </table>
+                </div>
+                <h2>Classes:</h2>
+                <div class="popup-classes"></div>
+                <h2>Links:</h2>
+                <div class="popup-links"></div>
+                <button class="icon-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="icon">
+                        <path d="M12 12L36 36M36 12L12 36" stroke="#29516d" stroke-width="4" stroke-linecap="round" fill="none" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+    <script src="src/js/popupProStaff.js"></script>
+    <script src="src/js/main.js"></script>
+    <script src="src/js/navigation.js"></script>
+</body>
+</html>
