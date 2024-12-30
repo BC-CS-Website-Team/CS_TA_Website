@@ -174,4 +174,3 @@ li {
 .dropdown-toggle.active::after {
     transform: rotate(270deg);
 }
-
