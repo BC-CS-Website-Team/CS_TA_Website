@@ -8,7 +8,7 @@ class WebsiteBuilder:
     def __init__(self, repo_name='CS_TA_Website'):
         self.repo_name = repo_name
         self.source_dir = Path('.')
-        self.build_dir = Path('build')
+        self.build_dir = Path('docs')
         self.patterns_to_update = [
             # CSS file paths
             (r'href=["\']\.\./css/', f'href="/{repo_name}/css/'),
@@ -25,13 +25,13 @@ class WebsiteBuilder:
         ]
 
     def create_build_directory(self):
-        """Create a clean build directory."""
+        """Create a clean docs directory."""
         if self.build_dir.exists():
             shutil.rmtree(self.build_dir)
         self.build_dir.mkdir()
 
     def copy_static_assets(self):
-        """Copy static assets to build directory."""
+        """Copy static assets to docs directory."""
         # Copy directories
         dirs_to_copy = ['css', 'js', 'images', 'components']
         for dir_name in dirs_to_copy:
@@ -54,7 +54,7 @@ class WebsiteBuilder:
         return content
 
     def process_html_files(self):
-        """Process all HTML files, updating paths and copying to build directory."""
+        """Process all HTML files, updating paths and copying to docs directory."""
         # Process root index.html
         root_index = self.source_dir / 'index.html'
         if root_index.exists():
@@ -71,7 +71,7 @@ class WebsiteBuilder:
                 self.process_single_html_file(html_file, dest_path)
 
     def process_single_html_file(self, src_path, dest_path):
-        """Process a single HTML file, updating paths and saving to build directory."""
+        """Process a single HTML file, updating paths and saving to docs directory."""
         with open(src_path, 'r', encoding='utf-8') as file:
             content = file.read()
 
@@ -84,10 +84,10 @@ class WebsiteBuilder:
             file.write(updated_content)
 
     def build(self):
-        """Run the complete build process."""
-        print(f"🚀 Starting build process for {self.repo_name}")
+        """Run the complete docs process."""
+        print(f"🚀 Starting docs process for {self.repo_name}")
 
-        print("📁 Creating build directory...")
+        print("📁 Creating docs directory...")
         self.create_build_directory()
 
         print("📦 Copying static assets...")
@@ -96,8 +96,8 @@ class WebsiteBuilder:
         print("🔄 Processing HTML files...")
         self.process_html_files()
 
-        print("✅ Build complete! Files are ready in the 'build' directory")
-        print(f"📋 Deploy the contents of the 'build' directory to GitHub Pages")
+        print("✅ Build complete! Files are ready in the 'docs' directory")
+        print(f"📋 Deploy the contents of the 'docs' directory to GitHub Pages")
 
 
 if __name__ == "__main__":
