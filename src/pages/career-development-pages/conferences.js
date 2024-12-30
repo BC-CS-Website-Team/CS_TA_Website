@@ -1,4 +1,5 @@
 
+window.alert("Hi")
 document.addEventListener('DOMContentLoaded', function() {
     const sidebarContainer = document.querySelector('#sidebar-container');
 
@@ -9,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Adjust path based on whether we're in a subdirectory
     const sidebarPath = 'conferences-sidebar.html';
 
-
+   console.log("sidebarPath", sidebarPath);
     // Fetch the sidebar content
-    fetch(sidebarPath)
+    fetch("conferences-sidebar.html")
         .then(response => response.text())
         .then(data => {
             sidebarContainer.innerHTML = data;
