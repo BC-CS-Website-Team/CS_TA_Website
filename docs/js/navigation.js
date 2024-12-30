@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded');
 
     // NAVIGATION COMPONENT LOADING
-    fetch('/src/components/navigation.html')
+    fetch('/CS_TA_Website/components/navigation.html')
         .then(response => {
             console.log('Navigation fetch response:', response.status);
             return response.text();
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     // HEADER COMPONENT LOADING
-    fetch('/src/components/header.html')
+    fetch('/CS_TA_Website/components/header.html')
         .then(response => {
             console.log('Header fetch response:', response.status);
             return response.text();
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     // FOOTER COMPONENT LOADING
-    fetch('/src/components/footer.html')
+    fetch('/CS_TA_Website/components/footer.html')
         .then(response => {
             console.log('Footer fetch response:', response.status);
             return response.text();
