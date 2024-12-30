@@ -70,12 +70,14 @@ document.addEventListener('DOMContentLoaded', function() {
         dropdown.addEventListener('click', function() {
             // Toggle the 'active' class on the clicked button
             // This class might rotate an arrow icon or change the button's appearance
-            this.classList.toggle('active');
-            
+            const dropdownContent = this.nextElementSibling;
             // Find the dropdown content (it's the next element after the button)
             // and toggle its 'active' class to show/hide it
-            const content = this.nextElementSibling;
-            content.classList.toggle('active');
+            if (dropdownContent) {
+                // Toggle the active class on both the toggle and the content
+                this.classList.toggle('active');
+                dropdownContent.classList.toggle('active');
+            }
         });
     });
 });
