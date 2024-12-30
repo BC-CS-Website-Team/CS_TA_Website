@@ -17,7 +17,7 @@ photoCards.forEach(card => {
     card.addEventListener('click', () => {
         const name = card.querySelector('h3').textContent; // Get the h3 text content
         if (name == 'Dr. Scott Heggen') {
-          popupHeader.innerHTML = `<img class="staff-image" src="/src/images/drHeggen1.jpeg" alt="Dr. Heggen"></img>${name}`;
+          popupHeader.innerHTML = `<img class="staff-image" src="/CS_TA_Website/images/drHeggen1.jpeg" alt="Dr. Heggen"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [{ start: 8.5, end: 11.5 }], 
               [{ start: 13, end: 16 }], 
@@ -48,7 +48,7 @@ photoCards.forEach(card => {
             ]
           );
       } else if (name == 'Dr. Jan Pearce') {
-          popupHeader.innerHTML = `<img src="/src/images/drPearce1.jpg" alt="Dr. Jan Pearce"></img>${name}`;
+          popupHeader.innerHTML = `<img src="/CS_TA_Website/images/drPearce1.jpg" alt="Dr. Jan Pearce"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [], 
               [{ start: 9, end: 11.5 }], 
@@ -79,7 +79,7 @@ photoCards.forEach(card => {
             ]
           );
       } else if (name == 'Dr. Mario Nakazawa') {
-          popupHeader.innerHTML = `<img src="/src/images/drNakazawa1.jpg" alt="Dr. Mario Nakazawa"></img>${name}`;
+          popupHeader.innerHTML = `<img src="/CS_TA_Website/images/drNakazawa1.jpg" alt="Dr. Mario Nakazawa"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [], 
               [{ start: 9.5, end: 11 }], 
@@ -110,7 +110,7 @@ photoCards.forEach(card => {
             ]
           );
       } else if (name == 'Dr. Jasmine Jones') {
-          popupHeader.innerHTML = `<img src="/src/images/drJones1.jpg" alt="Dr. Jasmine Jones"></img>${name}`;
+          popupHeader.innerHTML = `<img src="/CS_TA_Website/images/drJones1.jpg" alt="Dr. Jasmine Jones"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [], 
               [], 
@@ -141,7 +141,7 @@ photoCards.forEach(card => {
             ]
           );
       } else if (name == 'Dr. Jacqueline "Jacci" Boggs') {
-          popupHeader.innerHTML = `<img src="/src/images/drBoggs1.png" alt="Dr. Jacqueline Boggs"></img>${name}`;
+          popupHeader.innerHTML = `<img src="/CS_TA_Website/images/drBoggs1.png" alt="Dr. Jacqueline Boggs"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [], 
               [], 
@@ -172,7 +172,7 @@ photoCards.forEach(card => {
             ]
           );
       } else if (name == 'Prof. Deanna Wilborne') {
-          popupHeader.innerHTML = `<img src="/src/images/profWilborne1.jpeg" alt="Prof. Deanna Wilborne"></img>${name}`;
+          popupHeader.innerHTML = `<img src="/CS_TA_Website/images/profWilborne1.jpeg" alt="Prof. Deanna Wilborne"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [], 
               [{ start: 10, end: 12.5 }], 
@@ -202,7 +202,7 @@ photoCards.forEach(card => {
             ]
           );
       } else if (name == 'Brian Ramsey') {
-          popupHeader.innerHTML = `<img src="/src/images/brian1.png" alt="Brian Ramsey"></img>${name}`;
+          popupHeader.innerHTML = `<img src="/CS_TA_Website/images/brian1.png" alt="Brian Ramsey"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [{ start: 8, end: 12 }], 
               [{ start: 14, end: 18 }], 
