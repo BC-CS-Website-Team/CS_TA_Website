@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,8 @@
     <link rel="stylesheet" href="../../css/responsive.css">
     <link rel="stylesheet" href="../../css/sidebar_and_containers.css">
     <link rel="stylesheet" href="../../css/creative-space.css">
-    <style>
+    <link rel="stylesheet" href="../../css/career-development-pages-and-committee.css" />
+    <!-- <style>
         .carousel {
             position: relative;
             max-width: 100%;
@@ -24,8 +26,9 @@
         .carousel img:first-child {
             display: block;
         }
-    </style>
+    </style> -->
 </head>
+
 <body>
     <header id="main-header"></header>
     <nav id="main-nav"></nav>
@@ -36,7 +39,8 @@
 
                 <div class="main-content">
                     <h1>Creative Space Committee</h1>
-                    <h2>Our Mission: </h2>
+                    
+                    <h2>Our Mission</h2>
                     <p>
                         The Creative Space Committee is dedicated to transforming the physical environment of Berea
                         College's Computer Science classrooms and lab room into inspiring, educational, and inclusive
@@ -45,7 +49,16 @@
                         within the Computer Science department.
                     </p>
 
-                    <h2>Meet The Committee Members: </h2>
+                    <h2>Committee Goals</h2>
+                    <ul>
+                        <li>Collaborate with faculty and staff to identify areas for improvement in classroom and lab design</li>
+                        <li>Create visually engaging and educational displays that align with the computer science curriculum</li>
+                        <li>Incorporate inclusive design principles to ensure all students feel represented and welcomed</li>
+                        <li>Encourage student participation in the design process to reflect diverse perspectives</li>
+                        <li>Maintain and update creative elements to adapt to evolving needs and feedback</li>
+                    </ul>
+
+                    <!-- <h2>Meet the Committee</h2>
                     <div class="grid">
                         <div class="grid-item">
                             <img src="creative-space-committee/TeamPics/Bryanna.png" alt="Bryanna">
@@ -75,36 +88,75 @@
                             <img src="creative-space-committee/TeamPics/Cade.jpg" alt="Cade">
                             <p class="description">Cade</p>
                         </div>
+                    </div> -->
+
+                    <h2>Meet the Committee</h2>
+                    <div class="committee-members">
+                      <div class="member">
+                        <img src="creative-space-committee/TeamPics/Bryanna.png" alt="Bryanna" />
+                        <p>Bryanna</p>
+                      </div>
+                      <div class="member">
+                        <img src="creative-space-committee/TeamPics/David.png" alt="Jospeh C." />
+                        <p>Jospeh</p> <!-- AKA David Craubaugh -->
+                      </div>
+                      <div class="member">
+                        <img src="creative-space-committee/TeamPics/Berhane.png" alt="Berhane" />
+                        <p>Berhane</p>
+                      </div>
+                      <div class="member">
+                        <img src="creative-space-committee/TeamPics/Gandalf.png" alt="Gandalf" />
+                        <p>Alys</p>
+                      </div>
+                      <div class="member">
+                        <img src="creative-space-committee/TeamPics/Dylan.jpg" alt="Dylan" />
+                        <p>Dylan</p>
+                      </div>
+                      <div class="member">
+                        <img src="creative-space-committee/TeamPics/Naury.jpg" alt="Naury" />
+                        <p>Nauryzbek</p>
+                      </div>
+                      <div class="member">
+                        <img src="creative-space-committee/TeamPics/Cade.jpg" alt="Cade" />
+                        <p>Cade</p>
+                      </div>
                     </div>
 
-                    <h2> Contact us at: </h2>
+
+
+
+                    <section class="send-email">
+                        <h2>Contact Us</h2>
+                        <p>Please feel free to reach out to us at <strong>ericksonb@berea.edu</strong> or by using the section below:</p>
+                        <!-- <p>OR by using the section below:</p> -->
+                        <form action="https://formspree.io/f/xjkvorea" class="form" method="POST">
+                            <div class="input-box">
+                                <input type="text" name="Name" placeholder="Full Name" required aria-label="Full Name" />
+                            </div>
+                            <div class="input-box">
+                                <input type="email" name="Email" placeholder="Your Email" required aria-label="Email" />
+                            </div>
+                            <div class="input-box">
+                                <textarea name="Message" placeholder="Your Message" required aria-label="Message"></textarea>
+                            </div>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </section>
+                    
+                    <!-- <h2> Contact Us </h2>
                     <p> ericksonb@berea.edu </p>
 
                     <div>
-                        <h1 className="send_email_text">Send Email</h1>
+                        <h2 className="send_email_text">Send Email</h2>
                         <form action="https://formspree.io/f/xjkvorea" method="POST">
-                            <input
-                                type="text"
-                                name="Name"
-                                placeholder="Full Name"
-                                required
-                            />
-                            <input
-                                type="email"
-                                name="Email"
-                                placeholder="Your Email"
-                                required
-                            />
-                            <textarea
-                                name="Message"
-                                placeholder="Message"
-                                required
-                            ></textarea>
+                            <input type="text" name="Name" placeholder="Full Name" required />
+                            <input type="email" name="Email" placeholder="Your Email" required />
+                            <textarea name="Message" placeholder="Message" required></textarea>
                             <button type="submit">
                                 Send
                             </button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -127,4 +179,5 @@
         setInterval(showNextImage, 3000);
     </script>
 </body>
+
 </html>
