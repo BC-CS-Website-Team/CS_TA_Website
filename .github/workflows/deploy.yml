@@ -1,0 +1,17 @@
+name: Deploy to GitHub Pages  # Name of the workflow
+
+on:
+  push:
+    branches: [ main ]  # Triggers when you push to main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest    # Uses Ubuntu environment
+    steps:
+    - uses: actions/checkout@v2    # Clones your repository
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3  # Uses a pre-made action for GitHub Pages
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # Authentication
+        publish_dir: .  # Directory to publish
