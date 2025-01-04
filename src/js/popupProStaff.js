@@ -6,7 +6,6 @@ const popupHours = document.querySelector('.weekly-hours');
 const popupClasses = document.querySelector('.popup-classes');
 const popupLinks = document.querySelector('.popup-links');
 
-
 // Add an event listener to the button to hide layer2
 iconButton.addEventListener('click', () => {
     layer2.hidden = true;
@@ -19,72 +18,79 @@ photoCards.forEach(card => {
         if (name == 'Dr. Scott Heggen') {
           popupHeader.innerHTML = `<img class="staff-image" src="/src/images/drHeggen1.jpeg" alt="Dr. Heggen"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
-              [{ start: 8.5, end: 11.5 }], 
-              [{ start: 13, end: 16 }], 
-              [], 
-              [{ start: 10, end: 12 }], 
-              [], 
-              [], 
-              []
+              [{ start: 13, end: 14 }], 
+              [{ start: 13, end: 14 }], 
+              [{ start: 13, end: 14 }], 
+              [{ start: 13, end: 14 }], 
+              [{ start: 13, end: 14 }], 
+              [{ start: 13, end: 14 }], 
+              [{ start: 13, end: 14 }]
           ]);
           popupClasses.innerHTML = generateCourseTabs([
             [
               "M/W/F", 
-              "CSC330: Human-Centered Computing", 
-              "12:00-15:00"
+              "CSC226(A): Software Design and Implementation", 
+              "9:20-10:30"
             ],
             [
-              "T/Th", 
-              "CSC420: History of Computers", 
-              "13:00-15:00"
+              "M/W/F", 
+              "CSC226(B): Software Design and Implementation", 
+              "10:40-11:50"
             ]
           ]);
           popupLinks.innerHTML = generateEmailAndLinks(
             "heggens@berea.edu", 
             [
-              ["Slack", ""],
-              ["Navigate", ""],
+              ["Slack", "https://bereacs.slack.com/team/U3TH18WAC"],
+              // ["Navigate", ""],
               ["Berea Profile", "https://www.berea.edu/academics/departments-programs/computer-science/faculty-staff/dr-scott-heggen"]
             ]
           );
+          document.querySelector('.classes-section').hidden = false;
       } else if (name == 'Dr. Jan Pearce') {
           popupHeader.innerHTML = `<img src="/src/images/drPearce1.jpg" alt="Dr. Jan Pearce"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [], 
-              [{ start: 9, end: 11.5 }], 
-              [], 
-              [{ start: 13, end: 15 }], 
-              [], 
-              [], 
+              [{ start: 13.33, end: 14 }], 
+              [{ start: 14, end: 14.833 }], 
+              [{ start: 13.33, end: 14 }], 
+              [{ start: 14, end: 14.833 }], 
+              [{ start: 13.33, end: 14 }], 
               []
           ]);
           popupClasses.innerHTML = generateCourseTabs([
             [
               "M/W/F", 
-              "CSC250: Data Structures", 
-              "10:00-12:00"
+              "CSC236(A): Data Structures", 
+              "9:20-10:30"
             ],
             [
-              "T/Th", 
-              "CSC340: Software Engineering", 
-              "14:00-16:00"
+              "M/W/F", 
+              "CSC236(B): Data Structures", 
+              "10:40-11:50"
+            ],
+            [
+              "M/W/F", 
+              "CSC246: Scalable Algorithms & Objects", 
+              "8:00-9:10"
             ]
           ]);
           popupLinks.innerHTML = generateEmailAndLinks(
             "pearcej@berea.edu", 
             [
-              ["Slack", ""],
-              ["Navigate", ""],
+              ["Slack", "https://bereacs.slack.com/team/U6G45QE81"],
+              // ["Navigate", ""],
               ["Berea Profile", "https://www.berea.edu/academics/departments-programs/computer-science/faculty-staff/dr-jan-pearce-2"]
             ]
           );
+          document.querySelector('.classes-section').hidden = false;
       } else if (name == 'Dr. Mario Nakazawa') {
           popupHeader.innerHTML = `<img src="/src/images/drNakazawa1.jpg" alt="Dr. Mario Nakazawa"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [], 
-              [{ start: 9.5, end: 11 }], 
               [], 
-              [{ start: 14, end: 16 }], 
+              [{ start: 13.5, end: 15 }], 
+              [{ start: 22, end: 24 }], 
               [], 
               [], 
               []
@@ -92,146 +98,151 @@ photoCards.forEach(card => {
           popupClasses.innerHTML = generateCourseTabs([
             [
               "M/W/F", 
-              "CSC220: Introduction to Algorithms", 
-              "09:00-11:00"
+              "CSC121: Introduction to Game Design", 
+              "14:40-15:50"
             ],
             [
-              "T/Th", 
-              "CSC310: Artificial Intelligence", 
-              "13:00-15:00"
+              "M/W/F", 
+              "CSC440: Design & Analysis of Algorithm", 
+              "14:40-15:50"
             ]
           ]);
           popupLinks.innerHTML = generateEmailAndLinks(
             "nakazawam@berea.edu", 
             [
-              ["Slack", ""],
-              ["Navigate", ""],
+              ["Slack", "https://bereacs.slack.com/team/UV6TL9057"],
+              // ["Navigate", ""],
               ["Berea Profile", "https://www.berea.edu/academics/departments-programs/computer-science/faculty-staff/dr-mario-nakazawa-2"]
             ]
           );
+          document.querySelector('.classes-section').hidden = false;
       } else if (name == 'Dr. Jasmine Jones') {
           popupHeader.innerHTML = `<img src="/src/images/drJones1.jpg" alt="Dr. Jasmine Jones"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [], 
+              [{ start: 15, end: 17.5 }], 
               [], 
-              [{ start: 10, end: 12 }], 
-              [{ start: 13, end: 15.5 }], 
+              [{ start: 15, end: 17.5 }], 
               [], 
               [], 
               []
           ]);
           popupClasses.innerHTML = generateCourseTabs([
             [
-              "M/W/F", 
-              "CSC120: Introduction to Programming", 
-              "08:30-10:00"
+              "T/Th", 
+              "CSC110: Craft of Computing", 
+              "13:00-14:50"
             ],
             [
               "T/Th", 
-              "CSC410: Machine Learning", 
-              "14:30-16:30"
+              "CSC330: Database Systems", 
+              "10:00-11:50"
             ]
           ]);
           popupLinks.innerHTML = generateEmailAndLinks(
             "jonesj2@berea.edu", 
             [
               ["Slack", ""],
-              ["Navigate", ""],
+              // ["Navigate", ""],
               ["Berea Profile", "https://www.berea.edu/academics/departments-programs/computer-science/faculty-staff/dr-jasmine-jones"]
             ]
           );
+          document.querySelector('.classes-section').hidden = false;
       } else if (name == 'Dr. Jacqueline "Jacci" Boggs') {
           popupHeader.innerHTML = `<img src="/src/images/drBoggs1.png" alt="Dr. Jacqueline Boggs"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [], 
+              [{ start: 11, end: 12 }], 
               [], 
+              [{ start: 11, end: 12 }], 
               [], 
-              [{ start: 9, end: 12 }], 
-              [{ start: 13.5, end: 16.5 }], 
               [], 
               []
           ]);
           popupClasses.innerHTML = generateCourseTabs([
             [
-              "M/W/F", 
-              "CSC300: Operating Systems", 
-              "11:00-13:00"
+              "T/Th", 
+              "CSC114: Business App & Prog(BUS)(A)", 
+              "10:00-11:50"
             ],
             [
               "T/Th", 
-              "CSC420: Advanced Databases", 
-              "10:00-12:00"
+              "CSC114: Business App & Prog(BUS)(B)", 
+              "13:00-14:50"
+            ],
+            [
+              "M/W", 
+              "CSC328: Data Analytics(BUS)", 
+              "12:40-14:30"
             ]
           ]);
           popupLinks.innerHTML = generateEmailAndLinks(
             "boggsj2@berea.edu", 
             [
-              ["Slack", ""],
-              ["Navigate", ""],
+              ["Slack", "https://bereacs.slack.com/team/U01BFDDRCL9"],
+              // ["Navigate", ""],
               ["Berea Profile", "https://www.berea.edu/academics/departments-programs/computer-science/faculty-staff/dr-jacqueline-jacci-boggs"]
             ]
           );
+          document.querySelector('.classes-section').hidden = false;
       } else if (name == 'Prof. Deanna Wilborne') {
           popupHeader.innerHTML = `<img src="/src/images/profWilborne1.jpeg" alt="Prof. Deanna Wilborne"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
               [], 
-              [{ start: 10, end: 12.5 }], 
+              [{ start: 9.5, end: 11.5 }], 
               [], 
-              [{ start: 14, end: 16 }], 
+              [{ start: 9.5, end: 11.5 }], 
               [], 
-              [], 
+              [{ start: 9.5, end: 11.5 }], 
               []
           ]);
           popupClasses.innerHTML = generateCourseTabs([
             [
               "M/W/F", 
-              "CSC150: Introduction to Web Development", 
-              "09:30-11:30"],
+              "CSC246: Scalable Algorithms & Objects", 
+              "8:00-9:10"
+            ],
+            [
+              "M/W/F", 
+              "CSC420: Programming Languages", 
+              "9:20-10:30"
+            ],
             [
               "T/Th", 
-              "CSC210: Computer Graphics", 
-              "12:30-14:30"
+              "CSC486: Compiler Design & Impl.", 
+              "8:00-9:50"
             ]
           ]);
           popupLinks.innerHTML = generateEmailAndLinks(
             "wilborned@berea.edu", 
             [
-              ["Slack", ""],
-              ["Navigate", ""],
+              ["Slack", "https://bereacs.slack.com/team/U02AJ4P07E2"],
+              // ["Navigate", ""],
               ["Berea Profile", "https://www.berea.edu/academics/departments-programs/computer-science/faculty-staff/deanna-wilborne"]
             ]
           );
+          document.querySelector('.classes-section').hidden = false;
       } else if (name == 'Brian Ramsey') {
           popupHeader.innerHTML = `<img src="/src/images/brian1.png" alt="Brian Ramsey"></img>${name}`;
           popupHours.innerHTML = generateTableRow([
-              [{ start: 8, end: 12 }], 
-              [{ start: 14, end: 18 }], 
               [], 
-              [{ start: 10, end: 14 }], 
-              [{ start: 9, end: 11.5 }], 
+              [], 
+              [], 
+              [], 
+              [], 
               [], 
               []
           ]);
-          popupClasses.innerHTML = generateCourseTabs([
-            [
-              "M/W/F", 
-              "CSC110: Fundamentals of Computing", 
-              "08:00-09:30"
-            ],
-            [
-              "T/Th", 
-              "CSC320: Cybersecurity", 
-              "15:00-17:00"
-            ]
-          ]);
+          popupClasses.innerHTML = generateCourseTabs([]);
           popupLinks.innerHTML = generateEmailAndLinks(
             "ramsayb2@berea.edu", 
             [
-              ["Slack", ""],
-              ["Navigate", ""],
+              ["Slack", "https://bereacs.slack.com/team/UUL38KWGN"],
+              // ["Navigate", ""],
               ["Berea Profile", "https://www.berea.edu/academics/departments-programs/computer-science/faculty-staff/brian-ramsey"]
             ]
           );
+          document.querySelector('.classes-section').hidden = true;
       }
       layer2.hidden = false;
     }); 
@@ -244,10 +255,33 @@ function generateTableRow(hoursPerDay = []) {
   for (let i = 0; i < 7; i++) {
     const hours = hoursPerDay[i] || []; // Get hours for the day or default to an empty array
 
+    // Initialize top and height variables
+    let top = 0;
+    let height = 0;
+
     // Generate grid-based time slots
     const timeSlots = hours.map(({ start, end }) => {
-      const top = ((start - 8) / 12) * 100; // Calculate start percentage (6:00 is the base start)
-      const height = ((end - start) / 12) * 100; // Calculate duration percentage
+      if (start < 8) {
+        falseStart = Math.max(start, 8);
+      } else if (start > 20) {
+        falseStart = 20 - (start - 20);
+      } else {
+        falseStart = start;
+      }
+      if (end > 20) {
+        falseEnd = Math.min(end, 20);
+      } else if (end < 8) {
+        falseEnd = 8 + (8 - end);
+      } else {
+        falseEnd = end;
+      }
+
+      // Handle valid time range
+      if (start < end) {
+        top = ((falseStart - 8) / 12) * 100;  // Calculate start percentage
+        height = ((falseEnd - falseStart) / 12) * 100;  // Calculate duration percentage
+      }
+
       const formattedStart = formatTime(start);
       const formattedEnd = formatTime(end);
       return `<div class="time-slot" style="top: ${top}%; height: ${height}%;">${formattedStart}-${formattedEnd}</div>`;
