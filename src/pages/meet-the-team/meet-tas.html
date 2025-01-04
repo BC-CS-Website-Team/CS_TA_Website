@@ -1,102 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CS TA Program - Meet TAs</title>
-    <link rel="stylesheet" href="../../css/meet_ta.css" />
-    <link rel="stylesheet" href="../../css/main.css" />
-    <link rel="stylesheet" href="../../css/responsive.css" />
-    <link rel="stylesheet" href="../../css/sidebar_and_containers.css">
-  </head>
-  <body>
-    <header id="main-header"></header>
-    <nav id="main-nav"></nav>
-    <main>
-      <div class="container">
-        <div class="main-container">
-          <div id="sidebar-container"></div>
 
-          <div class="main-content">
-            <h1>Meet Our TAs</h1>
-            <p>Learn about the dedicated Teaching Assistants in our CS program.</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS TA Program - Meet TAs</title>
+  <link rel="stylesheet" href="../../css/popup.css" />
+  <link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/responsive.css" />
+  <link rel="stylesheet" href="../../css/sidebar_and_containers.css">
+</head>
 
-            <!-- Leads Section -->
-            <section class="lead-grid">
-              <h2>Leads for the CS Department</h2>
-              <div class="lead-card">
-                <img src="../../images/Nicholas.jpg" alt="Lead 1" />
-                <h3>Nicholas Hamilton</h3>
-              </div>
-              <div class="lead-card">
-                <img src="../../images/Bishal.JPG" alt="Lead 2" />
-                <h3>Bishal Timalsina</h3>
-              </div>
-              <div class="lead-card">
-                <img src="../../images/CrubaughD.jpg" alt="Lead 3" />
-                <h3>Jospeh Craubaugh</h3>
-              </div>
-            </section>
+<body>
+  <header id="main-header"></header>
+  <nav id="main-nav"></nav>
+  <main>
+    <div class="container">
+      <div class="main-container">
+        <div id="sidebar-container"></div>
 
-            <!-- Teaching Assistants Section -->
-            <section class="ta-grid">
-              <h2>Meet Our TAs</h2>
-              <div class="ta-card">
-                <img src="../../images/Mercy-Eze.jpg" alt="TA 1" />
-                <h3>Mercy Eze</h3>
-              </div>
-              <div class="ta-card">
-                <img src="../../images/Arbjosa-Halilaj.jpeg" alt="TA 3" />
-                <h3>Arbjosa</h3>
-              </div>
-              <div class="ta-card">
-                <img src="../../images/Bryanna-Erickson.jpeg" alt="TA 4" />
-                <h3>Bryanna Erickson</h3>
-              </div>
-              <div class="ta-card">
-                <img src="../../images/David-Olorunpoju-Ess.png" alt="TA 5" />
-                <h3>David Olorunpoju-Essang</h3>
-              </div>
-              <div class="ta-card">
-                <img src="../../images/Profile.jpg" alt="TA 6" />
-                <h3>Moise</h3>
-              </div>
-              <div class="ta-card">
-                <img src="../../images/Mohammad-Ali-Ramazan.jpg" alt="TA 7" />
-                <h3>Ali Ramazani</h3>
-              </div>
-              <div class="ta-card">
-                <img src="../../images/Maumoud.jpg" alt="TA 8" />
-                <h3>Mahmoud</h3>
-              </div>
-              <div class="ta-card">
-                <img src="../../images/Tojo.jpg" alt="TA 9" />
-                <h3>Tojo</h3>
-              </div>
-              <div class="ta-card">
-                <img src="../../images/America.jpg" alt="TA 10" />
-                <h3>America </h3>
-              </div>
-              <div class="ta-card">
-                <img src="../../images/Berhane.png" alt="TA 11" />
-                <h3>Berhane</h3>
-              </div>
-              <div class="ta-card">
-                <img src="../../images/John.png" alt="TA 12" />
-                <h3>John Cox</h3>
-              </div>
-              <div class="ta-card">
-                <img src="../../images/Gagan.jpg" alt="TA 13" />
-                <h3>Gagan Phuyal</h3>
-              </div>
-            </section>
-          </div>
+        <div class="main-content">
+          <h1>Meet Our TAs</h1>
+          <p>Learn about the dedicated Teaching Assistants in our CS program.</p>
+
+          <!-- Leads Section -->
+          <h2>Leads for the CS Department</h2>
+          <p>Click on a photo for more information on our Leads.</p>
+          <section class="photo-grid">
+            <!-- When editing the Photo Cards only add or edit a photo card in these sections so the the new person has one to add info go to the popupTA.js page. -->
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/Nicholas.jpg" alt="Lead 1" />
+              <h3>Nicholas Hamilton</h3> <!-- This is what is checked in the JS to populate the popup -->
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/Bishal.JPG" alt="Lead 2" />
+              <h3>Bishal Timalsina</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/CrubaughD.jpg" alt="Lead 3" />
+              <h3>Joseph Crubaugh</h3>
+            </div>
+          </section>
+
+          <!-- Teaching Assistants Section -->
+          <h2>Meet Our TAs</h2>
+          <p>Click on a photo for more information on our TAs.</p>
+          <section class="photo-grid">
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/Mercy-Eze.jpg" alt="TA 1" />
+              <h3>Mercy Eze</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/Arbjosa-Halilaj.jpeg" alt="TA 3" />
+              <h3>Arbjosa</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/Bryanna-Erickson.jpeg" alt="TA 4" />
+              <h3>Bryanna Erickson</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/David-Olorunpoju-Ess.png" alt="TA 5" />
+              <h3>David Olorunpoju-Essang</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/Profile.jpg" alt="TA 6" />
+              <h3>Moise</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/Mohammad-Ali-Ramazan.jpg" alt="TA 7" />
+              <h3>Ali Ramazani</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/Maumoud.jpg" alt="TA 8" />
+              <h3>Mahmoud</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/Tojo.jpg" alt="TA 9" />
+              <h3>Tojo</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/America.jpg" alt="TA 10" />
+              <h3>America</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/Berhane.png" alt="TA 11" />
+              <h3>Berhane</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/John.png" alt="TA 12" />
+              <h3>John Cox</h3>
+            </div>
+            <div class="photo-card">
+              <img class="staff-image" src="/src/images/Gagan.jpg" alt="TA 13" />
+              <h3>Gagan Phuyal</h3>
+            </div>
+          </section>
         </div>
       </div>
-    </main>
-    <footer id="main-footer"></footer>
-    <script src="../../js/main.js"></script>
-    <script src="../../js/navigation.js"></script>
-    <script src="meet-the-team.js"></script>
-  </body>
+    </div>
+    <div class="layer2" hidden>
+      <div class="popup-container">
+        <div class="popup-content"></div>
+        <div class="hours-section">
+          <h2>Lab Hours (CMIT: 318) (00:00-24:00):</h2>
+          <div class="popup-hours">
+            <!-- Schedule Table -->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Sun</th>
+                  <th>Mon</th>
+                  <th>Tue</th>
+                  <th>Wed</th>
+                  <th>Thu</th>
+                  <th>Fri</th>
+                  <th>Sat</th>
+                </tr>
+              </thead>
+              <tbody class="weekly-hours"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="classes-section">
+          <h2>Classes:</h2>
+          <div class="popup-classes"></div>
+        </div>
+        <div class="links-section">
+          <h2>Links:</h2>
+          <div class="popup-links"></div>
+        </div>
+        <button class="icon-button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="icon">
+            <path d="M12 12L36 36M36 12L12 36" stroke="#29516d" stroke-width="4" stroke-linecap="round" fill="none" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </main>
+  <footer id="main-footer"></footer>
+  <script src="../../js/main.js"></script>
+  <script src="../../js/popupTA.js"></script>
+  <script src="../../js/navigation.js"></script>
+  <script src="meet-the-team.js"></script>
+</body>
+
 </html>
