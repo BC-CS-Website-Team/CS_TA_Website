@@ -61,12 +61,12 @@ photoCards.forEach(card => {
           popupClasses.innerHTML = generateCourseTabs([
             [
               "M/W/F", 
-              "CSC236(A): Data Structures", 
+              "dropdown_menus(A): Data Structures",
               "9:20-10:30"
             ],
             [
               "M/W/F", 
-              "CSC236(B): Data Structures", 
+              "dropdown_menus(B): Data Structures",
               "10:40-11:50"
             ],
             [
