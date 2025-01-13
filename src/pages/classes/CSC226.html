@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="../../css/responsive.css">
     <link rel="stylesheet" href="../../css/sidebar_and_containers.css">
+    <link rel="stylesheet" href="dropdown_menus/classes_dropdown.css">
 </head>
 <body>
     <header id="main-header"></header>
@@ -17,16 +18,136 @@
                 <div id="sidebar-container"></div>
                 <div class="main-content">
                     <h1>CSC226: Software Design & Implement</h1>
-                    <h2>Course Description</h2>
-                    <p>[Course description to be added]</p>
 
-                    <h2>Resources</h2>
+                    <section>
+                        <h2>Relevant Links</h2>
+                        <ul>
+                            <li><a href="https://slack.com/" target="_blank">Slack</a> - Messaging service we use for class</li>
+                            <li><a href="https://moodle.berea.edu/" target="_blank">Moodle</a> - Where to find course information</li>
+                            <li><a href="https://trello.com/b/8Qamtt1j/2025-spring-csc-226-software-design-implementation" target="_blank">Trello</a> - Where we organize our homework and projects</li>
+                        </ul>
+                    </section>
+
                     <ul>
-                        <li>Course Syllabus</li>
-                        <li>Study Guides</li>
-                        <li>Additional Materials</li>
-                        <li>Linked Github and Slack</li>
+                        <li class="dropdown-box">
+                            <h3 class="dropdown-toggle">Course Syllabus</h3>
+                            <div class="dropdown-stuff">
+                                <p>You can view the course syllabus for Spring 2025 below:</p>
+                                <embed src="dropdown_menus/CSC226SyllabusSpring2025.pdf" type="application/pdf" width="100%" height="600px" />
+                            </div>
+                        </li>
 
+
+                        <li class="dropdown-box">
+                            <h3 class="dropdown-toggle">For Computer Science Beginners</h3>
+                            <div class="dropdown-stuff">
+                                <h4>Welcome to Computer Science!</h4>
+                                <p>CSC226 is your first step into the world of computer science! This class introduces you to software design using the Python programming language. But what exactly does that mean?</p>
+
+                                <h4>What is a Programming Language?</h4>
+                                <p>Just like humans use languages (English, Spanish, etc.) to communicate with each other, we use programming languages to communicate with computers. Python is one of these languages, and it's known for being especially friendly for beginners! Think of it as learning to write instructions that your computer can understand and follow.</p>
+
+                                <h4>Your Coding Workspace: PyCharm</h4>
+                                <p>In this class, we'll use something called PyCharm, which is what we call an IDE (Integrated Development Environment). If this sounds complicated, think of it like Microsoft Word, but for coding:</p>
+                                <ul>
+                                    <li>Just like Word helps you write documents by catching spelling mistakes, PyCharm helps you write code by catching coding mistakes</li>
+                                    <li>Word gives you tools like formatting and spell-check; PyCharm gives you tools like code completion and debugging</li>
+                                    <li>Word shows you when you've made grammar errors; PyCharm shows you when you've made syntax errors in your code</li>
+                                </ul>
+
+                                <h4>Key Things to Know</h4>
+                                <ul>
+                                    <li><strong>Don't be afraid to make mistakes!</strong> Making errors and fixing them is a normal part of learning to code</li>
+                                    <li><strong>Practice is crucial:</strong> Programming is like learning a new language - the more you practice, the better you get</li>
+                                    <li><strong>Ask questions:</strong> Computer science has its own vocabulary, so don't hesitate to ask when you don't understand a term</li>
+                                    <li><strong>AI is a fantastic tool, if used correctly!</strong> This class is centered around teaching you the fundamentals of algorithmic thinking, so an understanding of the basics is crucial</li>
+
+                                </ul>
+
+                                <h4>Helpful Video Resources</h4>
+                                <p>Here are some topics you might want to explore with video tutorials:</p>
+                                <ul>
+                                    <li><a href="https://www.youtube.com/watch?v=XASY30EfGAc" target="_blank">"What is a Programming Language? In 60 Seconds"</a></li>
+                                    <li><a href="https://www.youtube.com/watch?v=6YMec72CEiU" target="_blank">"What is Programming?"</a></li>
+                                    <li><a href="https://www.youtube.com/watch?v=k-EID5_2D9U" target="_blank">"File Management Part 1"</a></li>
+                                    <li><a href="https://www.youtube.com/watch?v=DGd48PGbnBs" target="_blank">"File Management Part 2"</a></li>
+                                    <li><a href="https://www.youtube.com/watch?v=hHcZbXsZtm0" target="_blank">"Windows Tutorial - Explaining computer files, folders, and directories"</a></li>
+                                    <li><a href="https://www.youtube.com/watch?v=HHcZbXsZtm0" target="_blank">"PyCharm Tutorial"</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                                                <li class="dropdown-box">
+                            <h3 class="dropdown-toggle">Git & GitHub</h3>
+                            <div class="dropdown-stuff">
+                                <h4>What are Git and GitHub?</h4>
+                                <p>Imagine you're working on a big group project where everyone needs to contribute to a document. Now imagine if you could:</p>
+                                <ul>
+                                    <li>Track every change made to the document</li>
+                                    <li>Know who made each change and when</li>
+                                    <li>Go back to any previous version if something goes wrong</li>
+                                    <li>Work on your own copy without affecting others</li>
+                                </ul>
+
+                                <h4>Git: Your Local Version Control</h4>
+                                <p>Git is a tool that runs on your computer (like Microsoft Word or PyCharm). It:</p>
+                                <ul>
+                                    <li>Keeps track of all changes to your code files</li>
+                                    <li>Lets you save different versions of your work</li>
+                                    <li>Works on your personal computer, even without internet</li>
+                                    <li>Helps you experiment with changes without breaking your working code</li>
+                                </ul>
+
+                                <h4>GitHub: Your Online Code Storage</h4>
+                                <p>GitHub is like Google Drive, but specifically designed for code. It:</p>
+                                <ul>
+                                    <li>Stores your code online so you can access it from anywhere</li>
+                                    <li>Lets you share your code with others</li>
+                                    <li>Makes it easy for multiple people to work on the same project</li>
+                                    <li>Keeps a backup of your code in case something happens to your computer</li>
+                                </ul>
+
+                                <h4>How They Work Together</h4>
+                                <p>Think of it this way:</p>
+                                <ul>
+                                    <li>Git is like working on files saved on your computer - you make changes locally first</li>
+                                    <li>GitHub is like Google Drive - once you're ready to share your changes, you upload (or "push") them to GitHub where others can see and use them</li>
+                                    <li>When you want to work on code that's on GitHub, you download (or "pull") it to your computer first, then use Git to track your changes</li>
+                                </ul>
+
+                                <p>We'll be using both tools throughout the course to manage and share our code!</p>
+
+                                <h4>Getting Started Resources</h4>
+                                <ul>
+                                    <li><a href="https://www.youtube.com/watch?v=8Dd7KRpKeaE" target="_blank">Git and GitHub for Beginners - Crash Course</a></li>
+                                    <li><a href="https://docs.github.com/en/get-started" target="_blank">GitHub's Official Getting Started Guide</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="dropdown-box">
+                            <h3 class="dropdown-toggle">Learning Python</h3>
+                            <div class="dropdown-stuff">
+                                <p>Our textbook in class is an invaluable resource for learning the Python programming language. For a broad overview of Python, you can watch this quick description: <a href="https://www.youtube.com/watch?v=MNeX4EGtR5Y" target="_blank">Python Tutorial for Beginners</a></p>
+
+                                <h4>Core Python Concepts</h4>
+                                <p>The core concepts you will learn in this course are:</p>
+                                <p>Develop familiarity and comfort with commonly used data and programming concepts, operations and structures, such as:</p>
+                                <ul>
+                                    <li>Flow of control</li>
+                                    <li>Data types</li>
+                                    <li>Branching</li>
+                                    <li>Input/Output (I/O)</li>
+                                    <li>Loops</li>
+                                    <li>Arrays</li>
+                                    <li>Functions</li>
+                                    <li>Methods</li>
+                                    <li>Objects</li>
+                                    <li>Classes</li>
+
+                                </ul>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -36,5 +157,6 @@
     <script src="../../js/main.js"></script>
     <script src="../../js/navigation.js"></script>
     <script src="classes.js"></script>
+    <script src="dropdown_menus/classes_dropdown.js"></script>
 </body>
 </html>
