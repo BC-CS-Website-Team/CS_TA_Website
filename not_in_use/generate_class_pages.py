@@ -12,7 +12,7 @@ classes = [
     ('CSC127', 'Intro to Web Design'),
     ('CSC150', 'Management Info. Systems (BUS)'),
     ('CSC226', 'Software Design & Implement'),
-    ('CSC236', 'Data Structures'),
+    ('dropdown_menus', 'Data Structures'),
     ('CSC246', 'Scalable Algorithms & Objects'),
     ('CSC300', 'Embedded Systems'),
     ('CSC301', 'Human-Computer Computing'),
