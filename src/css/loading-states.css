@@ -5,10 +5,12 @@
     min-height: 60px; /* Adjust this value based on your navigation height */
     transition: opacity 0.3s ease-in-out;
     opacity: 1;
+    visibility: visible;
 }
 
 #main-nav.loading {
     opacity: 0;
+    visibility: visible; /* Keep it in the document flow */
 }
 
 /* Prevent content shift during navigation load */

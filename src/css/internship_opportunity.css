@@ -86,13 +86,13 @@
     margin-bottom: 15px;
 }
 
-ul {
+main ul {
     list-style: none; 
     margin: 0;
     padding: 0;
 }
 
-ul li {
+main ul li {
     list-style: none; /* Ensure no bullets globally for <li> elements */
 }
 

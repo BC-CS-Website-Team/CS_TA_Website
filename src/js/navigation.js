@@ -21,16 +21,28 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             console.log('Navigation data received');
             const mainNav = document.getElementById('main-nav');
-            mainNav.innerHTML = data;
-            // Remove loading class after content is loaded
-            mainNav.classList.remove('loading');
+            if (mainNav) {
+                const parser = new DOMParser();
+                const navDoc = parser.parseFromString(data, 'text/html');
+                const navContent = navDoc.querySelector('#main-nav');
+                if (navContent) {
+                    mainNav.innerHTML = navContent.innerHTML;
+                    // Remove loading class after content is loaded
+                    setTimeout(() => {
+                        mainNav.classList.remove('loading');
+                    }, 100);
+                }
+            }
             // After navigation is loaded:
             highlightCurrentPage();
         })
         .catch(error => {
             console.error('Error loading navigation:', error);
             // Remove loading class even on error to prevent eternal loading state
-            document.getElementById('main-nav').classList.remove('loading');
+            const mainNav = document.getElementById('main-nav');
+            if (mainNav) {
+                mainNav.classList.remove('loading');
+            }
         });
 
     // HEADER COMPONENT LOADING
