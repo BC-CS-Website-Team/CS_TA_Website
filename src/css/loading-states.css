@@ -1,0 +1,38 @@
+/* Loading States and Transitions */
+
+/* Ensure navigation takes up space even when loading */
+#main-nav {
+    min-height: 60px; /* Adjust this value based on your navigation height */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+}
+
+#main-nav.loading {
+    opacity: 0;
+}
+
+/* Prevent content shift during navigation load */
+body {
+    padding-top: 60px; /* Same as nav height */
+    margin: 0;
+}
+
+/* Ensure smooth transitions for all interactive elements */
+.nav-link,
+.dropdown-content,
+.nav-logo-img {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Prevent layout shifts for dropdown menus */
+.dropdown-content {
+    transform-origin: top;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Optimize paint operations */
+.nav-list {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}

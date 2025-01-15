@@ -20,13 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             console.log('Navigation data received');
-            document.getElementById('main-nav').innerHTML = data;
-
+            const mainNav = document.getElementById('main-nav');
+            mainNav.innerHTML = data;
+            // Remove loading class after content is loaded
+            mainNav.classList.remove('loading');
             // After navigation is loaded:
             highlightCurrentPage();
         })
         .catch(error => {
             console.error('Error loading navigation:', error);
+            // Remove loading class even on error to prevent eternal loading state
+            document.getElementById('main-nav').classList.remove('loading');
         });
 
     // HEADER COMPONENT LOADING

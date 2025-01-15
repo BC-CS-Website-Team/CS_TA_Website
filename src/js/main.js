@@ -33,9 +33,27 @@ The toggle method adds the class if it's not there and removes it if it is.
 
 
 
+// Preload components
+const preloadComponents = () => {
+    const components = [
+        '/src/components/navigation.html',
+        '/src/components/header.html',
+        '/src/components/footer.html'
+    ];
+    
+    components.forEach(component => {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = component;
+        document.head.appendChild(link);
+    });
+};
+
 // This event listener waits for the DOM to be fully loaded before running any code
-// It's like saying "don't start until the whole page is ready"
 document.addEventListener('DOMContentLoaded', function() {
+    // Preload components for faster subsequent page loads
+    preloadComponents();
+    
     // Log a message to the browser's console to confirm the script is running
     // This is helpful for debugging - you can see it in browser developer tools
     console.log('Main script loaded');
