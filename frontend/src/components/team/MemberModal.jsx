@@ -1,13 +1,13 @@
 /**
- * TAModal.jsx
- * Modal component for displaying detailed TA information.
+ * MemberModal.jsx
+ * Generic modal component for displaying detailed team member information.
  */
 
 import PropTypes from 'prop-types'
 import { formatTime } from '../../utils/timeUtils'
 
-const TAModal = ({ ta, onClose }) => {
-  if (!ta) return null
+const MemberModal = ({ member, onClose }) => {
+  if (!member) return null
 
   const generateTableRow = (hoursPerDay = []) => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
@@ -58,38 +58,50 @@ const TAModal = ({ ta, onClose }) => {
               <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
                 <div className="flex items-center mb-4">
                   <img
-                    src={ta.image}
-                    alt={ta.name}
+                    src={member.image}
+                    alt={member.name}
                     className="w-16 h-16 rounded-full object-cover mr-4"
                   />
-                  <h3 className="text-lg leading-6 font-medium text-gray-900">
-                    {ta.name}
-                  </h3>
+                  <div>
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">
+                      {member.name}
+                    </h3>
+                    {member.role && (
+                      <p className="text-sm text-gray-600">
+                        {member.role}
+                      </p>
+                    )}
+                  </div>
                 </div>
 
-                {ta.hours && (
+                {member.hours && (
                   <div className="mb-6">
-                    <h4 className="font-semibold mb-2">Lab Hours</h4>
-                    {generateTableRow(ta.hours)}
+                    <h4 className="font-semibold mb-2">Office Hours</h4>
+                    {generateTableRow(member.hours)}
                   </div>
                 )}
 
-                {ta.courses && (
+                {member.courses && (
                   <div className="mb-6">
                     <h4 className="font-semibold mb-2">Courses</h4>
-                    {generateCourseTabs(ta.courses)}
+                    {generateCourseTabs(member.courses)}
                   </div>
                 )}
 
-                {ta.email && (
+                {member.email && (
                   <div className="space-y-2">
                     <a 
-                      href={`mailto:${ta.email}`}
+                      href={`mailto:${member.email}`}
                       className="text-primary-600 hover:text-primary-700 block"
                     >
-                      {ta.email}
+                      {member.email}
                     </a>
-                    {ta.links?.map((link, index) => (
+                  </div>
+                )}
+
+                {member.links && member.links.length > 0 && (
+                  <div className="mt-4 space-y-2">
+                    {member.links.map((link, index) => (
                       <a
                         key={index}
                         href={link[1]}
@@ -105,10 +117,11 @@ const TAModal = ({ ta, onClose }) => {
               </div>
             </div>
           </div>
+          
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button
               type="button"
-              className="btn-secondary w-full sm:w-auto"
+              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:w-auto sm:text-sm"
               onClick={onClose}
             >
               Close
@@ -120,17 +133,18 @@ const TAModal = ({ ta, onClose }) => {
   )
 }
 
-TAModal.propTypes = {
-  ta: PropTypes.shape({
+MemberModal.propTypes = {
+  member: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
+    role: PropTypes.string,
     email: PropTypes.string,
     hours: PropTypes.arrayOf(
       PropTypes.arrayOf(
         PropTypes.shape({
           start: PropTypes.number,
-          end: PropTypes.number,
+          end: PropTypes.number
         })
       )
     ),
@@ -139,9 +153,9 @@ TAModal.propTypes = {
     ),
     links: PropTypes.arrayOf(
       PropTypes.arrayOf(PropTypes.string)
-    ),
+    )
   }),
   onClose: PropTypes.func.isRequired,
 }
 
-export default TAModal
+export default MemberModal

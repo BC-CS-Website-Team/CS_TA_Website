@@ -3,47 +3,357 @@
  * Data for team members across different roles
  */
 
-export const taLeads = [
-  {
-    id: 1,
-    name: 'Nicholas Hamilton',
-    image: '/src/images/Nicholas.jpg',
-    role: 'Lead Teaching Assistant',
-    email: 'hamiltonn@berea.edu',
-    description: 'CS Teaching Assistant Lead',
-    courses: ['CSC 126', 'CSC 226']
-  },
-  {
-    id: 2,
-    name: 'Bishal Timalsina',
-    image: '/src/images/Bishal.JPG',
-    role: 'Lead Teaching Assistant',
-    email: 'timalsinab@berea.edu',
-    description: 'CS Teaching Assistant Lead',
-    courses: ['CSC 236', 'CSC 386']
-  },
-  {
-    id: 3,
-    name: 'Joseph Crubaugh',
-    image: '/src/images/CrubaughD.jpg',
-    role: 'Lead Teaching Assistant',
-    email: 'crubaughj@berea.edu',
-    description: 'CS Teaching Assistant Lead',
-    courses: ['CSC 236', 'CSC 386']
-  }
-]
+// Import images
+import nicholasImage from '../assets/images/Nicholas.jpg'
+import bishalImage from '../assets/images/Bishal.JPG'
+import crubaughImage from '../assets/images/CrubaughD.jpg'
+import mercyImage from '../assets/images/Mercy-Eze.jpg'
+import arbjosaImage from '../assets/images/Arbjosa-Halilaj.jpeg'
+import bryannaImage from '../assets/images/Bryanna-Erickson.jpeg'
+import davidImage from '../assets/images/David-Olorunpoju-Ess.png'
+import profileImage from '../assets/images/Profile.jpg'
+import aliImage from '../assets/images/Mohammad-Ali-Ramazan.jpg'
+import mahmoudImage from '../assets/images/Maumoud.jpg'
+import tojoImage from '../assets/images/Tojo.jpg'
+import americaImage from '../assets/images/America.jpg'
+import berhaneImage from '../assets/images/Berhane.png'
+import johnImage from '../assets/images/John.png'
+import gaganImage from '../assets/images/Gagan.jpg'
 
-export const teachingAssistants = [
+export const taData = [
   {
-    id: 4,
+    id: 'nicholas-hamilton',
+    name: 'Nicholas Hamilton',
+    image: nicholasImage,
+    email: 'hamiltonn@berea.edu',
+    role: 'Lead',
+    hours: [
+      [],
+      [{ start: 10, end: 12 }, { start: 12, end: 14 }],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["M/W/F", "CSC###: Course Title", "10:00-12:00"]
+    ],
+    links: [
+      ["Slack", ""],
+      ["LinkedIn", ""]
+    ]
+  },
+  {
+    id: 'bishal-timalsina',
+    name: 'Bishal Timalsina',
+    image: bishalImage,
+    email: 'timalsinab@berea.edu',
+    role: 'Lead',
+    hours: [
+      [],
+      [{ start: 10, end: 12 }, { start: 12, end: 14 }],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["M/W/F", "CSC###: Course Title", "10:00-12:00"]
+    ],
+    links: [
+      ["Slack", ""],
+      ["LinkedIn", ""]
+    ]
+  },
+  {
+    id: 'joseph-crubaugh',
+    name: 'Joseph Crubaugh',
+    image: crubaughImage,
+    email: 'crubaughd@berea.edu',
+    role: 'Lead',
+    hours: [
+      [],
+      [],
+      [{ start: 13, end: 15 }],
+      [],
+      [{ start: 13, end: 15 }],
+      [],
+      []
+    ],
+    courses: [
+      ["T/Th", "CSC###: Course Title", "13:00-15:00"]
+    ],
+    links: [
+      ["Slack", ""],
+      ["LinkedIn", ""]
+    ]
+  },
+  {
+    id: 'mercy-eze',
     name: 'Mercy Eze',
-    image: '/src/images/Mercy-Eze.jpg',
-    role: 'Teaching Assistant',
+    image: mercyImage,
     email: 'ezem@berea.edu',
-    description: 'CS Teaching Assistant',
-    courses: ['CSC 126']
+    role: 'TA',
+    hours: [
+      [],
+      [],
+      [{ start: 14, end: 16 }],
+      [],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["T/Th", "CSC###: Course Title", "14:00-16:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'arbjosa-halilaj',
+    name: 'Arbjosa Halilaj',
+    image: arbjosaImage,
+    email: 'halilaja@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [],
+      [],
+      [{ start: 13, end: 15 }],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["M/W/F", "CSC###: Course Title", "13:00-15:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'bryanna-erickson',
+    name: 'Bryanna Erickson',
+    image: bryannaImage,
+    email: 'ericksonb@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [],
+      [],
+      [],
+      [{ start: 14, end: 16 }],
+      [],
+      []
+    ],
+    courses: [
+      ["M/W/F", "CSC###: Course Title", "14:00-16:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'david-olorunpoju-essang',
+    name: 'David Olorunpoju-Essang',
+    image: davidImage,
+    email: 'olorunpojuessangd@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [],
+      [{ start: 15, end: 17 }],
+      [],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["T/Th", "CSC###: Course Title", "15:00-17:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'moise',
+    name: 'Moise',
+    image: profileImage,
+    email: 'dete-kpinssounonm@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [{ start: 15, end: 17 }],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["M/W/F", "CSC###: Course Title", "15:00-17:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'ali-ramazani',
+    name: 'Ali Ramazani',
+    image: aliImage,
+    email: 'ramazanim@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [],
+      [],
+      [{ start: 15, end: 17 }],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["M/W/F", "CSC###: Course Title", "15:00-17:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'mahmoud',
+    name: 'Mahmoud',
+    image: mahmoudImage,
+    email: 'leghlimia@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [],
+      [],
+      [],
+      [{ start: 13, end: 15 }],
+      [],
+      []
+    ],
+    courses: [
+      ["T/Th", "CSC###: Course Title", "13:00-15:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'tojo',
+    name: 'Tojo',
+    image: tojoImage,
+    email: 'tojor@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [{ start: 13, end: 15 }],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["M/W/F", "CSC###: Course Title", "13:00-15:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'america',
+    name: 'America',
+    image: americaImage,
+    email: 'gaonaborgesa@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [],
+      [{ start: 13, end: 15 }],
+      [],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["T/Th", "CSC###: Course Title", "13:00-15:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'berhane',
+    name: 'Berhane',
+    image: berhaneImage,
+    email: 'berhaneb@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [],
+      [],
+      [{ start: 14, end: 16 }],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["M/W/F", "CSC###: Course Title", "14:00-16:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'john-cox',
+    name: 'John Cox',
+    image: johnImage,
+    email: 'coxj@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [],
+      [],
+      [],
+      [{ start: 15, end: 17 }],
+      [],
+      []
+    ],
+    courses: [
+      ["T/Th", "CSC###: Course Title", "15:00-17:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'gagan-phuyal',
+    name: 'Gagan Phuyal',
+    image: gaganImage,
+    email: 'phuyalg@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [],
+      [{ start: 14, end: 16 }],
+      [],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["T/Th", "CSC###: Course Title", "14:00-16:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
   }
-  // Add more TAs here
 ]
 
 export const programmers = [
