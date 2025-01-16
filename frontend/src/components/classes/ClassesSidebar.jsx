@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { FaBook, FaChevronRight } from 'react-icons/fa'
+import { FaBook, FaChevronRight, FaGraduationCap } from 'react-icons/fa'
 
 const ClassesSidebar = () => {
   const classes = [
@@ -14,14 +14,41 @@ const ClassesSidebar = () => {
       name: 'CSC 236',
       title: 'Data Structures',
       path: '/classes/csc236'
+    },
+    {
+      id: 'csc246',
+      name: 'CSC 246',
+      title: 'Scalable Algorithms & Objects',
+      path: '/classes/csc246'
     }
   ]
 
   return (
-    <aside className="w-64 bg-white shadow-md rounded-lg p-4">
-      <h2 className="text-lg font-semibold text-gray-900 mb-4">Classes</h2>
+    <div className="bg-white shadow-md rounded-lg p-4">
       <nav>
         <ul className="space-y-2">
+          <li>
+            <NavLink
+              to="/classes/learning-resources"
+              className={({ isActive }) =>
+                `flex items-center px-4 py-2 rounded-md transition-colors ${
+                  isActive
+                    ? 'bg-primary-50 text-primary-700'
+                    : 'text-gray-700 hover:bg-gray-50'
+                }`
+              }
+            >
+              <FaGraduationCap className="mr-3" />
+              Learning Resources
+            </NavLink>
+          </li>
+          
+          <li className="pt-4">
+            <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider px-4 mb-2">
+              Classes
+            </h2>
+          </li>
+          
           <li>
             <NavLink
               to="/classes"
@@ -38,6 +65,7 @@ const ClassesSidebar = () => {
               Overview
             </NavLink>
           </li>
+          
           {classes.map((classItem) => (
             <li key={classItem.id}>
               <NavLink
@@ -60,7 +88,7 @@ const ClassesSidebar = () => {
           ))}
         </ul>
       </nav>
-    </aside>
+    </div>
   )
 }
 
