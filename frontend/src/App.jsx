@@ -24,6 +24,7 @@ import EveningLab from './pages/EveningLab'
 import ClassesOverview from './pages/classes/ClassesOverview'
 import CSC226 from './pages/classes/CSC226'
 import CSC236 from './pages/classes/CSC236'
+import LearningResources from './pages/classes/LearningResources'
 import './styles/index.css'
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
             {/* Classes Routes */}
             <Route path="/classes" element={<ClassesLayout />}>
               <Route index element={<ClassesOverview />} />
+              <Route path="learning-resources" element={<LearningResources />} />
               <Route path="csc226" element={<CSC226 />} />
               <Route path="csc236" element={<CSC236 />} />
             </Route>
