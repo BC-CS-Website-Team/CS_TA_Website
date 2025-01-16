@@ -18,7 +18,7 @@ const navItems = [
   {
     to: '/meet-the-team',
     icon: FaUsers,
-    label: 'Meet The Team',
+    label: <span className="whitespace-nowrap">Meet The<br />Team</span>,
     dropdown: [
       { to: '/meet-the-team', label: 'Overview' },
       { to: '/meet-the-team/tas', label: 'Meet CS TAs' },
@@ -66,10 +66,10 @@ const NavItem = ({ item }) => {
     <div className="relative group">
       <Link
         to={item.to}
-        className={`nav-link ${isActive ? 'nav-link-active' : ''}`}
+        className={`nav-link flex items-center ${isActive ? 'nav-link-active' : ''}`}
       >
         <item.icon className="w-5 h-5 mr-2" />
-        <span>{item.label}</span>
+        <div className="text-center">{item.label}</div>
         {item.dropdown && <FaCaretDown className="ml-1" />}
       </Link>
 
@@ -93,9 +93,9 @@ const NavItem = ({ item }) => {
 
 const Navigation = () => {
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between items-center h-16">
           <div className="flex">
             <Link to="/" className="flex-shrink-0 flex items-center">
               <img

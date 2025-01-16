@@ -1,17 +1,18 @@
 import { Box } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
 import Navigation from '../components/Navigation'
+import Footer from '../components/Footer'
 
 const MainLayout = () => {
   return (
-    <Box>
+    <div className="min-h-screen flex flex-col">
       <Navigation />
-      <Box as="main" py={8} px={4}>
+      <main className="flex-grow mt-16">
         <Outlet />
-      </Box>
-      {/* Footer will go here */}
-    </Box>
-  )
-}
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 export default MainLayout
