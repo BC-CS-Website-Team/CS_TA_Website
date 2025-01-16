@@ -14,7 +14,7 @@ const facultyData = [
   {
     id: 'Scott-Heggen',
     name: 'Dr. Scott Heggen',
-    image: '/src/assets/images/drHeggen1.jpeg',
+    image: '/assets/images/drHeggen1.jpeg',
     email: 'heggens@berea.edu',
     hours: [
       [{ start: 13, end: 14 }],
@@ -37,7 +37,7 @@ const facultyData = [
   {
     id: 'Jan-Pearce',
     name: 'Dr. Jan Pearce',
-    image: '/src/assets/images/drPearce1.jpg',
+    image: '/assets/images/drPearce1.jpg',
     email: 'pearcej@berea.edu',
     hours: [
       [{ start: 13, end: 14 }],
@@ -59,27 +59,27 @@ const facultyData = [
   {
     id: 'Mario-Nakazawa',
     name: 'Dr. Mario Nakazawa',
-    image: '/src/assets/images/drNakazawa1.jpg'
+    image: '/assets/images/drNakazawa1.jpg'
   },
   {
     id: 'Jasmine-Jones',
     name: 'Dr. Jasmine Jones',
-    image: '/src/assets/images/drJones1.jpg'
+    image: '/assets/images/drJones1.jpg'
   },
   {
     id: 'Jacqueline-Boggs',
     name: 'Dr. Jacqueline "Jacci" Boggs',
-    image: '/src/assets/images/drBoggs1.png'
+    image: '/assets/images/drBoggs1.png'
   },
   {
     id: 'Deanna-Wilborne',
     name: 'Prof. Deanna Wilborne',
-    image: '/src/assets/images/profWilborne1.jpeg'
+    image: '/assets/images/profWilborne1.jpeg'
   },
   {
     id: 'Brian-Ramsey',
     name: 'Brian Ramsey',
-    image: '/src/assets/images/brian1.png'
+    image: '/assets/images/brian1.png'
   }
 ]
 

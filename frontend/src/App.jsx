@@ -7,12 +7,18 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import TeamLayout from './layouts/TeamLayout'
+import CareerLayout from './layouts/CareerLayout'
 import Home from './pages/Home'
 import TeamOverview from './pages/team/TeamOverview'
 import MeetTAs from './pages/team/MeetTAs'
 import MeetProgrammers from './pages/team/MeetProgrammers'
 import MeetRobotics from './pages/team/MeetRobotics'
 import MeetMakerspace from './pages/team/MeetMakerspace'
+import CareerDevelopment from './pages/career/CareerDevelopment'
+import CareerResources from './pages/career/CareerResources'
+import Conferences from './pages/career/Conferences'
+import Internships from './pages/career/Internships'
+import Clubs from './pages/Clubs'
 import './styles/index.css'
 
 function App() {
@@ -32,10 +38,13 @@ function App() {
               <Route path="makerspace" element={<MeetMakerspace />} />
             </Route>
             
-            <Route path="/career-development" element={<div>Career Development</div>} />
-            <Route path="/career-development/resources" element={<div>Career Resources</div>} />
-            <Route path="/career-development/conferences" element={<div>Conferences</div>} />
-            <Route path="/career-development/internships" element={<div>Internships</div>} />
+            {/* Career Development Routes */}
+            <Route path="/career-development" element={<CareerLayout />}>
+              <Route index element={<CareerDevelopment />} />
+              <Route path="resources" element={<CareerResources />} />
+              <Route path="conferences" element={<Conferences />} />
+              <Route path="internships" element={<Internships />} />
+            </Route>
             
             <Route path="/committees" element={<div>Committees</div>} />
             <Route path="/committees/tech-ethics" element={<div>Tech Ethics Committee</div>} />
@@ -43,7 +52,7 @@ function App() {
             <Route path="/committees/diversity" element={<div>Diversity in STEM</div>} />
             <Route path="/committees/creative-space" element={<div>Creative Space</div>} />
             
-            <Route path="/clubs" element={<div>Clubs</div>} />
+            <Route path="/clubs" element={<Clubs />} />
             <Route path="/classes" element={<div>Classes</div>} />
             <Route path="/alumni" element={<div>Alumni</div>} />
             <Route path="/student-projects" element={<div>Student Projects</div>} />

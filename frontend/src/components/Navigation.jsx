@@ -41,7 +41,7 @@ const navItems = [
   {
     to: '/committees',
     icon: FaSitemap,
-    label: 'Committees',
+    label: 'CS Dept Committees',
     dropdown: [
       { to: '/committees', label: 'Overview' },
       { to: '/committees/tech-ethics', label: 'Tech Ethics Committee' },
@@ -50,9 +50,9 @@ const navItems = [
       { to: '/committees/creative-space', label: 'Creative Space' }
     ]
   },
-  { to: '/clubs', icon: FaUserFriends, label: 'Clubs' },
+  { to: '/clubs', icon: FaUserFriends, label: 'CS Clubs' },
   { to: '/classes', icon: FaChalkboardTeacher, label: 'Classes' },
-  { to: '/alumni', icon: FaGraduationCap, label: 'Alumni' },
+  { to: '/alumni', icon: FaGraduationCap, label: 'Alumni Network' },
   { to: '/student-projects', icon: FaProjectDiagram, label: 'Student Projects' },
   { to: '/evening-lab', icon: FaClock, label: 'Evening Lab' }
 ]
