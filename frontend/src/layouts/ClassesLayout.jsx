@@ -3,12 +3,12 @@ import ClassesSidebar from '../components/classes/ClassesSidebar'
 
 const ClassesLayout = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="flex gap-8">
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col md:flex-row gap-8">
         <ClassesSidebar />
-        <div className="flex-1">
+        <main className="flex-1 bg-white shadow-md rounded-lg p-6">
           <Outlet />
-        </div>
+        </main>
       </div>
     </div>
   )

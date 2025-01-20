@@ -9,6 +9,7 @@ import MainLayout from './layouts/MainLayout'
 import TeamLayout from './layouts/TeamLayout'
 import CareerLayout from './layouts/CareerLayout'
 import ClassesLayout from './layouts/ClassesLayout'
+import CommitteesLayout from './layouts/CommitteesLayout'
 import Home from './pages/Home'
 import TeamOverview from './pages/team/TeamOverview'
 import MeetTAs from './pages/team/MeetTAs'
@@ -25,6 +26,7 @@ import ClassesOverview from './pages/classes/ClassesOverview'
 import CSC226 from './pages/classes/CSC226'
 import CSC236 from './pages/classes/CSC236'
 import LearningResources from './pages/classes/LearningResources'
+import Committees from './pages/committees/Committees'
 import './styles/index.css'
 
 function App() {
@@ -60,11 +62,14 @@ function App() {
               <Route path="csc236" element={<CSC236 />} />
             </Route>
             
-            <Route path="/committees" element={<div>Committees</div>} />
-            <Route path="/committees/tech-ethics" element={<div>Tech Ethics Committee</div>} />
-            <Route path="/committees/career-dev" element={<div>Career Development Committee</div>} />
-            <Route path="/committees/diversity" element={<div>Diversity in STEM</div>} />
-            <Route path="/committees/creative-space" element={<div>Creative Space</div>} />
+            {/* Committees Routes */}
+            <Route path="/committees" element={<CommitteesLayout />}>
+              <Route index element={<Committees />} />
+              <Route path="tech-ethics" element={<div>Tech Ethics Committee</div>} />
+              <Route path="career-dev" element={<div>Career Development Committee</div>} />
+              <Route path="diversity-in-stem" element={<div>Diversity in STEM</div>} />
+              <Route path="creative-space" element={<div>Creative Space</div>} />
+            </Route>
             
             <Route path="/clubs" element={<Clubs />} />
             <Route path="/alumni" element={<div>Alumni</div>} />
