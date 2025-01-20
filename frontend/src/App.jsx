@@ -25,8 +25,15 @@ import EveningLab from './pages/EveningLab'
 import ClassesOverview from './pages/classes/ClassesOverview'
 import CSC226 from './pages/classes/CSC226'
 import CSC236 from './pages/classes/CSC236'
+import CSC246 from './pages/classes/CSC246'
 import LearningResources from './pages/classes/LearningResources'
 import Committees from './pages/committees/Committees'
+import TechEthics from './pages/committees/TechEthics'
+import DiversityInStem from './pages/committees/DiversityInStem'
+import CareerDevCommittee from './pages/committees/CareerDevCommittee'
+import CreativeSpace from './pages/committees/CreativeSpace'
+import StudentProjects from './pages/projects/StudentProjects'
+import Alumni from './pages/alumni/Alumni'
 import './styles/index.css'
 
 function App() {
@@ -60,20 +67,21 @@ function App() {
               <Route path="learning-resources" element={<LearningResources />} />
               <Route path="csc226" element={<CSC226 />} />
               <Route path="csc236" element={<CSC236 />} />
+              <Route path="csc246" element={<CSC246 />} />
             </Route>
             
             {/* Committees Routes */}
             <Route path="/committees" element={<CommitteesLayout />}>
               <Route index element={<Committees />} />
-              <Route path="tech-ethics" element={<div>Tech Ethics Committee</div>} />
-              <Route path="career-dev" element={<div>Career Development Committee</div>} />
-              <Route path="diversity-in-stem" element={<div>Diversity in STEM</div>} />
-              <Route path="creative-space" element={<div>Creative Space</div>} />
+              <Route path="tech-ethics" element={<TechEthics />} />
+              <Route path="career-dev" element={<CareerDevCommittee />} />
+              <Route path="diversity-in-stem" element={<DiversityInStem />} />
+              <Route path="creative-space" element={<CreativeSpace />} />
             </Route>
             
             <Route path="/clubs" element={<Clubs />} />
-            <Route path="/alumni" element={<div>Alumni</div>} />
-            <Route path="/student-projects" element={<div>Student Projects</div>} />
+            <Route path="/student-projects" element={<StudentProjects />} />
+            <Route path="/alumni" element={<Alumni />} />
             <Route path="/evening-lab" element={<EveningLab />} />
           </Route>
         </Routes>
