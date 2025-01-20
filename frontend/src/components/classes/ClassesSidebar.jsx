@@ -24,22 +24,22 @@ const ClassesSidebar = () => {
   ]
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4">
+    <aside className="bg-white shadow-md rounded-lg p-4 w-64">
       <nav>
         <ul className="space-y-2">
           <li>
             <NavLink
               to="/classes/learning-resources"
               className={({ isActive }) =>
-                `flex items-center px-4 py-2 rounded-md transition-colors ${
+                `flex items-center space-x-2 px-4 py-2 rounded-md transition-colors duration-200 ${
                   isActive
-                    ? 'bg-primary-50 text-primary-700'
-                    : 'text-gray-700 hover:bg-gray-50'
+                    ? 'bg-primary-600 text-white'
+                    : 'text-gray-700 hover:bg-gray-100'
                 }`
               }
             >
-              <FaGraduationCap className="mr-3" />
-              Learning Resources
+              <FaGraduationCap className="text-xl" />
+              <span>Learning Resources</span>
             </NavLink>
           </li>
           
@@ -54,15 +54,15 @@ const ClassesSidebar = () => {
               to="/classes"
               end
               className={({ isActive }) =>
-                `flex items-center px-4 py-2 rounded-md transition-colors ${
+                `flex items-center space-x-2 px-4 py-2 rounded-md transition-colors duration-200 ${
                   isActive
-                    ? 'bg-primary-50 text-primary-700'
-                    : 'text-gray-700 hover:bg-gray-50'
+                    ? 'bg-primary-600 text-white'
+                    : 'text-gray-700 hover:bg-gray-100'
                 }`
               }
             >
-              <FaBook className="mr-3" />
-              Overview
+              <FaBook className="text-xl" />
+              <span>Overview</span>
             </NavLink>
           </li>
           
@@ -71,14 +71,14 @@ const ClassesSidebar = () => {
               <NavLink
                 to={classItem.path}
                 className={({ isActive }) =>
-                  `flex items-center px-4 py-2 rounded-md transition-colors ${
+                  `flex items-center space-x-2 px-4 py-2 rounded-md transition-colors duration-200 ${
                     isActive
-                      ? 'bg-primary-50 text-primary-700'
-                      : 'text-gray-700 hover:bg-gray-50'
+                      ? 'bg-primary-600 text-white'
+                      : 'text-gray-700 hover:bg-gray-100'
                   }`
                 }
               >
-                <FaChevronRight className="mr-3" />
+                <FaChevronRight className="text-xl" />
                 <div>
                   <div className="font-medium">{classItem.name}</div>
                   <div className="text-sm text-gray-500">{classItem.title}</div>
@@ -88,7 +88,7 @@ const ClassesSidebar = () => {
           ))}
         </ul>
       </nav>
-    </div>
+    </aside>
   )
 }
 
