@@ -12,49 +12,65 @@ This project is a collaborative web development effort to create a comprehensive
 - Alumni showcase
 - Responsive design for mobile and desktop viewing
 
-## Documentation
-- For a detailed description of the current repository structure, please see: `documentation/repository-explained.md`
-- For comprehensive project details, including its purpose and goals, please see: `documentation/project-details.md`
+## Project Documentation
+For comprehensive documentation of the entire repository, including detailed explanations of each component and instructions on how to contribute, please see our [Repository Documentation](./repository_explained.md).
 
-## Getting Started
+## Project Timeline and Development Phases
 
-### Prerequisites
-- Git
-- A modern web browser
-- Text editor (e.g., VSCode, Sublime Text)
+### Section 1: Interactive Learning Experience
+The initial phase of this project served as an interactive lesson plan for Teaching Assistants, designed to:
+- Teach modern web development practices
+- Foster teamwork and collaboration skills
+- Build professional portfolios and resumes
+- Develop technical presentation abilities
+- Create hands-on experience with real-world project management
 
-### Setup
-1. Clone the repository:
-   ```
-   git clone https://github.com/hamiltonnBC/CS_TA_Website.git
-   ```
-2. Navigate to the project directory:
-   ```
-   cd CS_TA_Website
-   ```
-3. Open `index.html` in your web browser to view the site locally.
+### Section 2: Winter Labor Implementation
+During the winter labor period, a select team of TAs collaborated to:
+- Complete core website content
+- Implement essential features
+- Deploy the initial version of the website
+- Establish basic infrastructure
+- Document development processes
 
-### Running the Site
-This is a static website that can be run locally:
+### Section 3: React Migration and Sustainability
+The final phase focused on modernization and long-term sustainability:
+- Migrated the application to React for improved maintainability
+- Implemented modern frontend practices
+- Enhanced user experience and performance
+- Created comprehensive documentation
+- Established processes for year-to-year knowledge transfer
+- Set up continuous improvement workflows
 
-1. Open terminal in the project root directory
-2. Run the local server:
-   ```
-   python server.py
-   ```
-3. Open `http://localhost:8000` in your browser
-
-For a more dynamic development experience, you can use extensions in your code editor (like "Live Server" in VSCode) to create a local server with live reloading.
-
+## Project Goals
+1. Create a valuable resource for the CS department
+2. Provide real-world development experience for TAs
+3. Establish a sustainable platform that can evolve with department needs
+4. Build a showcase of student capabilities
+5. Create a template for future collaborative projects
 
 ## Contributing
-We welcome contributions from all team members, regardless of experience level. Please read our CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
+For detailed information about contributing to this project, please refer to our [Repository Documentation](./repository_explained.md), which includes:
+- Development setup instructions
+- Code organization explanations
+- Best practices and guidelines
+- Deployment procedures
+- Documentation standards
 
-## Learning Resources
-- [HTML basics](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics)
-- [CSS basics](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics)
-- [JavaScript basics](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
-- [Git and GitHub for Beginners](https://www.freecodecamp.org/news/git-and-github-for-beginners/)
+## Current Status
+The website is currently live at [bereacshub.live](https://bereacshub.live) and continues to evolve through collaborative development by the CS TA team.
+
+## Project Leads
+
+### Project Lead 2024-2025
+Nicholas Hamilton
+
+### Project Lead 2025-2026
+TBD
+
+## Contributors
+See all contributors to this project [here](https://github.com/BC-CS-Website-Team/CS_TA_Website/graphs/contributors).
+
 
 ## Project Management
 We use GitHub Projects for task management. Check the [project board](https://github.com/BC-CS-Website-Team/CS_TA_Website/projects) for current tasks and their status.
