@@ -8,30 +8,26 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white h-16 flex items-center">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <Link to="/about" className="hover:text-gray-300">
-              About
+    <footer className="bg-gray-800 text-white py-4 w-full">
+      <div className="container px-4 sm:px-6 lg:px-8 w-full">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center space-x-6">
+            <Link to="/about" className="hover:text-gray-300 transition-colors">
+              About This Project
             </Link>
             <a
               href="https://github.com/BC-CS-Website-Team/CS_TA_Website"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-gray-300"
+              className="hover:text-gray-300 transition-colors flex items-center gap-2"
             >
-              GitHub
+              <FaGithub className="text-xl" /> GitHub
             </a>
-            <span>|</span>
-            <a
-              href="mailto:cs@berea.edu"
-              className="hover:text-gray-300"
-            >
-              Contact Us
-            </a>
+            <div className="flex items-center gap-2 text-gray-300">
+              Made with <FaHeart className="text-red-500" /> by CS TAs
+            </div>
           </div>
-          <div className="text-sm">
+          <div className="text-sm text-gray-300">
             {new Date().getFullYear()} Berea College CS Department
           </div>
         </div>

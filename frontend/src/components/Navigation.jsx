@@ -100,7 +100,7 @@ const Navigation = () => {
             <Link to="/" className="flex-shrink-0 flex items-center">
               <img
                 className="h-10 w-auto"
-                src="/src/assets/images/BC_CS_TA_logo.png"
+                src="/BC_CS_TA_logo.png"
                 alt="BC CS TA Logo"
               />
             </Link>
