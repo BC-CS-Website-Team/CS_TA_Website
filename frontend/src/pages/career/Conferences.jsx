@@ -93,7 +93,7 @@ const FundingSection = () => (
       </li>
     </ul>
     <Alert status="warning" className="mt-4" variant="left-accent">
-      <AlertIcon />
+      <AlertIcon boxSize="2em" />
       Important: Before applying for the CS fund, we encourage you to apply for off-campus funding opportunities.
     </Alert>
   </section>
@@ -159,7 +159,7 @@ const Conferences = () => {
   const conferences = [
     {
       name: "National Society of Black Engineers (NSBE)",
-      description: "A four-day event that provides networking, professional and personal development, and celebratory activities. The theme for 2025 is Inspire! Excel! Impact!",
+      description: "A four-day event that provides networking, professional and personal development, and celebratory activities. The theme for 2025 is Inspire<span className='text-xs'>!</span> Excel<span className='text-xs'>!</span> Impact<span className='text-xs'>!</span>",
       dates: "March 20 - 24, 2025",
       location: "Atlanta, Georgia",
       registrationLink: "https://convention.nsbe.org/registration-2024/#rates",
