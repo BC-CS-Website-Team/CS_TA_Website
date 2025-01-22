@@ -89,19 +89,6 @@ const About = () => {
         </div>
       </ProjectSection>
 
-      <ProjectSection title="Project Leadership">
-        <div className="space-y-4">
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Project Lead 2024-2025</h3>
-            <p className="text-gray-700">Nicholas Hamilton</p>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Project Lead 2025-2026</h3>
-            <p className="text-gray-700">TBD</p>
-          </div>
-        </div>
-      </ProjectSection>
-
       <ProjectSection title="Contributing">
         <p className="text-gray-700 mb-4">
           We welcome contributions from all CS TAs! Whether you're fixing a bug, adding a feature, or
@@ -138,6 +125,19 @@ const About = () => {
           <li>Create a new issue with a descriptive title and detailed description</li>
           <li>For urgent matters, contact Nicholas Hamilton at hamiltonn@berea.edu</li>
         </ol>
+      </ProjectSection>
+
+      <ProjectSection title="Project Leadership">
+        <div className="space-y-4">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Project Lead 2024-2025</h3>
+            <p className="text-gray-700">Nicholas Hamilton</p>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Project Lead 2025-2026</h3>
+            <p className="text-gray-700">TBD</p>
+          </div>
+        </div>
       </ProjectSection>
     </div>
   )
