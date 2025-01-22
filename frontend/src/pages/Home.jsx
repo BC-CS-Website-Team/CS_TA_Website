@@ -179,13 +179,13 @@ const Home = () => {
                 Computer scientists have transformed the world we live in, and with a computer science degree, 
                 you can become the next leader in our technology-driven society. With four areas of concentration, 
                 hands-on curriculum, a caring and accessible faculty, and numerous labor and co-curricular opportunities, 
-                you'll be ready to create the next great advancement in technology. Coming in 2024, our new technology 
-                building will support opportunities to explore advanced computing subjects in our interactive robotics 
+                you'll be ready to create the next great advancement in technology. Opened in 2024, our new technology 
+                building supports opportunities to explore advanced computing subjects in our interactive robotics 
                 and visualization lab, a makerspace designed to foster creativity and exploration, and a hands-on 
                 networking and security lab.
               </p>
               <p>
-                We've designed an inclusive curriculum that begins with the basics of programming and data structures, 
+                Berea College Faculty designed an inclusive curriculum that begins with the basics of programming and data structures, 
                 and culminates with advanced topics in computer science and a capstone experience. The curriculum is 
                 also flexible enough to accommodate students with varying levels of prior programming experience.
               </p>
