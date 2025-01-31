@@ -25,15 +25,20 @@ const ProjectSection = ({ title, children }) => {
 
 const TAhandbook = () => {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <h1 className="text-4xl font-bold text-center mb-12 text-gray-900"> CS TA Handbook</h1>
+    <div className="container mx-auto px-4 py-8 max-w-full">
+      <h1 className="text-4xl font-bold text-center mb-12 text-gray-900">CS TA Handbook</h1>
 
       <ProjectSection title="CS TA Handbook">
         <div className="flex justify-center items-center">
           <iframe
             src="https://docs.google.com/document/d/1NqtHFc1GsaK4AzTIpfe74IpW2Rj8z2nc/preview"
             title="CS TA Handbook"
-            className="w-full h-screen border-0 rounded-lg shadow-lg"
+            className="rounded-lg shadow-lg"
+            style={{
+              width: '80vw',  // 80% of the viewport width
+              height: '80vh', // 80% of the viewport height
+              border: 'none',
+            }}
             allowFullScreen
           />
         </div>
