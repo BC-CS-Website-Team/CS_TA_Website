@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-4 w-full">
-      <div className="container px-4 sm:px-6 lg:px-8 w-full">
+    <footer className="bg-gray-800 text-white py-4 fixed bottom-0 left-0 right-0">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center space-x-6">
             <Link to="/about" className="hover:text-gray-300 transition-colors">
