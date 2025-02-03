@@ -19,6 +19,8 @@ import americaImage from '../assets/images/America.jpg'
 import berhaneImage from '../assets/images/Berhane.png'
 import johnImage from '../assets/images/John.png'
 import gaganImage from '../assets/images/Gagan.jpg'
+import BerdiImage from '../assets/images/Berdi.jpg'
+import JulioImage from '../assets/images/Julio.jpg'
 
 export const taData = [
   {
@@ -90,33 +92,12 @@ export const taData = [
       ["LinkedIn", ""]
     ]
   },
+
   {
-    id: 'mercy-eze',
-    name: 'Mercy Eze',
-    image: mercyImage,
-    email: 'ezem@berea.edu',
-    role: 'TA',
-    hours: [
-      [],
-      [],
-      [{ start: 14, end: 16 }],
-      [],
-      [],
-      [],
-      []
-    ],
-    courses: [
-      ["T/Th", "CSC###: Course Title", "14:00-16:00"]
-    ],
-    links: [
-      ["Slack", ""]
-    ]
-  },
-  {
-    id: 'arbjosa-halilaj',
-    name: 'Arbjosa Halilaj',
-    image: arbjosaImage,
-    email: 'halilaja@berea.edu',
+    id: 'Nauryzbek Berdi',
+    name: 'Nauryzbek Berdi',
+    image: BerdiImage,
+    email: 'berdin@berea.edu',
     role: 'TA',
     hours: [
       [],
@@ -337,6 +318,28 @@ export const taData = [
     name: 'Gagan Phuyal',
     image: gaganImage,
     email: 'phuyalg@berea.edu',
+    role: 'TA',
+    hours: [
+      [],
+      [],
+      [{ start: 14, end: 16 }],
+      [],
+      [],
+      [],
+      []
+    ],
+    courses: [
+      ["T/Th", "CSC###: Course Title", "14:00-16:00"]
+    ],
+    links: [
+      ["Slack", ""]
+    ]
+  },
+  {
+    id: 'Julio Jijon',
+    name: 'Julio Jijon',
+    image: JulioImage,
+    email: 'Jijonj@berea.edu',
     role: 'TA',
     hours: [
       [],
