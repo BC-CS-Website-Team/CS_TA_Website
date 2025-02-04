@@ -35,8 +35,8 @@ const TAhandbook = () => {
             title="CS TA Handbook"
             className="rounded-lg shadow-lg"
             style={{
-              width: '80vw',  // 80% of the viewport width
-              height: '80vh', // 80% of the viewport height
+              width: '80vw',  
+              height: '80vh', 
               border: 'none',
             }}
             allowFullScreen
