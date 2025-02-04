@@ -1,8 +1,3 @@
-/**
- * About.jsx
- * Displays information about the CS TA Website project, its history, and contributors
- */
-
 import { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
@@ -13,12 +8,18 @@ const ProjectSection = ({ title, children }) => {
     <div className="mb-8 bg-white rounded-lg shadow-md overflow-hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-4 flex justify-between items-center bg-primary-600 text-white hover:bg-primary-700 transition-colors"
+        className="w-full p-8 text-left flex justify-between items-center bg-primary-600 text-white hover:bg-primary-700 transition-colors duration-150"
       >
-        <h2 className="text-xl font-semibold">{title}</h2>
+        <h2 className="text-2xl font-semibold">{title}</h2>
         {isOpen ? <FaChevronUp /> : <FaChevronDown />}
       </button>
-      {isOpen && <div className="p-6">{children}</div>}
+      <div
+        className={`transition-all duration-300 ${
+          isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+        }`}
+      >
+        <div className="p-8">{children}</div>
+      </div>
     </div>
   );
 };
@@ -26,7 +27,12 @@ const ProjectSection = ({ title, children }) => {
 const TAhandbook = () => {
   return (
     <div className="container mx-auto px-4 py-8 max-w-full">
-      <h1 className="text-4xl font-bold text-center mb-12 text-gray-900">CS TA Handbook</h1>
+      <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-lg shadow-lg p-8 mb-12">
+        <h1 className="text-4xl font-bold text-white mb-4">CS TA Handbook</h1>
+        <p className="text-primary-100 text-lg">
+          A guide for teaching assistants in the computer science department to excel in their role.
+        </p>
+      </div>
 
       <ProjectSection title="CS TA Handbook">
         <div className="flex justify-center items-center">
@@ -35,8 +41,8 @@ const TAhandbook = () => {
             title="CS TA Handbook"
             className="rounded-lg shadow-lg"
             style={{
-              width: '80vw',  
-              height: '80vh', 
+              width: '80vw',
+              height: '80vh',
               border: 'none',
             }}
             allowFullScreen
