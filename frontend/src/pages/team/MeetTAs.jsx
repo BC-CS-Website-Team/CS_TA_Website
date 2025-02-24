@@ -3,13 +3,22 @@
  * Page component for displaying Teaching Assistants
  */
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import TeamMemberCard from '../../components/team/TeamMemberCard'
 import TeamMemberModal from '../../components/team/TeamMemberModal'
-import { taData } from '../../data/teamData'
+import { loadTeamData } from '../../utils/csvLoader'
 
 const MeetTAs = () => {
   const [selectedMember, setSelectedMember] = useState(null)
+  const [taData, setTaData] = useState([])
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await loadTeamData();
+      setTaData(data);
+    };
+    loadData();
+  }, []);
 
   return (
     <div className="space-y-12">
