@@ -65,6 +65,21 @@ const EveningLab = () => {
         </div>
       </section> */} 
 
+      {/* Check into Lab Button Section */}
+      <section className="mb-16 text-center">
+        <a
+          href="https://bereacollege-my.sharepoint.com/personal/hamiltonn_berea_edu/_layouts/15/listforms.aspx?cid=YmNmNThkYTItYmJkMS00N2UwLTg1NmEtYjU0NWM0ZGVkZDFh&nav=MThhNzhkZWYtYTQ1MC00YTRmLTgyMmItNzFmMzA1NTdhNDFm"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block px-8 py-4 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors shadow-md hover:shadow-lg"
+        >
+          Check into Evening Lab <ExternalLinkIcon className="ml-2 inline" />
+        </a>
+        <p className="mt-4 text-gray-600">
+          Please check in when you arrive at the evening lab session
+        </p>
+      </section>
+
       {/* Calendar Section */}
       <section className="bg-white rounded-lg shadow-md p-8">
         <div className="mb-8">
