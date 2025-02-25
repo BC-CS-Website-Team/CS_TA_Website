@@ -4,15 +4,31 @@
  * Displays faculty profiles, program information, and quick links.
  */
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import FacultyCard from '../components/staff/FacultyCard'
 import FacultyModal from '../components/staff/FacultyModal'
-import { facultyData } from '../data/facultyData'
+import { loadFacultyData } from '../utils/facultyCsvLoader'
 
 const Home = () => {
   const [selectedFaculty, setSelectedFaculty] = useState(null)
+  const [facultyData, setFacultyData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await loadFacultyData();
+        setFacultyData(data);
+      } catch (error) {
+        console.error('Error loading faculty data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadData();
+  }, []);
 
   return (
     <div className="bg-gray-50">
@@ -35,15 +51,21 @@ const Home = () => {
           <p className="text-gray-600 mb-8">
             Click on a photo for more information on each faculty and staff member.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-            {facultyData.map((faculty) => (
-              <FacultyCard
-                key={faculty.id}
-                faculty={faculty}
-                onClick={setSelectedFaculty}
-              />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="flex justify-center items-center h-32">
+              <div className="text-xl text-gray-600">Loading Faculty Data...</div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+              {facultyData.map((faculty) => (
+                <FacultyCard
+                  key={faculty.id}
+                  faculty={faculty}
+                  onClick={setSelectedFaculty}
+                />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Quick Links Section */}
@@ -120,13 +142,15 @@ const Home = () => {
             </div>
           </div>
         </section>
-      </main>
 
-      {/* Faculty Modal */}
-      <FacultyModal
-        faculty={selectedFaculty}
-        onClose={() => setSelectedFaculty(null)}
-      />
+        {/* Faculty Modal */}
+        {selectedFaculty && (
+          <FacultyModal
+            faculty={selectedFaculty}
+            onClose={() => setSelectedFaculty(null)}
+          />
+        )}
+      </main>
     </div>
   )
 }
