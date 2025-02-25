@@ -2,7 +2,7 @@ import Papa from 'papaparse';
 
 export const loadTeamData = async () => {
   try {
-    const response = await fetch('/src/data/team.csv');
+    const response = await fetch('/data/team.csv');
     const csvText = await response.text();
     
     const { data } = Papa.parse(csvText, {
@@ -24,7 +24,7 @@ export const loadTeamData = async () => {
     // Process the data to match the expected format
     return data.map(member => {
       // Dynamically import images
-      const imagePath = `/src/assets/images/${member.image}`;
+      const imagePath = `/images/${member.image}`;
       
       return {
         ...member,

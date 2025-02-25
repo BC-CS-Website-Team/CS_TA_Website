@@ -2,7 +2,7 @@ import Papa from 'papaparse';
 
 export const loadRoboticsData = async () => {
   try {
-    const response = await fetch('/src/data/robotics.csv');
+    const response = await fetch('/data/robotics.csv');
     const csvText = await response.text();
     
     const { data } = Papa.parse(csvText, {
@@ -26,7 +26,7 @@ export const loadRoboticsData = async () => {
       .filter(member => member.id && member.name && member.image) // Filter out empty rows
       .map(member => {
         // Dynamically import images
-        const imagePath = `/src/assets/images/${member.image}`;
+        const imagePath = `/images/${member.image}`;
         
         return {
           ...member,
