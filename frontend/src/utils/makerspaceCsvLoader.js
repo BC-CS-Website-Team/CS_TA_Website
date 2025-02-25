@@ -2,7 +2,7 @@ import Papa from 'papaparse';
 
 export const loadMakerspaceData = async () => {
   try {
-    const response = await fetch('/src/data/makerspace.csv');
+    const response = await fetch('/data/makerspace.csv');
     const csvText = await response.text();
     
     const { data } = Papa.parse(csvText, {
@@ -26,7 +26,7 @@ export const loadMakerspaceData = async () => {
       .filter(member => member.id && member.name && member.image) // Filter out empty rows
       .map(member => {
         // Dynamically import images
-        const imagePath = `/src/assets/images/${member.image}`;
+        const imagePath = `/images/${member.image}`;
         
         return {
           ...member,
