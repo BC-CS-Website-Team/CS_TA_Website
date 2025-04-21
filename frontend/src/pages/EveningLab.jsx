@@ -65,7 +65,7 @@ const EveningLab = () => {
         </div>
       </section> */} 
 
-      {/* Check into Lab Button Section */}
+      {/* Check into Lab Button Section
       <section className="mb-16 text-center">
         <a
           href="https://bereacollege-my.sharepoint.com/personal/hamiltonn_berea_edu/_layouts/15/listforms.aspx?cid=YmNmNThkYTItYmJkMS00N2UwLTg1NmEtYjU0NWM0ZGVkZDFh&nav=MThhNzhkZWYtYTQ1MC00YTRmLTgyMmItNzFmMzA1NTdhNDFm"
@@ -78,7 +78,7 @@ const EveningLab = () => {
         <p className="mt-4 text-gray-600">
           Please check in when you arrive at the evening lab session
         </p>
-      </section>
+      </section> */}
 
       {/* Calendar Section */}
       <section className="bg-white rounded-lg shadow-md p-8">

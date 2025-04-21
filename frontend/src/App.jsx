@@ -13,6 +13,7 @@ import CommitteesLayout from './layouts/CommitteesLayout'
 import Home from './pages/Home'
 import TeamOverview from './pages/team/TeamOverview'
 import MeetTAs from './pages/team/MeetTAs'
+import PreviousYear2024_2025 from './pages/team/PreviousYear2024_2025'
 import MeetProgrammers from './pages/team/MeetProgrammers'
 import MeetRobotics from './pages/team/MeetRobotics'
 import MeetMakerspace from './pages/team/MeetMakerspace'
@@ -36,7 +37,7 @@ import StudentProjects from './pages/projects/StudentProjects'
 import Alumni from './pages/alumni/Alumni'
 import About from './pages/About'
 import TAhandbook from './pages/TAhandbook'
-import './styles/index.css'
+import "./index.css";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
             <Route path="/meet-the-team" element={<TeamLayout />}>
               <Route index element={<TeamOverview />} />
               <Route path="tas" element={<MeetTAs />} />
+<Route path="tas/previous-2024-2025" element={<PreviousYear2024_2025 />} />
               <Route path="programmers" element={<MeetProgrammers />} />
               <Route path="robotics" element={<MeetRobotics />} />
               <Route path="makerspace" element={<MeetMakerspace />} />
