@@ -24,7 +24,7 @@ export const loadTeamData2024_2025 = async () => {
     // Process the data to match the expected format
     return data.map(member => {
       // Dynamically import images
-      const imagePath = `/src/assets/images/${member.image}`;
+      const imagePath = `/images/${member.image}`;
       
       return {
         ...member,
