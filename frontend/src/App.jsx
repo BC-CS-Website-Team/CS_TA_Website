@@ -36,7 +36,7 @@ import StudentProjects from './pages/projects/StudentProjects'
 import Alumni from './pages/alumni/Alumni'
 import About from './pages/About'
 import TAhandbook from './pages/TAhandbook'
-import './styles/index.css'
+import "./index.css";
 
 function App() {
   return (
