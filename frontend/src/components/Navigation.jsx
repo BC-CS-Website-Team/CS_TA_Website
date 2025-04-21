@@ -38,21 +38,21 @@ const navItems = [
       { to: '/career-development/internships', label: 'Internships' }
     ]
   },
-  {
-    to: '/committees',
-    icon: FaSitemap,
-    label: 'CS Dept Committees',
-    dropdown: [
-      { to: '/committees', label: 'Overview' },
-      { to: '/committees/tech-ethics', label: 'Tech Ethics Committee' },
-      { to: '/committees/career-dev', label: 'Tech Career Development' },
-      { to: '/committees/diversity', label: 'Diversity in STEM' },
-      { to: '/committees/creative-space', label: 'Creative Space' }
-    ]
-  },
+  // {
+  //   to: '/committees',
+  //   icon: FaSitemap,
+  //   label: 'CS Dept Committees',
+  //   dropdown: [
+  //     { to: '/committees', label: 'Overview' },
+  //     { to: '/committees/tech-ethics', label: 'Tech Ethics Committee' },
+  //     { to: '/committees/career-dev', label: 'Tech Career Development' },
+  //     { to: '/committees/diversity', label: 'Diversity in STEM' },
+  //     { to: '/committees/creative-space', label: 'Creative Space' }
+  //   ]
+  // },
   { to: '/clubs', icon: FaUserFriends, label: 'CS Clubs' },
   { to: '/classes', icon: FaChalkboardTeacher, label: 'Classes' },
-  { to: '/alumni', icon: FaGraduationCap, label: 'Alumni Network' },
+  // { to: '/alumni', icon: FaGraduationCap, label: 'Alumni Network' },
   { to: '/student-projects', icon: FaProjectDiagram, label: 'Student Projects' },
   { to: '/evening-lab', icon: FaClock, label: 'Evening Lab' }
 ]
