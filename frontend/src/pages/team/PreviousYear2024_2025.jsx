@@ -1,21 +1,16 @@
-/**
- * MeetTAs.jsx
- * Page component for displaying Teaching Assistants
- */
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import TeamMemberCard from '../../components/team/TeamMemberCard';
+import TeamMemberModal from '../../components/team/TeamMemberModal';
+import { loadTeamData2024_2025 } from '../../utils/csvLoader2024_2025';
 
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import TeamMemberCard from '../../components/team/TeamMemberCard'
-import TeamMemberModal from '../../components/team/TeamMemberModal'
-import { loadTeamData } from '../../utils/csvLoader'
-
-const MeetTAs = () => {
-  const [selectedMember, setSelectedMember] = useState(null)
-  const [taData, setTaData] = useState([])
+const PreviousYear2024_2025 = () => {
+  const [selectedMember, setSelectedMember] = useState(null);
+  const [taData, setTaData] = useState([]);
 
   useEffect(() => {
     const loadData = async () => {
-      const data = await loadTeamData();
+      const data = await loadTeamData2024_2025();
       setTaData(data);
     };
     loadData();
@@ -24,11 +19,14 @@ const MeetTAs = () => {
   return (
     <div className="space-y-12">
       <div>
+        <Link to="/meet-the-team/tas" className="inline-block mb-4 px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700 transition-colors">
+          ← Back to Current Year
+        </Link>
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Meet Our TAs
+          Meet Our TAs (2024-2025)
         </h1>
         <p className="text-xl text-gray-600">
-          Learn about the dedicated Teaching Assistants in our CS program.
+          Learn about the dedicated Teaching Assistants in our CS program for the 2024-2025 academic year.
         </p>
       </div>
 
@@ -81,20 +79,8 @@ const MeetTAs = () => {
           onClose={() => setSelectedMember(null)}
         />
       )}
-
-      {/* Previous Years Section */}
-      <section className="mt-16 border-t pt-8">
-        <h2 className="text-xl font-semibold mb-4">Previous years</h2>
-        <ul>
-          <li>
-            <Link to="/meet-the-team/tas/previous-2024-2025" className="text-primary-600 hover:underline">
-              2024-2025
-            </Link>
-          </li>
-        </ul>
-      </section>
     </div>
-  )
-}
+  );
+};
 
-export default MeetTAs
+export default PreviousYear2024_2025;

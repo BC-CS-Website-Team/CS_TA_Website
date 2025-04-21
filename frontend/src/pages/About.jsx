@@ -127,7 +127,7 @@ const About = () => {
         </ol>
       </ProjectSection>
 
-      <ProjectSection title="Project Leadership">
+      {/* <ProjectSection title="Project Leadership">
         <div className="space-y-4">
           <div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Project Lead 2024-2025</h3>
@@ -138,7 +138,7 @@ const About = () => {
             <p className="text-gray-700">TBD</p>
           </div>
         </div>
-      </ProjectSection>
+      </ProjectSection> */}
     </div>
   )
 }
