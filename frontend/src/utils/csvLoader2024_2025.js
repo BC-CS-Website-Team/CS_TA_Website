@@ -2,7 +2,7 @@ import Papa from 'papaparse';
 
 export const loadTeamData2024_2025 = async () => {
   try {
-    const response = await fetch('/src/data/2024_2025team.csv');
+    const response = await fetch('/data/2024_2025team.csv');
     const csvText = await response.text();
     
     const { data } = Papa.parse(csvText, {
