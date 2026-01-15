@@ -5,11 +5,11 @@
  */
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import MainLayout from './layouts/MainLayout'
-import TeamLayout from './layouts/TeamLayout'
-import CareerLayout from './layouts/CareerLayout'
-import ClassesLayout from './layouts/ClassesLayout'
-import CommitteesLayout from './layouts/CommitteesLayout'
+import MainLayout from './components/templates/MainLayout'
+import TeamLayout from './components/templates/TeamLayout'
+import CareerLayout from './components/templates/CareerLayout'
+import ClassesLayout from './components/templates/ClassesLayout'
+import CommitteesLayout from './components/templates/CommitteesLayout'
 import Home from './pages/Home'
 import TeamOverview from './pages/team/TeamOverview'
 import MeetTAs from './pages/team/MeetTAs'
@@ -46,17 +46,17 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
-            
+
             {/* Team Routes */}
             <Route path="/meet-the-team" element={<TeamLayout />}>
               <Route index element={<TeamOverview />} />
               <Route path="tas" element={<MeetTAs />} />
-<Route path="tas/previous-2024-2025" element={<PreviousYear2024_2025 />} />
+              <Route path="tas/previous-2024-2025" element={<PreviousYear2024_2025 />} />
               <Route path="programmers" element={<MeetProgrammers />} />
               <Route path="robotics" element={<MeetRobotics />} />
               <Route path="makerspace" element={<MeetMakerspace />} />
             </Route>
-            
+
             {/* Career Development Routes */}
             <Route path="/career-development" element={<CareerLayout />}>
               <Route index element={<CareerDevelopment />} />
@@ -64,7 +64,7 @@ function App() {
               <Route path="conferences" element={<Conferences />} />
               <Route path="internships" element={<Internships />} />
             </Route>
-            
+
             {/* Classes Routes */}
             <Route path="/classes" element={<ClassesLayout />}>
               <Route index element={<ClassesOverview />} />
@@ -73,7 +73,7 @@ function App() {
               <Route path="csc236" element={<CSC236 />} />
               <Route path="csc246" element={<CSC246 />} />
             </Route>
-            
+
             {/* Committees Routes */}
             <Route path="/committees" element={<CommitteesLayout />}>
               <Route index element={<Committees />} />
@@ -82,7 +82,7 @@ function App() {
               <Route path="diversity-in-stem" element={<DiversityInStem />} />
               <Route path="creative-space" element={<CreativeSpace />} />
             </Route>
-            
+
             <Route path="/clubs" element={<Clubs />} />
             <Route path="/evening-lab" element={<EveningLab />} />
             <Route path="/about" element={<About />} />

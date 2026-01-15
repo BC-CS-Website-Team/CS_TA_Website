@@ -13,7 +13,7 @@ This project is a collaborative web development effort to create a comprehensive
 - Responsive design for mobile and desktop viewing
 
 ## Project Documentation
-For comprehensive documentation of the entire repository, including detailed explanations of each component and instructions on how to contribute, please see our [Repository Documentation](./repository_explained.md).
+For comprehensive documentation of the entire repository, including detailed explanations of each component and instructions on how to contribute, please see our [Repository Documentation](frontend/documentation/atomic_design_repository_explained.md).
 
 ## Project Timeline and Development Phases
 
@@ -50,7 +50,7 @@ The final phase focused on modernization and long-term sustainability:
 5. Create a template for future collaborative projects
 
 ## Contributing
-For detailed information about contributing to this project, please refer to our [Repository Documentation](./repository_explained.md), which includes:
+For detailed information about contributing to this project, please refer to our [Repository Documentation](frontend/documentation/atomic_design_repository_explained.md), which includes:
 - Development setup instructions
 - Code organization explanations
 - Best practices and guidelines

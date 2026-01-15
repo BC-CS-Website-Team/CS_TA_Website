@@ -1,17 +1,16 @@
 /**
- * TeamLayout.jsx
- * Layout component for the Meet the Team section.
- * Includes the sidebar and main content area.
+ * CareerLayout.jsx
+ * Layout component for career development pages
  */
 
 import { Outlet } from 'react-router-dom'
-import TeamSidebar from '../components/team/TeamSidebar'
+import CareerSidebar from '../organisms/CareerSidebar'
 
-const TeamLayout = () => {
+const CareerLayout = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row gap-8">
-        <TeamSidebar />
+        <CareerSidebar />
         <main className="flex-1 bg-white shadow-md rounded-lg p-6">
           <Outlet />
         </main>
@@ -20,4 +19,4 @@ const TeamLayout = () => {
   )
 }
 
-export default TeamLayout
+export default CareerLayout
