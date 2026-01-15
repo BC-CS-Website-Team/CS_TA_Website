@@ -4,8 +4,8 @@
  */
 
 import { useState, useEffect } from 'react'
-import TeamMemberCard from '../../components/team/TeamMemberCard'
-import TeamMemberModal from '../../components/team/TeamMemberModal'
+import ProfileCard from '../../components/molecules/ProfileCard'
+import TeamMemberModal from '../../components/organisms/TeamMemberModal'
 import { loadRoboticsData } from '../../utils/roboticsCsvLoader'
 
 const MeetRobotics = () => {
@@ -51,14 +51,14 @@ const MeetRobotics = () => {
           Our Robotics Team
         </h2>
         <p className="text-gray-600 mb-6">
-          Our robotics team works on cutting-edge projects, from autonomous systems to 
-          custom-built robots. Each member brings unique skills and passion to create 
+          Our robotics team works on cutting-edge projects, from autonomous systems to
+          custom-built robots. Each member brings unique skills and passion to create
           innovative solutions in robotics.
         </p>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {roboticsTeam.map(member => (
-            <TeamMemberCard
+            <ProfileCard
               key={member.id}
               {...member}
               onClick={() => setSelectedMember(member)}
@@ -74,9 +74,9 @@ const MeetRobotics = () => {
             Current Projects
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {roboticsTeam.map(member => 
+            {roboticsTeam.map(member =>
               member.projects?.map((project, index) => (
-                <div 
+                <div
                   key={`${member.id}-project-${index}`}
                   className="bg-white rounded-lg shadow-md p-6"
                 >
@@ -91,7 +91,7 @@ const MeetRobotics = () => {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech?.map((tech, techIndex) => (
-                      <span 
+                      <span
                         key={techIndex}
                         className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full"
                       >

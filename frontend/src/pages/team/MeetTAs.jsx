@@ -5,8 +5,8 @@
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import TeamMemberCard from '../../components/team/TeamMemberCard'
-import TeamMemberModal from '../../components/team/TeamMemberModal'
+import ProfileCard from '../../components/molecules/ProfileCard'
+import TeamMemberModal from '../../components/organisms/TeamMemberModal'
 import { loadTeamData } from '../../utils/csvLoader'
 
 const MeetTAs = () => {
@@ -44,7 +44,7 @@ const MeetTAs = () => {
           {taData
             .filter(member => member.role === 'Lead')
             .map(member => (
-              <TeamMemberCard
+              <ProfileCard
                 key={member.id}
                 {...member}
                 onClick={() => setSelectedMember(member)}
@@ -65,7 +65,7 @@ const MeetTAs = () => {
           {taData
             .filter(member => member.role === 'TA')
             .map(member => (
-              <TeamMemberCard
+              <ProfileCard
                 key={member.id}
                 {...member}
                 onClick={() => setSelectedMember(member)}

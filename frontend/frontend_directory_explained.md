@@ -151,7 +151,7 @@ Ensures:
 ## Feature Example: Career Development Section
 To better understand how different parts of the codebase work together, we've documented the Career Development section as a comprehensive example:
 
-[Career Development Documentation](./documentation/career_development_explained.md)
+[Career Development Documentation](../original_version/second_version_docs/career_development_explained.md)
 
 This documentation demonstrates:
 - How pages are organized within a section
