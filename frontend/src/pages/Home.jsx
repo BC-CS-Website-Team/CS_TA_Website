@@ -7,8 +7,8 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import FacultyCard from '../components/staff/FacultyCard'
-import FacultyModal from '../components/staff/FacultyModal'
+import ProfileCard from '../components/molecules/ProfileCard'
+import FacultyModal from '../components/organisms/FacultyModal'
 import { loadFacultyData } from '../utils/facultyCsvLoader'
 
 const Home = () => {
@@ -58,10 +58,13 @@ const Home = () => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
               {facultyData.map((faculty) => (
-                <FacultyCard
+                <ProfileCard
                   key={faculty.id}
-                  faculty={faculty}
-                  onClick={setSelectedFaculty}
+                  name={faculty.name}
+                  image={faculty.image}
+                  onClick={() => setSelectedFaculty(faculty)}
+                  variant="round"
+                  className="w-full max-w-[200px] mx-auto"
                 />
               ))}
             </div>
@@ -74,7 +77,7 @@ const Home = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-6">
               Computer Science TAs
             </h2>
-            <Link 
+            <Link
               to="/meet-the-team/tas"
               className="btn-primary inline-block"
             >
@@ -87,7 +90,7 @@ const Home = () => {
               Computer Science Courses
             </h2>
             <div className="space-y-4">
-              <Link 
+              <Link
                 to="/classes"
                 className="btn-primary block sm:inline-block sm:mr-4"
               >
@@ -126,17 +129,17 @@ const Home = () => {
             </h2>
             <div className="prose prose-lg max-w-none text-gray-600">
               <p className="mb-4">
-                Computer scientists have transformed the world we live in, and with a computer science degree, 
-                you can become the next leader in our technology-driven society. With four areas of concentration, 
-                hands-on curriculum, a caring and accessible faculty, and numerous labor and co-curricular opportunities, 
-                you'll be ready to create the next great advancement in technology. Opened in 2024, our new technology 
-                building supports opportunities to explore advanced computing subjects in our interactive robotics 
-                and visualization lab, a makerspace designed to foster creativity and exploration, and a hands-on 
+                Computer scientists have transformed the world we live in, and with a computer science degree,
+                you can become the next leader in our technology-driven society. With four areas of concentration,
+                hands-on curriculum, a caring and accessible faculty, and numerous labor and co-curricular opportunities,
+                you'll be ready to create the next great advancement in technology. Opened in 2024, our new technology
+                building supports opportunities to explore advanced computing subjects in our interactive robotics
+                and visualization lab, a makerspace designed to foster creativity and exploration, and a hands-on
                 networking and security lab.
               </p>
               <p>
-                Berea College Faculty designed an inclusive curriculum that begins with the basics of programming and data structures, 
-                and culminates with advanced topics in computer science and a capstone experience. The curriculum is 
+                Berea College Faculty designed an inclusive curriculum that begins with the basics of programming and data structures,
+                and culminates with advanced topics in computer science and a capstone experience. The curriculum is
                 also flexible enough to accommodate students with varying levels of prior programming experience.
               </p>
             </div>

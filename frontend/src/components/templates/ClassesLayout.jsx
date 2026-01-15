@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import ClassesSidebar from '../components/classes/ClassesSidebar'
+import ClassesSidebar from '../organisms/ClassesSidebar'
 
 const ClassesLayout = () => {
   return (

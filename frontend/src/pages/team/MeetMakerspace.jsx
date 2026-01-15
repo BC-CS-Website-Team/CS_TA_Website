@@ -4,8 +4,8 @@
  */
 
 import { useState, useEffect } from 'react'
-import TeamMemberCard from '../../components/team/TeamMemberCard'
-import TeamMemberModal from '../../components/team/TeamMemberModal'
+import ProfileCard from '../../components/molecules/ProfileCard'
+import TeamMemberModal from '../../components/organisms/TeamMemberModal'
 import { loadMakerspaceData } from '../../utils/makerspaceCsvLoader'
 
 const MeetMakerspace = () => {
@@ -51,14 +51,14 @@ const MeetMakerspace = () => {
           Our Makerspace TAs
         </h2>
         <p className="text-gray-600 mb-6">
-          Our Makerspace TAs are dedicated to helping students explore and create using various 
-          technologies. From 3D printing to electronics, our team provides guidance and support 
+          Our Makerspace TAs are dedicated to helping students explore and create using various
+          technologies. From 3D printing to electronics, our team provides guidance and support
           for all kinds of maker projects.
         </p>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {makerspaceTeam.map(member => (
-            <TeamMemberCard
+            <ProfileCard
               key={member.id}
               {...member}
               onClick={() => setSelectedMember(member)}
