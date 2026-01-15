@@ -4,8 +4,8 @@
  */
 
 import { useState, useEffect } from 'react'
-import TeamMemberCard from '../../components/team/TeamMemberCard'
-import TeamMemberModal from '../../components/team/TeamMemberModal'
+import ProfileCard from '../../components/molecules/ProfileCard'
+import TeamMemberModal from '../../components/organisms/TeamMemberModal'
 import { loadProgrammerData } from '../../utils/programmersCsvLoader'
 
 const MeetProgrammers = () => {
@@ -36,14 +36,14 @@ const MeetProgrammers = () => {
           Our Programming Team
         </h2>
         <p className="text-gray-600 mb-6">
-          Our programming team works on various projects that benefit the Berea College community. 
-          From web applications to software tools, our programmers gain real-world development 
+          Our programming team works on various projects that benefit the Berea College community.
+          From web applications to software tools, our programmers gain real-world development
           experience while creating solutions for our school.
         </p>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {programmers.map(member => (
-            <TeamMemberCard
+            <ProfileCard
               key={member.id}
               {...member}
               onClick={() => setSelectedMember(member)}

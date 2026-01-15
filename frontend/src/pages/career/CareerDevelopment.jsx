@@ -4,7 +4,7 @@
  */
 
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import DropdownSection from '../../components/career/DropdownSection'
+import DropdownSection from '../../components/molecules/DropdownSection'
 
 const CareerDevelopment = () => {
   return (
@@ -14,8 +14,8 @@ const CareerDevelopment = () => {
           Career Development
         </h1>
         <p className="text-gray-600">
-          Explore resources and opportunities for your CS career growth. Our career development 
-          program provides comprehensive support to help you navigate your professional journey 
+          Explore resources and opportunities for your CS career growth. Our career development
+          program provides comprehensive support to help you navigate your professional journey
           in computer science.
         </p>
       </div>
@@ -24,8 +24,8 @@ const CareerDevelopment = () => {
         <section>
           <h2 className="text-2xl font-semibold text-gray-900 mb-2">Resources</h2>
           <p className="text-gray-600 mb-4">
-            We provide various resources to support your career development, including funding 
-            opportunities and professional development tools. Explore the sections below to 
+            We provide various resources to support your career development, including funding
+            opportunities and professional development tools. Explore the sections below to
             learn more about what's available to you.
           </p>
 

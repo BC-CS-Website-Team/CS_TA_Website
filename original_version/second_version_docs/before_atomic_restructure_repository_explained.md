@@ -12,7 +12,7 @@ The current version of the website is a modern Single Page Application (SPA) bui
 - Efficient development workflow
 - Optimized production builds
 
-[See detailed frontend documentation](./frontend/frontend_directory_explained.md)
+[See detailed frontend documentation](../../frontend/frontend_directory_explained.md)
 
 Key directories include:
 
@@ -24,12 +24,12 @@ Static assets served directly without processing:
 
 #### 📁 `src/`
 Application source code with detailed documentation:
-- [Components](./frontend/src/components/components_directory_explained.md): Reusable UI elements
+- [Components](../../frontend/src/components/components_directory_explained.md): Reusable UI elements
 - [Layouts](./frontend/src/layouts/layout_directory_explained.md): Page structure templates
-- [Pages](./frontend/src/pages/directory_explained.md): Individual route components
+- [Pages](../../frontend/src/pages/directory_explained.md): Individual route components
 
 ### Feature Example
-For a comprehensive example of how different parts of the application work together, see our [Career Development Section documentation](./frontend/documentation/career_development_explained.md).
+For a comprehensive example of how different parts of the application work together, see our [Career Development Section documentation](career_development_explained.md).
 
 ## Deployment
 
@@ -128,8 +128,8 @@ CS_TA_Website/
    ```
 
 ## Additional Resources
-- [Frontend Documentation](./frontend/frontend_directory_explained.md)
-- [Components Documentation](./frontend/src/components/components_directory_explained.md)
+- [Frontend Documentation](../../frontend/frontend_directory_explained.md)
+- [Components Documentation](../../frontend/src/components/components_directory_explained.md)
 - [Layouts Documentation](./frontend/src/layouts/layout_directory_explained.md)
-- [Pages Documentation](./frontend/src/pages/directory_explained.md)
-- [Career Development Example](./frontend/documentation/career_development_explained.md)
+- [Pages Documentation](../../frontend/src/pages/directory_explained.md)
+- [Career Development Example](career_development_explained.md)
