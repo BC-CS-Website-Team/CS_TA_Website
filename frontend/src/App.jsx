@@ -37,6 +37,7 @@ import StudentProjects from './pages/projects/StudentProjects'
 import Alumni from './pages/alumni/Alumni'
 import About from './pages/About'
 import TAhandbook from './pages/TAhandbook'
+import AdminDashboard from './pages/admin/AdminDashboard'
 import "./index.css";
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
     <Router>
       <div className="flex flex-col min-h-screen">
         <Routes>
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
 
