@@ -9,12 +9,11 @@ from alembic import context
 import sys
 from os.path import dirname, abspath, join
 
-from src.database import Base
-from src.config import settings
-
 # Adding src to python path so imports work
-sys.path.insert(0, dirname(dirname(abspath(__file__))))
 sys.path.insert(0, join(dirname(dirname(abspath(__file__))), "src"))
+
+from database import Base
+from config import settings
 # I want to ensure alembic knows about my models and DB URL
 
 # TODO I need to importa all models here!

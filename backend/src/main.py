@@ -19,7 +19,11 @@ async def lifespan(app: FastAPI):
     await engine.dispose()
 
 
+from auth.router import router as auth_router
+
 app = FastAPI(lifespan=lifespan)
+
+app.include_router(auth_router)
 
 
 @app.get("/")
