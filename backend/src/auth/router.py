@@ -9,7 +9,7 @@ from database import get_db
 from config import settings
 from auth.schemas import Token, UserCreate, UserResponse
 from auth.service import authenticate_user, create_user
-from auth.dependencies import get_current_active_user
+from auth.dependencies import get_current_active_user, get_current_superuser
 from auth.models import User
 from auth.exceptions import UserAlreadyExists
 
@@ -17,6 +17,10 @@ router = APIRouter(
     prefix="/auth",
     tags=["auth"],
 )
+
+@router.get("/admin-only")
+async def admin_only_test(current_user: Annotated[User, Depends(get_current_superuser)]):
+    return {"message": "Welcome, Almighty Admin!", "user": current_user.email}
 
 @router.post("/register", response_model=UserResponse)
 async def register(user_in: UserCreate, db: Annotated[AsyncSession, Depends(get_db)]):

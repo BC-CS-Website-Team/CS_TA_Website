@@ -37,61 +37,68 @@ import StudentProjects from './pages/projects/StudentProjects'
 import Alumni from './pages/alumni/Alumni'
 import About from './pages/About'
 import TAhandbook from './pages/TAhandbook'
+import Login from './pages/auth/Login'
+import Register from './pages/auth/Register'
+import { AuthProvider } from './context/AuthContext'
 import "./index.css";
 
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
+      <AuthProvider>
+        <div className="flex flex-col min-h-screen">
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
 
-            {/* Team Routes */}
-            <Route path="/meet-the-team" element={<TeamLayout />}>
-              <Route index element={<TeamOverview />} />
-              <Route path="tas" element={<MeetTAs />} />
-              <Route path="tas/previous-2024-2025" element={<PreviousYear2024_2025 />} />
-              <Route path="programmers" element={<MeetProgrammers />} />
-              <Route path="robotics" element={<MeetRobotics />} />
-              <Route path="makerspace" element={<MeetMakerspace />} />
+              {/* Team Routes */}
+              <Route path="/meet-the-team" element={<TeamLayout />}>
+                <Route index element={<TeamOverview />} />
+                <Route path="tas" element={<MeetTAs />} />
+                <Route path="tas/previous-2024-2025" element={<PreviousYear2024_2025 />} />
+                <Route path="programmers" element={<MeetProgrammers />} />
+                <Route path="robotics" element={<MeetRobotics />} />
+                <Route path="makerspace" element={<MeetMakerspace />} />
+              </Route>
+
+              {/* Career Development Routes */}
+              <Route path="/career-development" element={<CareerLayout />}>
+                <Route index element={<CareerDevelopment />} />
+                <Route path="resources" element={<CareerResources />} />
+                <Route path="conferences" element={<Conferences />} />
+                <Route path="internships" element={<Internships />} />
+              </Route>
+
+              {/* Classes Routes */}
+              <Route path="/classes" element={<ClassesLayout />}>
+                <Route index element={<ClassesOverview />} />
+                <Route path="learning-resources" element={<LearningResources />} />
+                <Route path="csc226" element={<CSC226 />} />
+                <Route path="csc236" element={<CSC236 />} />
+                <Route path="csc246" element={<CSC246 />} />
+              </Route>
+
+              {/* Committees Routes */}
+              <Route path="/committees" element={<CommitteesLayout />}>
+                <Route index element={<Committees />} />
+                <Route path="tech-ethics" element={<TechEthics />} />
+                <Route path="career-dev" element={<CareerDevCommittee />} />
+                <Route path="diversity-in-stem" element={<DiversityInStem />} />
+                <Route path="creative-space" element={<CreativeSpace />} />
+              </Route>
+
+              <Route path="/clubs" element={<Clubs />} />
+              <Route path="/evening-lab" element={<EveningLab />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/TAhandbook" element={<TAhandbook />} />
+              <Route path="/student-projects" element={<StudentProjects />} />
+              <Route path="/alumni" element={<Alumni />} />
             </Route>
-
-            {/* Career Development Routes */}
-            <Route path="/career-development" element={<CareerLayout />}>
-              <Route index element={<CareerDevelopment />} />
-              <Route path="resources" element={<CareerResources />} />
-              <Route path="conferences" element={<Conferences />} />
-              <Route path="internships" element={<Internships />} />
-            </Route>
-
-            {/* Classes Routes */}
-            <Route path="/classes" element={<ClassesLayout />}>
-              <Route index element={<ClassesOverview />} />
-              <Route path="learning-resources" element={<LearningResources />} />
-              <Route path="csc226" element={<CSC226 />} />
-              <Route path="csc236" element={<CSC236 />} />
-              <Route path="csc246" element={<CSC246 />} />
-            </Route>
-
-            {/* Committees Routes */}
-            <Route path="/committees" element={<CommitteesLayout />}>
-              <Route index element={<Committees />} />
-              <Route path="tech-ethics" element={<TechEthics />} />
-              <Route path="career-dev" element={<CareerDevCommittee />} />
-              <Route path="diversity-in-stem" element={<DiversityInStem />} />
-              <Route path="creative-space" element={<CreativeSpace />} />
-            </Route>
-
-            <Route path="/clubs" element={<Clubs />} />
-            <Route path="/evening-lab" element={<EveningLab />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/TAhandbook" element={<TAhandbook />} />
-            <Route path="/student-projects" element={<StudentProjects />} />
-            <Route path="/alumni" element={<Alumni />} />
-          </Route>
-        </Routes>
-      </div>
+          </Routes>
+        </div>
+      </AuthProvider>
     </Router>
   )
 }
