@@ -131,7 +131,7 @@ const Navigation = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden xl:flex items-center space-x-4">
             {navItems.map((item) => (
               <NavItem key={item.to} item={item} />
             ))}
@@ -159,7 +159,7 @@ const Navigation = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
+          <div className="xl:hidden flex items-center">
             <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 focus:outline-none"
@@ -177,7 +177,7 @@ const Navigation = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`lg:hidden ${isOpen ? 'block' : 'hidden'} bg-white border-t border-gray-200 shadow-lg max-h-[80vh] overflow-y-auto`}>
+      <div className={`xl:hidden ${isOpen ? 'block' : 'hidden'} bg-white border-t border-gray-200 shadow-lg max-h-[80vh] overflow-y-auto`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
           {navItems.map((item) => (
             <NavItem

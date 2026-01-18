@@ -4,9 +4,12 @@
  */
 
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { formatTime } from '../../utils/timeUtils'
+import { useAuth } from '../../context/AuthContext'
 
 const FacultyModal = ({ faculty, onClose }) => {
+  const { isAuthenticated } = useAuth()
   if (!faculty) return null
 
   const generateTableRow = (hoursPerDay = []) => {
@@ -46,7 +49,7 @@ const FacultyModal = ({ faculty, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div 
+        <div
           className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
           aria-hidden="true"
           onClick={onClose}
@@ -67,39 +70,56 @@ const FacultyModal = ({ faculty, onClose }) => {
                   </h3>
                 </div>
 
-                {faculty.hours && (
-                  <div className="mb-6">
-                    <h4 className="font-semibold mb-2">Office Hours</h4>
-                    {generateTableRow(faculty.hours)}
-                  </div>
-                )}
+                {isAuthenticated ? (
+                  <>
+                    {faculty.hours && (
+                      <div className="mb-6">
+                        <h4 className="font-semibold mb-2">Office Hours</h4>
+                        {generateTableRow(faculty.hours)}
+                      </div>
+                    )}
 
-                {faculty.courses && (
-                  <div className="mb-6">
-                    <h4 className="font-semibold mb-2">Courses</h4>
-                    {generateCourseTabs(faculty.courses)}
-                  </div>
-                )}
+                    {faculty.courses && (
+                      <div className="mb-6">
+                        <h4 className="font-semibold mb-2">Courses</h4>
+                        {generateCourseTabs(faculty.courses)}
+                      </div>
+                    )}
 
-                {faculty.email && (
-                  <div className="space-y-2">
-                    <a 
-                      href={`mailto:${faculty.email}`}
-                      className="text-primary-600 hover:text-primary-700 block"
+                    {faculty.email && (
+                      <div className="space-y-2">
+                        <a
+                          href={`mailto:${faculty.email}`}
+                          className="text-primary-600 hover:text-primary-700 block"
+                        >
+                          {faculty.email}
+                        </a>
+                        {faculty.links?.map((link, index) => (
+                          <a
+                            key={index}
+                            href={link[1]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary-600 hover:text-primary-700 block"
+                          >
+                            {link[0]}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="mt-6 p-4 bg-gray-50 rounded-lg text-center">
+                    <p className="text-gray-600 mb-4">
+                      Please log in to view office hours, courses, and contact information.
+                    </p>
+                    <Link
+                      to="/login"
+                      className="inline-block px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
+                      onClick={onClose}
                     >
-                      {faculty.email}
-                    </a>
-                    {faculty.links?.map((link, index) => (
-                      <a
-                        key={index}
-                        href={link[1]}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary-600 hover:text-primary-700 block"
-                      >
-                        {link[0]}
-                      </a>
-                    ))}
+                      Login
+                    </Link>
                   </div>
                 )}
               </div>
