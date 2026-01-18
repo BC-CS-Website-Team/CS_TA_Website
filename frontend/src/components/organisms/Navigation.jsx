@@ -5,12 +5,13 @@
  */
 
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {
   FaHome, FaUsers, FaBriefcase, FaUserFriends,
   FaChalkboardTeacher, FaProjectDiagram,
   FaClock, FaCaretDown, FaBars, FaTimes
 } from 'react-icons/fa'
+import { useAuth } from '../../context/AuthContext'
 
 const navItems = [
   {
@@ -103,8 +104,16 @@ const NavItem = ({ item, onClick, mobile }) => {
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen)
+
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false);
+    navigate('/');
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
@@ -126,6 +135,27 @@ const Navigation = () => {
             {navItems.map((item) => (
               <NavItem key={item.to} item={item} />
             ))}
+
+            <div className="border-l pl-4 ml-4 flex items-center space-x-3">
+              {isAuthenticated ? (
+                <>
+                  <span className="text-gray-700 text-sm">Welcome, {user?.email}</span>
+                  <button
+                    onClick={handleLogout}
+                    className="text-gray-600 hover:text-primary-600 text-sm font-medium"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700 transition-colors"
+                >
+                  Login
+                </Link>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -159,6 +189,30 @@ const Navigation = () => {
               }}
             />
           ))}
+
+          <div className="border-t pt-4 mt-4 px-2">
+            {isAuthenticated ? (
+              <div className="space-y-3">
+                <div className="px-4 text-gray-700 text-sm font-medium">
+                  Signed in as: <span className="block text-gray-900">{user?.email}</span>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2 text-base font-medium text-red-600 hover:bg-red-50 rounded-md"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                onClick={() => setIsOpen(false)}
+                className="block w-full text-center px-4 py-3 font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700"
+              >
+                Login
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </nav>
