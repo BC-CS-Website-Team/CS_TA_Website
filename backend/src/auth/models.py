@@ -32,5 +32,7 @@ class User(Base):
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
     is_superuser = Column(Boolean, default=False)
+    first_name = Column(String, nullable=True)
+    last_name = Column(String, nullable=True)
     roles = relationship("Role", secondary=user_roles, back_populates="users")
     # major = Column(String, nullable=True)
