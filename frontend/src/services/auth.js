@@ -98,3 +98,59 @@ export const logout = () => {
 export const isAuthenticated = () => {
     return !!localStorage.getItem('token');
 };
+
+// --- Role Management Services ---
+
+export const createRole = async (roleName) => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/auth/roles`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ name: roleName })
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Failed to create role');
+    }
+    return await response.json();
+};
+
+export const getRoles = async () => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/auth/roles`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    if (!response.ok) throw new Error('Failed to fetch roles');
+    return await response.json();
+};
+
+export const getUsers = async () => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/auth/users`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    if (!response.ok) throw new Error('Failed to fetch users');
+    return await response.json();
+};
+
+export const assignUserRoles = async (userId, roleIds) => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/auth/users/${userId}/roles`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ role_ids: roleIds })
+    });
+    if (!response.ok) throw new Error('Failed to assign roles');
+    return await response.json();
+};
