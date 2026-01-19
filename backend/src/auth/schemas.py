@@ -31,11 +31,28 @@ class UserCreate(UserBase):
         return v
 
 
+# Role Schemas
+class RoleBase(BaseModel):
+    name: str
+
+class RoleCreate(RoleBase):
+    pass
+
+class RoleResponse(RoleBase):
+    id: int
+
+    model_config = ConfigDict(from_attributes=True)
+
+class UserRoleAssign(BaseModel):
+    role_ids: list[int]
+
+
 # Properties to return per User
 class UserResponse(UserBase):
     id: int
     created_at: datetime
     is_superuser: bool
+    roles: list[RoleResponse] = []
     # updated_at: datetime
 
     # ConfigDict is needed for Pydantic to read ORM models

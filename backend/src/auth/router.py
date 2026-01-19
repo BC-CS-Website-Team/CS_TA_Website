@@ -67,3 +67,48 @@ async def read_users_me(
     current_user: Annotated[User, Depends(get_current_active_user)],
 ):
     return current_user
+
+# --- Role Management Endpoints (Admin Only) ---
+from auth.schemas import RoleCreate, RoleResponse, UserRoleAssign
+from auth.service import create_role, get_all_roles, get_all_users_with_roles, assign_roles_to_user
+
+@router.post("/roles", response_model=RoleResponse)
+async def create_new_role(
+    role_in: RoleCreate,
+    current_user: Annotated[User, Depends(get_current_superuser)],
+    db: Annotated[AsyncSession, Depends(get_db)],
+):
+    """Create a new role (Admin only)."""
+    return await create_role(db, role_in)
+
+@router.get("/roles", response_model=list[RoleResponse])
+async def read_roles(
+    current_user: Annotated[User, Depends(get_current_superuser)],
+    db: Annotated[AsyncSession, Depends(get_db)],
+):
+    """Get all roles (Admin only)."""
+    return await get_all_roles(db)
+
+@router.get("/users", response_model=list[UserResponse])
+async def read_all_users(
+    current_user: Annotated[User, Depends(get_current_superuser)],
+    db: Annotated[AsyncSession, Depends(get_db)],
+):
+    """Get all users (Admin only)."""
+    return await get_all_users_with_roles(db)
+
+@router.post("/users/{user_id}/roles", response_model=UserResponse)
+async def assign_user_roles(
+    user_id: int,
+    role_data: UserRoleAssign,
+    current_user: Annotated[User, Depends(get_current_superuser)],
+    db: Annotated[AsyncSession, Depends(get_db)],
+):
+    """Assign roles to a user (Admin only)."""
+    user = await assign_roles_to_user(db, user_id, role_data.role_ids)
+    if not user:
+         raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found",
+        )
+    return user
