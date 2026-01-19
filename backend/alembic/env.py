@@ -14,9 +14,9 @@ sys.path.insert(0, join(dirname(dirname(abspath(__file__))), "src"))
 
 from database import Base
 from config import settings
-# I want to ensure alembic knows about my models and DB URL
+from src.auth import models as auth_models
 
-# TODO I need to importa all models here!
+# I want to ensure alembic knows about my models and DB URL
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
