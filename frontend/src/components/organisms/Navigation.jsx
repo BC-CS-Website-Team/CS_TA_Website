@@ -138,15 +138,33 @@ const Navigation = () => {
 
             <div className="border-l pl-4 ml-4 flex items-center space-x-3">
               {isAuthenticated ? (
-                <>
-                  <span className="text-gray-700 text-sm">Welcome, {user?.email}</span>
+                <div className="relative group">
                   <button
-                    onClick={handleLogout}
-                    className="text-gray-600 hover:text-primary-600 text-sm font-medium"
+                    className="nav-link flex items-center focus:outline-none"
+                    onClick={() => { }} // Optional: handle click if needed, but hover handles dropdown
                   >
-                    Logout
+                    <span className="text-gray-700 text-sm font-medium mr-1">Welcome, {user?.email}</span>
+                    <FaCaretDown className="ml-1 text-gray-500" />
                   </button>
-                </>
+                  <ul className="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 min-w-[200px] z-50 right-0 left-auto">
+                    <li>
+                      <Link
+                        to="/profile-settings" // Placeholder link
+                        className="dropdown-item px-4 py-2 hover:bg-gray-100"
+                      >
+                        Profile Settings
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left dropdown-item px-4 py-2 hover:bg-gray-100 text-red-600"
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               ) : (
                 <Link
                   to="/login"
@@ -193,9 +211,16 @@ const Navigation = () => {
           <div className="border-t pt-4 mt-4 px-2">
             {isAuthenticated ? (
               <div className="space-y-3">
-                <div className="px-4 text-gray-700 text-sm font-medium">
-                  Signed in as: <span className="block text-gray-900">{user?.email}</span>
+                <div className="px-4 text-gray-700 text-sm font-medium border-b pb-2 mb-2">
+                  Signed in as: <span className="block text-gray-900 truncate">{user?.email}</span>
                 </div>
+                <Link
+                  to="/profile-settings"
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-left px-4 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 rounded-md"
+                >
+                  Profile Settings
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="w-full text-left px-4 py-2 text-base font-medium text-red-600 hover:bg-red-50 rounded-md"
