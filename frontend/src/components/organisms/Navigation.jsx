@@ -147,6 +147,16 @@ const Navigation = () => {
                     <FaCaretDown className="ml-1 text-gray-500" />
                   </button>
                   <ul className="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 min-w-[200px] z-50 right-0 left-auto">
+                    {user?.is_superuser && (
+                      <li>
+                        <Link
+                          to="/admin"
+                          className="dropdown-item px-4 py-2 hover:bg-gray-100 font-semibold text-primary-700"
+                        >
+                          Admin Dashboard
+                        </Link>
+                      </li>
+                    )}
                     <li>
                       <Link
                         to="/profile-settings" // Placeholder link
@@ -214,6 +224,15 @@ const Navigation = () => {
                 <div className="px-4 text-gray-700 text-sm font-medium border-b pb-2 mb-2">
                   Signed in as: <span className="block text-gray-900 truncate">{user?.email}</span>
                 </div>
+                {user?.is_superuser && (
+                  <Link
+                    to="/admin"
+                    onClick={() => setIsOpen(false)}
+                    className="block w-full text-left px-4 py-2 text-base font-bold text-primary-700 hover:bg-gray-50 rounded-md"
+                  >
+                    Admin Dashboard
+                  </Link>
+                )}
                 <Link
                   to="/profile-settings"
                   onClick={() => setIsOpen(false)}

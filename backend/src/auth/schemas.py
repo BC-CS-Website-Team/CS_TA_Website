@@ -35,6 +35,7 @@ class UserCreate(UserBase):
 class UserResponse(UserBase):
     id: int
     created_at: datetime
+    is_superuser: bool
     # updated_at: datetime
 
     # ConfigDict is needed for Pydantic to read ORM models

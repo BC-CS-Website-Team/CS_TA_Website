@@ -37,6 +37,8 @@ import StudentProjects from './pages/projects/StudentProjects'
 import Alumni from './pages/alumni/Alumni'
 import About from './pages/About'
 import TAhandbook from './pages/TAhandbook'
+import Admin from './pages/Admin'
+import ProfileSettings from './pages/ProfileSettings'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import { AuthProvider } from './context/AuthContext'
@@ -50,6 +52,8 @@ function App() {
           <Routes>
             <Route element={<MainLayout />}>
               <Route path="/" element={<Home />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/profile-settings" element={<ProfileSettings />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
 
