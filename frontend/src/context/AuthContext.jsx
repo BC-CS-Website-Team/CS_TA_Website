@@ -50,12 +50,22 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
     };
 
+    const refreshUser = async () => {
+        try {
+            const userData = await getCurrentUser();
+            setUser(userData);
+        } catch (err) {
+            console.error("Failed to refresh user:", err);
+        }
+    };
+
     const value = {
         user,
         loading,
         error,
         login,
         logout,
+        refreshUser,
         isAuthenticated: !!user,
     };
 

@@ -34,5 +34,6 @@ class User(Base):
     is_superuser = Column(Boolean, default=False)
     first_name = Column(String, nullable=True)
     last_name = Column(String, nullable=True)
+    profile_picture = Column(String, nullable=True)
     roles = relationship("Role", secondary=user_roles, back_populates="users")
     # major = Column(String, nullable=True)

@@ -154,3 +154,24 @@ export const assignUserRoles = async (userId, roleIds) => {
     if (!response.ok) throw new Error('Failed to assign roles');
     return await response.json();
 };
+
+export const uploadProfilePicture = async (file) => {
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await fetch(`${API_URL}/auth/me/profile-picture`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        body: formData
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Failed to upload profile picture');
+    }
+
+    return await response.json();
+};
