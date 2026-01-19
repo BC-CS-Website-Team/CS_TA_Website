@@ -53,6 +53,7 @@ class UserResponse(UserBase):
     created_at: datetime
     is_superuser: bool
     roles: list[RoleResponse] = []
+    profile_picture: str | None = None
     # updated_at: datetime
 
     # ConfigDict is needed for Pydantic to read ORM models

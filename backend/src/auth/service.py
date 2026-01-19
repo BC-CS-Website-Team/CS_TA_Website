@@ -92,3 +92,14 @@ async def assign_roles_to_user(db: AsyncSession, user_id: int, role_ids: list[in
     await db.commit()
     await db.refresh(user)
     return user
+
+async def update_user_profile_picture(db: AsyncSession, user_id: int, image_path: str):
+    """Updates the user's profile picture URL."""
+    result = await db.execute(select(User).where(User.id == user_id).options(selectinload(User.roles)))
+    user = result.scalars().first()
+    
+    if user:
+        user.profile_picture = image_path
+        await db.commit()
+        await db.refresh(user)
+    return user

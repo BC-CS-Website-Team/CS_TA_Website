@@ -1,8 +1,12 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 from database import engine
+import os
 
+# Ensure static directory exists
+os.makedirs("static/profile_pictures", exist_ok=True)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -22,6 +26,9 @@ async def lifespan(app: FastAPI):
 from auth.router import router as auth_router
 
 app = FastAPI(lifespan=lifespan)
+
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 from fastapi.middleware.cors import CORSMiddleware
 

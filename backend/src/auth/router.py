@@ -112,3 +112,44 @@ async def assign_user_roles(
             detail="User not found",
         )
     return user
+
+# --- Profile Picture Upload ---
+from fastapi import File, UploadFile
+import shutil
+from pathlib import Path
+import uuid
+from auth.service import update_user_profile_picture
+
+@router.post("/me/profile-picture", response_model=UserResponse)
+async def upload_profile_picture(
+    current_user: Annotated[User, Depends(get_current_active_user)],
+    db: Annotated[AsyncSession, Depends(get_db)],
+    file: UploadFile = File(...),
+):
+    """Upload a profile picture for the current user."""
+    # simple validation
+    if not file.content_type.startswith("image/"):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="File must be an image",
+        )
+    
+    # Create unique filename
+    file_extension = Path(file.filename).suffix
+    unique_filename = f"{current_user.id}_{uuid.uuid4()}{file_extension}"
+    file_path = f"static/profile_pictures/{unique_filename}"
+    
+    # Save file
+    try:
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+    except Exception as e:
+         raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Could not save file: {e}",
+        )
+        
+    # Update DB - store the URL path (relative to backend url)
+    # The frontend will prepend the backend URL.
+    db_path = f"/static/profile_pictures/{unique_filename}"
+    return await update_user_profile_picture(db, current_user.id, db_path)
