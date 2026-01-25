@@ -7,6 +7,8 @@ import re
 class UserBase(BaseModel):
     email: EmailStr
     is_active: bool = True
+    first_name: str | None = None
+    last_name: str | None = None
 
 
 # Properties to receive via API on creation

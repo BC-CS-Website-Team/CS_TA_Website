@@ -42,6 +42,11 @@ import Admin from './pages/Admin'
 import ProfileSettings from './pages/ProfileSettings'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
+import DocsLayout from './components/templates/DocsLayout'
+import ContributorsHome from './pages/contributors/ContributorsHome'
+import FrontendGuide from './pages/contributors/FrontendGuide'
+import BackendGuide from './pages/contributors/BackendGuide'
+import WorkflowGuide from './pages/contributors/WorkflowGuide'
 import { AuthProvider } from './context/AuthContext'
 import "./index.css";
 
@@ -101,6 +106,14 @@ function App() {
               <Route path="/TAhandbook" element={<TAhandbook />} />
               <Route path="/student-projects" element={<StudentProjects />} />
               <Route path="/alumni" element={<Alumni />} />
+
+              {/* Contributors Routes */}
+              <Route path="/contributors" element={<DocsLayout />}>
+                <Route index element={<ContributorsHome />} />
+                <Route path="frontend" element={<FrontendGuide />} />
+                <Route path="backend" element={<BackendGuide />} />
+                <Route path="workflow" element={<WorkflowGuide />} />
+              </Route>
             </Route>
           </Routes>
         </div>
