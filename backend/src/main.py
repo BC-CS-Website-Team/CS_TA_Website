@@ -49,6 +49,15 @@ app.add_middleware(
 
 app.include_router(auth_router)
 
+from opportunities.router import router as opportunities_router
+app.include_router(opportunities_router)
+
+from preferences.router import router as preferences_router
+app.include_router(preferences_router)
+
+from slack.router import router as slack_router
+app.include_router(slack_router)
+
 
 @app.get("/")
 def read_root():
