@@ -6,9 +6,9 @@
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ExternalLinkIcon } from '@chakra-ui/icons'
-import ProfileCard from '../components/molecules/ProfileCard'
-import FacultyModal from '../components/organisms/FacultyModal'
+import { FaExternalLinkAlt } from 'react-icons/fa'
+import { ProfileCard } from '../components/molecules'
+import { FacultyModal } from '../components/organisms'
 import { loadFacultyData } from '../utils/facultyCsvLoader'
 
 const Home = () => {
@@ -103,7 +103,7 @@ const Home = () => {
                 className="btn-secondary block sm:inline-block"
               >
                 View the Berea CS Course Catalog
-                <ExternalLinkIcon className="inline ml-2" />
+                <FaExternalLinkAlt className="inline ml-2" />
               </a>
             </div>
           </div>
@@ -119,7 +119,7 @@ const Home = () => {
               className="btn-primary inline-block"
             >
               Info on the Computer Science Department
-              <ExternalLinkIcon className="inline ml-2" />
+              <FaExternalLinkAlt className="inline ml-2" />
             </a>
           </div>
 

@@ -2,6 +2,10 @@ import React from 'react';
 import Card from '../atoms/Card';
 import Badge from '../atoms/Badge';
 import Button from '../atoms/Button';
+import Link from '../atoms/Link';
+import Image from '../atoms/Image';
+import Text from '../atoms/Text';
+import Heading from '../atoms/Heading';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const OpportunityCard = ({ opportunity, onEdit, onDelete }) => {
@@ -9,7 +13,7 @@ const OpportunityCard = ({ opportunity, onEdit, onDelete }) => {
         <Card className="h-full flex flex-col">
             {opportunity.opportunity_image && (
                 <div className="relative h-48 w-full overflow-hidden bg-gray-100">
-                    <img
+                    <Image
                         src={opportunity.opportunity_image}
                         alt={opportunity.name}
                         className="w-full h-full object-cover"
@@ -22,7 +26,7 @@ const OpportunityCard = ({ opportunity, onEdit, onDelete }) => {
                 {opportunity.opportunity_uploader && (
                     <div className="flex items-center mb-4 pb-4 border-b border-gray-100">
                         {opportunity.opportunity_uploader.profile_picture ? (
-                            <img
+                            <Image
                                 src={opportunity.opportunity_uploader.profile_picture}
                                 alt={`${opportunity.opportunity_uploader.first_name} ${opportunity.opportunity_uploader.last_name}`}
                                 className="w-8 h-8 rounded-full object-cover mr-2"
@@ -51,22 +55,21 @@ const OpportunityCard = ({ opportunity, onEdit, onDelete }) => {
                         )}
                     </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <Heading level={3} className="text-xl mb-2">
                     {opportunity.name}
-                </h3>
-                <p className="text-gray-600 mb-4 whitespace-pre-wrap">
+                </Heading>
+                <Text className="mb-4 whitespace-pre-wrap">
                     {opportunity.opportunity_description}
-                </p>
+                </Text>
                 {opportunity.link && (
                     <div className="mb-4">
-                        <a
+                        <Link
                             href={opportunity.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary-600 hover:text-primary-800 font-medium text-sm flex items-center"
+                            className="font-medium text-sm flex items-center"
+                            external
                         >
                             View Details <span className="ml-1">&rarr;</span>
-                        </a>
+                        </Link>
                     </div>
                 )}
             </div>

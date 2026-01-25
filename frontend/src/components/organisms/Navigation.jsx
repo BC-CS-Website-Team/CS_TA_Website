@@ -5,13 +5,15 @@
  */
 
 import { useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   FaHome, FaUsers, FaBriefcase, FaUserFriends,
   FaChalkboardTeacher, FaProjectDiagram,
-  FaClock, FaCaretDown, FaBars, FaTimes
+  FaClock, FaCaretDown, FaBars, FaTimes, FaExternalLinkAlt
 } from 'react-icons/fa'
 import { useAuth } from '../../context/AuthContext'
+import { NavItem } from '../molecules'
+import { Link, Button, Text } from '../atoms'
 
 const navItems = [
   {
@@ -49,60 +51,6 @@ const navItems = [
   { to: '/student-projects', icon: FaProjectDiagram, label: 'Student Projects' },
   { to: '/evening-lab', icon: FaClock, label: 'Evening Lab' }
 ]
-
-const NavItem = ({ item, onClick, mobile }) => {
-  const location = useLocation()
-  const isActive = location.pathname === item.to ||
-    (item.dropdown && location.pathname.startsWith(item.to))
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-
-  const toggleDropdown = (e) => {
-    if (mobile && item.dropdown) {
-      e.preventDefault()
-      setIsDropdownOpen(!isDropdownOpen)
-    }
-  }
-
-  return (
-    <div className={`relative group ${mobile ? 'w-full' : ''}`}>
-      <Link
-        to={item.to}
-        onClick={(e) => {
-          if (item.dropdown && mobile) {
-            toggleDropdown(e)
-          } else if (onClick) {
-            onClick()
-          }
-        }}
-        className={`nav-link flex items-center ${isActive ? 'nav-link-active' : ''} ${mobile ? 'w-full py-3 px-4 hover:bg-gray-50' : ''}`}
-      >
-        <item.icon className={`w-5 h-5 mr-2 ${mobile ? 'text-gray-500' : ''}`} />
-        <div className={`text-center ${mobile ? 'text-left flex-1' : ''}`}>{item.label}</div>
-        {item.dropdown && <FaCaretDown className={`ml-1 transition-transform ${isDropdownOpen && mobile ? 'rotate-180' : ''}`} />}
-      </Link>
-
-      {item.dropdown && (
-        <ul className={`
-          ${mobile
-            ? `${isDropdownOpen ? 'block' : 'hidden'} bg-gray-50 pl-8`
-            : 'dropdown-menu absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 min-w-[200px] z-50 left-0'}
-        `}>
-          {item.dropdown.map((dropdownItem) => (
-            <li key={dropdownItem.to}>
-              <Link
-                to={dropdownItem.to}
-                onClick={onClick}
-                className={`block ${mobile ? 'py-2 px-4 text-gray-600 hover:text-primary-600' : 'dropdown-item px-4 py-2 hover:bg-gray-100'}`}
-              >
-                {dropdownItem.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  )
-}
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -148,12 +96,12 @@ const Navigation = () => {
                     <span className="text-gray-700 text-sm font-medium mr-1">Welcome, {user?.email}</span>
                     <FaCaretDown className="ml-1 text-gray-500" />
                   </button>
-                  <ul className="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 min-w-[200px] z-50 right-0 left-auto">
+                  <ul className="dropdown-menu right-0 left-auto">
                     {user?.is_superuser && (
                       <li>
                         <Link
                           to="/admin"
-                          className="dropdown-item px-4 py-2 hover:bg-gray-100 font-semibold text-primary-700"
+                          className="dropdown-item font-semibold text-primary-700"
                         >
                           Admin Dashboard
                         </Link>
@@ -162,7 +110,7 @@ const Navigation = () => {
                     <li>
                       <Link
                         to="/profile-settings" // Placeholder link
-                        className="dropdown-item px-4 py-2 hover:bg-gray-100"
+                        className="dropdown-item"
                       >
                         Profile Settings
                       </Link>
@@ -170,7 +118,7 @@ const Navigation = () => {
                     <li>
                       <button
                         onClick={handleLogout}
-                        className="w-full text-left dropdown-item px-4 py-2 hover:bg-gray-100 text-red-600"
+                        className="dropdown-item text-red-600 w-full text-left"
                       >
                         Logout
                       </button>
@@ -180,7 +128,7 @@ const Navigation = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700 transition-colors"
+                  className="btn-primary"
                 >
                   Login
                 </Link>
@@ -253,7 +201,7 @@ const Navigation = () => {
               <Link
                 to="/login"
                 onClick={() => setIsOpen(false)}
-                className="block w-full text-center px-4 py-3 font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700"
+                className="btn-primary w-full text-center block"
               >
                 Login
               </Link>

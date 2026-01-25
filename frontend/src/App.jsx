@@ -4,7 +4,7 @@
  * Sets up routing and global providers.
  */
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from './components/templates/MainLayout'
 import TeamLayout from './components/templates/TeamLayout'
 import CareerLayout from './components/templates/CareerLayout'
@@ -45,6 +45,12 @@ import Register from './pages/auth/Register'
 import DocsLayout from './components/templates/DocsLayout'
 import ContributorsHome from './pages/contributors/ContributorsHome'
 import FrontendGuide from './pages/contributors/FrontendGuide'
+import FrontendOverview from './pages/contributors/frontend_guide/FrontendOverview'
+import FrontendAtoms from './pages/contributors/frontend_guide/FrontendAtoms'
+import FrontendMolecules from './pages/contributors/frontend_guide/FrontendMolecules'
+import FrontendOrganisms from './pages/contributors/frontend_guide/FrontendOrganisms'
+import FrontendTemplates from './pages/contributors/frontend_guide/FrontendTemplates'
+import FrontendExamples from './pages/contributors/frontend_guide/FrontendExamples'
 import BackendGuide from './pages/contributors/BackendGuide'
 import WorkflowGuide from './pages/contributors/WorkflowGuide'
 import { AuthProvider } from './context/AuthContext'
@@ -110,7 +116,14 @@ function App() {
               {/* Contributors Routes */}
               <Route path="/contributors" element={<DocsLayout />}>
                 <Route index element={<ContributorsHome />} />
-                <Route path="frontend" element={<FrontendGuide />} />
+                <Route path="frontend" element={<FrontendGuide />}>
+                  <Route index element={<FrontendOverview />} />
+                  <Route path="atoms" element={<FrontendAtoms />} />
+                  <Route path="molecules" element={<FrontendMolecules />} />
+                  <Route path="organisms" element={<FrontendOrganisms />} />
+                  <Route path="templates" element={<FrontendTemplates />} />
+                  <Route path="how-to" element={<FrontendExamples />} />
+                </Route>
                 <Route path="backend" element={<BackendGuide />} />
                 <Route path="workflow" element={<WorkflowGuide />} />
               </Route>

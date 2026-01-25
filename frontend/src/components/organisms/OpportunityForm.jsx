@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Input from '../atoms/Input';
-import Select from '../atoms/Select';
-import TextArea from '../atoms/TextArea';
-import Button from '../atoms/Button';
-import FileUpload from '../atoms/FileUpload';
+import { Input, Select, TextArea, Button, FileUpload } from '../atoms';
 import { uploadOpportunityImage } from '../../services/opportunities';
 
 const OpportunityForm = ({ initialData, onSubmit, onCancel }) => {
