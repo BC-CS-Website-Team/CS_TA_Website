@@ -1,5 +1,8 @@
 from typing import Annotated, List
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, File, UploadFile
+import shutil
+import uuid
+from pathlib import Path
 from sqlalchemy.ext.asyncio import AsyncSession
 from database import get_db
 from auth.models import User
@@ -24,6 +27,35 @@ async def read_opportunities(
 ):
     """Get all opportunities (Public)."""
     return await get_all_opportunities(db)
+
+@router.post("/upload-image", response_model=dict)
+async def upload_opportunity_image(
+    current_user: Annotated[User, Depends(get_current_active_user)],
+    file: UploadFile = File(...),
+):
+    """Upload an image for an opportunity."""
+    if not file.content_type.startswith("image/"):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="File must be an image",
+        )
+    
+    # Create unique filename
+    file_extension = Path(file.filename).suffix
+    unique_filename = f"{current_user.id}_{uuid.uuid4()}{file_extension}"
+    file_path = f"static/opportunity_images/{unique_filename}"
+    
+    # Save file
+    try:
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Could not save file: {e}",
+        )
+        
+    return {"url": f"/static/opportunity_images/{unique_filename}"}
 
 @router.post("/", response_model=OpportunityResponse)
 async def create_new_opportunity(
