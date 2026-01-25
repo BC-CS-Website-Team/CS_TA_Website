@@ -82,7 +82,17 @@ const ProfileSettings = () => {
                             <img className="h-24 w-24 rounded-full object-cover border-2 border-gray-200" src={previewUrl} alt="Preview" />
                         ) : (
                             user?.profile_picture ? (
-                                <img className="h-24 w-24 rounded-full object-cover border-2 border-gray-200" src={`${API_URL}${user.profile_picture}`} alt="Profile" />
+                                <img
+                                    className="h-24 w-24 rounded-full object-cover border-2 border-gray-200"
+                                    src={user.profile_picture.startsWith('http') ? user.profile_picture : `http://localhost:8000${user.profile_picture}`}
+                                    alt="Profile"
+                                    onError={(e) => {
+                                        console.error("Image load failed", e.target.src);
+                                        // Fallback to initial if image fails
+                                        e.target.style.display = 'none';
+                                        e.target.nextSibling.style.display = 'flex';
+                                    }}
+                                />
                             ) : (
                                 <div className="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-400">
                                     <svg className="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">

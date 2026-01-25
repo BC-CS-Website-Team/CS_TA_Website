@@ -18,6 +18,26 @@ const OpportunityCard = ({ opportunity, onEdit, onDelete }) => {
                 </div>
             )}
             <div className="p-6 flex-grow">
+                {/* Uploader Info */}
+                {opportunity.opportunity_uploader && (
+                    <div className="flex items-center mb-4 pb-4 border-b border-gray-100">
+                        {opportunity.opportunity_uploader.profile_picture ? (
+                            <img
+                                src={opportunity.opportunity_uploader.profile_picture}
+                                alt={`${opportunity.opportunity_uploader.first_name} ${opportunity.opportunity_uploader.last_name}`}
+                                className="w-8 h-8 rounded-full object-cover mr-2"
+                            />
+                        ) : (
+                            <div className="w-8 h-8 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center mr-2 text-xs font-bold">
+                                {opportunity.opportunity_uploader.first_name?.[0]}{opportunity.opportunity_uploader.last_name?.[0]}
+                            </div>
+                        )}
+                        <span className="text-sm font-medium text-gray-700">
+                            {opportunity.opportunity_uploader.first_name} {opportunity.opportunity_uploader.last_name}
+                        </span>
+                    </div>
+                )}
+
                 <div className="flex justify-between items-start mb-4">
                     <Badge type={opportunity.opportunity_type} />
                     <div className="text-right">
@@ -31,10 +51,10 @@ const OpportunityCard = ({ opportunity, onEdit, onDelete }) => {
                         )}
                     </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2 truncate">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
                     {opportunity.name}
                 </h3>
-                <p className="text-gray-600 mb-4 line-clamp-3">
+                <p className="text-gray-600 mb-4 whitespace-pre-wrap">
                     {opportunity.opportunity_description}
                 </p>
                 {opportunity.link && (

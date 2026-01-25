@@ -14,10 +14,12 @@ export const fetchOpportunities = async () => {
 };
 
 export const createOpportunity = async (data) => {
+    const token = localStorage.getItem('token');
     const response = await fetch(`${API_BASE_URL}/opportunities`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(data),
     });
@@ -28,10 +30,12 @@ export const createOpportunity = async (data) => {
 };
 
 export const updateOpportunity = async (id, data) => {
+    const token = localStorage.getItem('token');
     const response = await fetch(`${API_BASE_URL}/opportunities/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(data),
     });
@@ -42,8 +46,12 @@ export const updateOpportunity = async (id, data) => {
 };
 
 export const deleteOpportunity = async (id) => {
+    const token = localStorage.getItem('token');
     const response = await fetch(`${API_BASE_URL}/opportunities/${id}`, {
         method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
     });
     if (!response.ok) {
         throw new Error('Failed to delete opportunity');
@@ -55,8 +63,12 @@ export const uploadOpportunityImage = async (file) => {
     const formData = new FormData();
     formData.append('file', file);
 
+    const token = localStorage.getItem('token');
     const response = await fetch(`${API_BASE_URL}/opportunities/upload-image`, {
         method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
         body: formData,
     });
 

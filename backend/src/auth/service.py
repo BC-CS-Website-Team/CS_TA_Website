@@ -29,13 +29,20 @@ async def create_user(db: AsyncSession, user_in: UserCreate):
         hashed_password=hashed_password,
         is_active=user_in.is_active,
         is_superuser=False,  # Default to False, change manually in DB if needed
+        first_name=user_in.first_name,
+        last_name=user_in.last_name,
     )
 
     # We then save to the DB
     db.add(db_user)
     await db.commit()
-    await db.refresh(db_user)
-    return db_user
+    # Reload with roles to prevent MissingGreenlet error
+    result = await db.execute(
+        select(User)
+        .options(selectinload(User.roles))
+        .where(User.id == db_user.id)
+    )
+    return result.scalar_one()
 
 
 async def authenticate_user(db: AsyncSession, email: str, password: str):
