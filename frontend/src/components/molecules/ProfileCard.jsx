@@ -4,6 +4,9 @@
  * Replaces FacultyCard, MemberCard, and TeamMemberCard.
  */
 
+import Image from '../atoms/Image';
+import Heading from '../atoms/Heading';
+import Text from '../atoms/Text';
 import PropTypes from 'prop-types'
 
 const ProfileCard = ({ image, name, role, onClick, variant = 'default', className = '' }) => {
@@ -23,20 +26,20 @@ const ProfileCard = ({ image, name, role, onClick, variant = 'default', classNam
         overflow-hidden relative
         ${isRound ? 'w-[150px] h-[150px] rounded-full border border-gray-200 mb-4' : 'aspect-square w-full'}
       `}>
-                <img
+                <Image
                     src={image}
                     alt={name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
             </div>
             <div className={`w-full ${isRound ? 'text-center p-0' : 'p-4 text-center'}`}>
-                <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary-600">
+                <Heading level={3} className="text-lg text-gray-900 group-hover:text-primary-600">
                     {name}
-                </h3>
+                </Heading>
                 {role && (
-                    <p className="text-sm text-gray-600 mt-1">
+                    <Text className="text-sm mt-1">
                         {role}
-                    </p>
+                    </Text>
                 )}
             </div>
         </div>

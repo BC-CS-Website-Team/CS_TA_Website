@@ -1,5 +1,5 @@
 import React from 'react';
-import OpportunityForm from '../molecules/OpportunityForm';
+import { OpportunityForm } from '../organisms';
 import { FaTimes } from 'react-icons/fa';
 
 const ManageOpportunityModal = ({ isOpen, onClose, onSubmit, initialData }) => {
