@@ -36,4 +36,5 @@ class User(Base):
     last_name = Column(String, nullable=True)
     profile_picture = Column(String, nullable=True)
     roles = relationship("Role", secondary=user_roles, back_populates="users")
+    preferences = relationship("preferences.models.UserPreference", uselist=False, back_populates="user")
     # major = Column(String, nullable=True)
