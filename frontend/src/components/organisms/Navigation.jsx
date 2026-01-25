@@ -39,7 +39,9 @@ const navItems = [
       { to: '/career-development', label: 'Overview' },
       { to: '/career-development/resources', label: 'Resources' },
       { to: '/career-development/conferences', label: 'Conferences' },
-      { to: '/career-development/internships', label: 'Internships' }
+      { to: '/career-development/internships', label: 'Internships' },
+      { to: '/career-development/opportunities', label: 'Opportunities' },
+
     ]
   },
   { to: '/clubs', icon: FaUserFriends, label: 'CS Clubs' },
