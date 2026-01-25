@@ -7,6 +7,7 @@ import os
 
 # Ensure static directory exists
 os.makedirs("static/profile_pictures", exist_ok=True)
+os.makedirs("static/opportunity_images", exist_ok=True)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

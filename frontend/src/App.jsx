@@ -21,6 +21,7 @@ import CareerDevelopment from './pages/career/CareerDevelopment'
 import CareerResources from './pages/career/CareerResources'
 import Conferences from './pages/career/Conferences'
 import Internships from './pages/career/Internships'
+import Opportunities from './pages/career/Opportunities'
 import Clubs from './pages/Clubs'
 import EveningLab from './pages/EveningLab'
 import ClassesOverview from './pages/classes/ClassesOverview'
@@ -73,6 +74,7 @@ function App() {
                 <Route path="resources" element={<CareerResources />} />
                 <Route path="conferences" element={<Conferences />} />
                 <Route path="internships" element={<Internships />} />
+                <Route path="opportunities" element={<Opportunities />} />
               </Route>
 
               {/* Classes Routes */}

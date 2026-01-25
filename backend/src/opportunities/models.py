@@ -14,6 +14,7 @@ class Opportunity(Base):
     in_house = Column(Boolean, default=False, nullable=True)
     opportunity_image = Column(String, nullable=True)
     opportunity_description = Column(String, nullable=True)
+    link = Column(String, nullable=True)
     source = Column(String, default="web", nullable=True)
 
     # Foreign Key to User

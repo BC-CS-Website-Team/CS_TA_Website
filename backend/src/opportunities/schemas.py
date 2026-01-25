@@ -9,6 +9,7 @@ class OpportunityBase(BaseModel):
     opportunity_type: Optional[OpportunityType] = None
     in_house: Optional[bool] = False
     opportunity_image: Optional[str] = None
+    link: Optional[str] = None
     opportunity_description: Optional[str] = None
 
 class OpportunityCreate(OpportunityBase):
