@@ -14,9 +14,7 @@ sys.path.insert(0, join(dirname(dirname(abspath(__file__))), "src"))
 
 from database import Base
 from config import settings
-from src.auth import models as auth_models
-from src.preferences import models as preference_models
-from src.opportunities import models as opportunity_models
+from src import models
 
 # I want to ensure alembic knows about my models and DB URL
 
