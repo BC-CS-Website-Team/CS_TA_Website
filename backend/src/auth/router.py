@@ -7,8 +7,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from config import settings
-from auth.schemas import Token, UserCreate, UserResponse
-from auth.service import authenticate_user, create_user
+from auth.schemas import Token, UserCreate, UserResponse, UserUpdate
+from auth.service import authenticate_user, create_user, update_user
 from auth.dependencies import get_current_active_user, get_current_superuser
 from auth.models import User
 from auth.exceptions import UserAlreadyExists
@@ -67,6 +67,16 @@ async def read_users_me(
     current_user: Annotated[User, Depends(get_current_active_user)],
 ):
     return current_user
+
+@router.patch("/me", response_model=UserResponse)
+async def update_users_me(
+    user_update: UserUpdate,
+    current_user: Annotated[User, Depends(get_current_active_user)],
+    db: Annotated[AsyncSession, Depends(get_db)],
+):
+    """Update current user's profile."""
+    updated_user = await update_user(db, current_user.id, user_update)
+    return updated_user
 
 # --- Role Management Endpoints (Admin Only) ---
 from auth.schemas import RoleCreate, RoleResponse, UserRoleAssign
