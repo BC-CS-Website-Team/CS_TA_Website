@@ -175,3 +175,22 @@ export const uploadProfilePicture = async (file) => {
 
     return await response.json();
 };
+
+export const updateUser = async (updateData) => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/auth/me`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(updateData)
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Failed to update profile');
+    }
+
+    return await response.json();
+};

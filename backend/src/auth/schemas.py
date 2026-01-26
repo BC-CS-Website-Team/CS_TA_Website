@@ -11,6 +11,12 @@ class UserBase(BaseModel):
     last_name: str | None = None
 
 
+class UserUpdate(BaseModel):
+    first_name: str | None = None
+    last_name: str | None = None
+    email: EmailStr | None = None
+
+
 # Properties to receive via API on creation
 class UserCreate(UserBase):
     password: str

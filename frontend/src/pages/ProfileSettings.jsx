@@ -1,16 +1,52 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { uploadProfilePicture } from '../services/auth'
+import { uploadProfilePicture, updateUser } from '../services/auth'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 const ProfileSettings = () => {
     const { user, isAuthenticated, refreshUser } = useAuth()
     const [uploading, setUploading] = useState(false)
+    const [updatingProfile, setUpdatingProfile] = useState(false)
     const [message, setMessage] = useState({ type: '', text: '' })
     const [selectedFile, setSelectedFile] = useState(null)
     const [previewUrl, setPreviewUrl] = useState(null)
+
+    // Form state
+    const [formData, setFormData] = useState({
+        first_name: user?.first_name || '',
+        last_name: user?.last_name || ''
+    })
+
+    useEffect(() => {
+        if (user) {
+            setFormData({
+                first_name: user.first_name || '',
+                last_name: user.last_name || ''
+            })
+        }
+    }, [user])
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target
+        setFormData(prev => ({ ...prev, [name]: value }))
+    }
+
+    const handleProfileUpdate = async () => {
+        setUpdatingProfile(true)
+        setMessage({ type: '', text: '' })
+        try {
+            await updateUser(formData)
+            await refreshUser()
+            setMessage({ type: 'success', text: 'Profile updated successfully!' })
+        } catch (err) {
+            setMessage({ type: 'error', text: err.message || 'Failed to update profile.' })
+        } finally {
+            setUpdatingProfile(false)
+        }
+    }
+
 
     const handleFileChange = (e) => {
         const file = e.target.files[0]
@@ -138,6 +174,44 @@ const ProfileSettings = () => {
                         <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">Email address</dt>
                             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{user?.email}</dd>
+                        </div>
+                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm font-medium text-gray-500 self-center">Full Name</dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 flex gap-4">
+                                <div className="flex-1">
+                                    <label htmlFor="first_name" className="sr-only">First Name</label>
+                                    <input
+                                        type="text"
+                                        name="first_name"
+                                        id="first_name"
+                                        placeholder="First Name"
+                                        value={formData.first_name}
+                                        onChange={handleInputChange}
+                                        className="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border"
+                                    />
+                                </div>
+                                <div className="flex-1">
+                                    <label htmlFor="last_name" className="sr-only">Last Name</label>
+                                    <input
+                                        type="text"
+                                        name="last_name"
+                                        id="last_name"
+                                        placeholder="Last Name"
+                                        value={formData.last_name}
+                                        onChange={handleInputChange}
+                                        className="shadow-sm focus:ring-primary-500 focus:border-primary-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border"
+                                    />
+                                </div>
+                            </dd>
+                        </div>
+                        <div className="bg-gray-50 px-4 py-5 sm:px-6 flex justify-end">
+                            <button
+                                onClick={handleProfileUpdate}
+                                disabled={updatingProfile}
+                                className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${updatingProfile ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            >
+                                {updatingProfile ? 'Saving...' : 'Save Changes'}
+                            </button>
                         </div>
                         <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">Account Type</dt>

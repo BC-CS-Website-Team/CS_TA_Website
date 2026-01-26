@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 from auth.models import User, Role
-from auth.schemas import UserCreate, RoleCreate
+from auth.schemas import UserCreate, RoleCreate, UserUpdate
 from auth.utils import get_password_hash, verify_password
 from auth.exceptions import UserAlreadyExists
 
@@ -107,6 +107,27 @@ async def update_user_profile_picture(db: AsyncSession, user_id: int, image_path
     
     if user:
         user.profile_picture = image_path
-        await db.commit()
-        await db.refresh(user)
     return user
+
+
+async def update_user(db: AsyncSession, user_id: int, user_update: UserUpdate):
+    """Updates user profile information."""
+    # Fetch user
+    result = await db.execute(select(User).where(User.id == user_id).options(selectinload(User.roles)))
+    user = result.scalars().first()
+    
+    if not user:
+        return None
+        
+    # Update fields if provided
+    if user_update.first_name is not None:
+        user.first_name = user_update.first_name
+    if user_update.last_name is not None:
+        user.last_name = user_update.last_name
+    # if user_update.email is not None: # careful with email updates
+    #    user.email = user_update.email
+        
+    await db.commit()
+    await db.refresh(user)
+    return user
+
