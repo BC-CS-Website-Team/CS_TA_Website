@@ -15,9 +15,6 @@ const Footer = () => {
             <Link to="/about" className="hover:text-gray-300 transition-colors">
               About This Project
             </Link>
-            <Link to="/TAhandbook" className="hover:text-gray-300 transition-colors">
-              TA Handbook
-            </Link>
             <Link to="/contributors" className="hover:text-gray-300 transition-colors">
               Contributors Guide
             </Link>
