@@ -5,7 +5,7 @@
  */
 
 import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, Link as RouterLink } from 'react-router-dom'
 import {
   FaHome, FaUsers, FaBriefcase, FaUserFriends,
   FaChalkboardTeacher, FaProjectDiagram,
@@ -126,12 +126,12 @@ const Navigation = () => {
                   </ul>
                 </div>
               ) : (
-                <Link
+                <RouterLink
                   to="/login"
                   className="btn-primary"
                 >
                   Login
-                </Link>
+                </RouterLink>
               )}
             </div>
           </div>
@@ -198,13 +198,13 @@ const Navigation = () => {
                 </button>
               </div>
             ) : (
-              <Link
+              <RouterLink
                 to="/login"
                 onClick={() => setIsOpen(false)}
                 className="btn-primary w-full text-center block"
               >
                 Login
-              </Link>
+              </RouterLink>
             )}
           </div>
         </div>
