@@ -26,6 +26,8 @@ async def lifespan(app: FastAPI):
 
 from auth.router import router as auth_router
 
+from config import settings
+
 app = FastAPI(lifespan=lifespan)
 
 # Mount static files
@@ -33,12 +35,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 from fastapi.middleware.cors import CORSMiddleware
 
-origins = [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:5174",
-]
+origins = settings.ALLOWED_ORIGINS
 
 app.add_middleware(
     CORSMiddleware,
