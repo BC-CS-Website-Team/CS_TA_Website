@@ -15,6 +15,11 @@ const links = [
         exact: true
     },
     {
+        to: '/contributors/workflow',
+        label: 'Workflow & Git',
+        icon: FaTools
+    },
+    {
         to: '/contributors/frontend',
         label: 'Frontend Architecture',
         icon: FaCode
@@ -23,11 +28,6 @@ const links = [
         to: '/contributors/backend',
         label: 'Backend Architecture',
         icon: FaServer
-    },
-    {
-        to: '/contributors/workflow',
-        label: 'Workflow & Git',
-        icon: FaTools
     }
 ]
 

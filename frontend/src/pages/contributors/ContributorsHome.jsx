@@ -9,11 +9,24 @@ const ContributorsHome = () => {
                     Become a Contributor
                 </h1>
                 <p className="text-lg text-gray-600">
-                    Welcome to the CS TA Website project! This guide is designed to take you from "I don't know React" to "I just merged my first PR."
+                    Welcome to the CS TA Website project! This guide is designed for students of all skill levels who are interested in contributing to the project. It is broken down into three main sections: Workflow, Frontend, and Backend. These pages are best viewed on a desktop or laptop.
                 </p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-12">
+                <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
+                    <div className="w-12 h-12 bg-gray-200 text-gray-700 rounded-lg flex items-center justify-center mb-4 text-2xl">
+                        <FaGithub />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">Workflow</h3>
+                    <p className="text-gray-600 mb-4 text-sm">
+                        Learn how to get started, the git flow, how to run Docker, and how to submit your first Pull Request.
+                    </p>
+                    <Link to="/contributors/workflow" className="text-gray-600 font-medium hover:text-gray-900 text-sm">
+                        View Workflow &rarr;
+                    </Link>
+                </div>
+
                 <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
                     <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4 text-2xl">
                         <FaReact />
@@ -33,23 +46,10 @@ const ContributorsHome = () => {
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2">Backend</h3>
                     <p className="text-gray-600 mb-4 text-sm">
-                        Understand how FastAPI and SQLAlchemy power our database and API endpoints.
+                        Learn our FastAPI design patterns and how to use SQLAlchemy to interact with our database.
                     </p>
                     <Link to="/contributors/backend" className="text-green-600 font-medium hover:text-green-800 text-sm">
                         Explore Backend &rarr;
-                    </Link>
-                </div>
-
-                <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
-                    <div className="w-12 h-12 bg-gray-200 text-gray-700 rounded-lg flex items-center justify-center mb-4 text-2xl">
-                        <FaGithub />
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">Workflow</h3>
-                    <p className="text-gray-600 mb-4 text-sm">
-                        Learn the git flow, how to run Docker, and how to submit your first Pull Request.
-                    </p>
-                    <Link to="/contributors/workflow" className="text-gray-600 font-medium hover:text-gray-900 text-sm">
-                        View Workflow &rarr;
                     </Link>
                 </div>
             </div>
@@ -71,7 +71,7 @@ const ContributorsHome = () => {
                         </div>
                         <div className="ml-3">
                             <p className="text-sm text-yellow-700">
-                                <strong>New here?</strong> Don't worry if you break something locally. That's what `git reset --hard` is for!
+                                <strong>New here?</strong> Don't worry if you break something locally. All PRs are welcome and we will help you fix any issues that arise.
                             </p>
                         </div>
                     </div>
