@@ -37,7 +37,6 @@ import CreativeSpace from './pages/committees/CreativeSpace'
 import StudentProjects from './pages/projects/StudentProjects'
 import Alumni from './pages/alumni/Alumni'
 import About from './pages/About'
-import TAhandbook from './pages/TAhandbook'
 import Admin from './pages/Admin'
 import ProfileSettings from './pages/ProfileSettings'
 import Login from './pages/auth/Login'
@@ -111,7 +110,6 @@ function App() {
               <Route path="/clubs" element={<Clubs />} />
               <Route path="/evening-lab" element={<EveningLab />} />
               <Route path="/about" element={<About />} />
-              <Route path="/TAhandbook" element={<TAhandbook />} />
               <Route path="/student-projects" element={<StudentProjects />} />
               <Route path="/alumni" element={<Alumni />} />
 
