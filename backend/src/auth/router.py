@@ -150,6 +150,8 @@ async def upload_profile_picture(
     file_path = f"static/profile_pictures/{unique_filename}"
     
     # Save file
+    # NOTE: 
+    # this should be changed to upload to S3 or compatible object storage. I have to decide for sure if db will be on school server
     try:
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)

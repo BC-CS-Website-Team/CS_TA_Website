@@ -46,6 +46,8 @@ async def upload_opportunity_image(
     file_path = f"static/opportunity_images/{unique_filename}"
     
     # Save file
+    # NOTE: 
+    # this should be changed to upload to S3 or compatible object storage.
     try:
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
