@@ -52,6 +52,8 @@ import FrontendOrganisms from './pages/contributors/frontend_guide/FrontendOrgan
 import FrontendTemplates from './pages/contributors/frontend_guide/FrontendTemplates'
 import FrontendExamples from './pages/contributors/frontend_guide/FrontendExamples'
 import BackendGuide from './pages/contributors/BackendGuide'
+import BackendOverview from './pages/contributors/backend_guide/BackendOverview'
+import BackendDatabase from './pages/contributors/backend_guide/BackendDatabase'
 import WorkflowGuide from './pages/contributors/WorkflowGuide'
 import { AuthProvider } from './context/AuthContext'
 import "./index.css";
@@ -124,7 +126,10 @@ function App() {
                   <Route path="templates" element={<FrontendTemplates />} />
                   <Route path="how-to" element={<FrontendExamples />} />
                 </Route>
-                <Route path="backend" element={<BackendGuide />} />
+                <Route path="backend" element={<BackendGuide />}>
+                  <Route index element={<BackendOverview />} />
+                  <Route path="database" element={<BackendDatabase />} />
+                </Route>
                 <Route path="workflow" element={<WorkflowGuide />} />
               </Route>
             </Route>

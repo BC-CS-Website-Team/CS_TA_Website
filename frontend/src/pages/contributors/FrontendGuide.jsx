@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { NavTab } from '../../components/atoms';
 
 const FrontendGuide = () => {
     return (
@@ -18,17 +19,13 @@ const FrontendGuide = () => {
                     { path: 'templates', label: 'Templates' },
                     { path: 'how-to', label: 'How-To & Examples' }
                 ].map(({ path, label, end }) => (
-                    <NavLink
+                    <NavTab
                         key={path}
                         to={path}
                         end={end}
-                        className={({ isActive }) => `px-4 py-2 sm:px-6 sm:py-3 rounded-full font-medium capitalize transition-colors whitespace-nowrap ${isActive
-                            ? 'bg-primary-600 text-white shadow-md'
-                            : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
-                            }`}
                     >
                         {label}
-                    </NavLink>
+                    </NavTab>
                 ))}
             </div>
 
