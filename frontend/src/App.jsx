@@ -54,6 +54,9 @@ import BackendGuide from './pages/contributors/BackendGuide'
 import BackendOverview from './pages/contributors/backend_guide/BackendOverview'
 import BackendDatabase from './pages/contributors/backend_guide/BackendDatabase'
 import WorkflowGuide from './pages/contributors/WorkflowGuide'
+import WorkflowOverview from './pages/contributors/workflow_guide/WorkflowOverview'
+import WorkflowGit from './pages/contributors/workflow_guide/WorkflowGit'
+import WorkflowFAQ from './pages/contributors/workflow_guide/WorkflowFAQ'
 import { AuthProvider } from './context/AuthContext'
 import "./index.css";
 
@@ -128,7 +131,11 @@ function App() {
                   <Route index element={<BackendOverview />} />
                   <Route path="database" element={<BackendDatabase />} />
                 </Route>
-                <Route path="workflow" element={<WorkflowGuide />} />
+                <Route path="workflow" element={<WorkflowGuide />}>
+                  <Route index element={<WorkflowOverview />} />
+                  <Route path="git" element={<WorkflowGit />} />
+                  <Route path="faq" element={<WorkflowFAQ />} />
+                </Route>
               </Route>
             </Route>
           </Routes>
