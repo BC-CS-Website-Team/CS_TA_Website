@@ -5,7 +5,7 @@
 
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { FaBriefcase, FaBook, FaUsers, FaLaptopCode, FaBars, FaTimes } from 'react-icons/fa'
+import { FaBriefcase, FaBook, FaUsers, FaLaptopCode, FaBars, FaTimes, FaLightbulb } from 'react-icons/fa'
 
 const links = [
   {
@@ -28,6 +28,11 @@ const links = [
     to: '/career-development/internships',
     label: 'Internships',
     icon: FaLaptopCode
+  },
+  {
+    to: '/career-development/opportunities',
+    label: 'Opportunities',
+    icon: FaLightbulb
   }
 ]
 

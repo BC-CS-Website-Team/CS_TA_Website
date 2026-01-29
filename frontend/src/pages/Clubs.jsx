@@ -4,13 +4,12 @@
  */
 
 import { useState } from 'react'
-import { Image } from '@chakra-ui/react'
 import { FaChevronDown, FaChevronUp, FaExternalLinkAlt } from 'react-icons/fa'
 
 const ClubCard = ({ image, title, description, link }) => (
   <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
     <div className="relative h-48">
-      <Image
+      <img
         src={image}
         alt={title}
         className="w-full h-full object-cover"
@@ -159,8 +158,8 @@ const Clubs = () => {
       <section>
         <h1 className="text-3xl font-bold text-gray-900 mb-4">Computer Science Clubs</h1>
         <p className="text-lg text-gray-600 mb-8">
-          At Berea College, our Computer Science clubs provide opportunities for students to explore their interests, 
-          develop technical skills, and build community. Whether you're interested in coding, cybersecurity, 
+          At Berea College, our Computer Science clubs provide opportunities for students to explore their interests,
+          develop technical skills, and build community. Whether you're interested in coding, cybersecurity,
           or tech ethics, there's a place for you to grow and learn.
         </p>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">

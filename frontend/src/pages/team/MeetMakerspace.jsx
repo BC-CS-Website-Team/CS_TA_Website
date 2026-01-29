@@ -4,8 +4,8 @@
  */
 
 import { useState, useEffect } from 'react'
-import ProfileCard from '../../components/molecules/ProfileCard'
-import TeamMemberModal from '../../components/organisms/TeamMemberModal'
+import { ProfileCard } from '../../components/molecules'
+import { TeamMemberModal } from '../../components/organisms'
 import { loadMakerspaceData } from '../../utils/makerspaceCsvLoader'
 
 const MeetMakerspace = () => {

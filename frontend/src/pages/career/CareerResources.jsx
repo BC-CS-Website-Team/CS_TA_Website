@@ -3,7 +3,7 @@
  * Career resources page component
  */
 
-import { ExternalLinkIcon } from '@chakra-ui/icons'
+import { FaExternalLinkAlt } from 'react-icons/fa'
 
 const ResourceSection = ({ title, items }) => (
   <section className="mb-8">
@@ -20,7 +20,7 @@ const ResourceSection = ({ title, items }) => (
                 className="text-primary-600 hover:text-primary-800 inline-flex items-center"
               >
                 {item.text}
-                <ExternalLinkIcon className="ml-1 h-4 w-4" />
+                <FaExternalLinkAlt className="ml-1 h-4 w-4" />
               </a>
               {item.description && (
                 <span className="ml-2">– {item.description}</span>

@@ -1,0 +1,6 @@
+# files to ignore in docker build
+.venv
+__pycache__
+*.pyc
+.git
+.env

@@ -4,6 +4,8 @@
  */
 
 import { ExternalLinkIcon } from '@chakra-ui/icons'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const ResourceCard = ({ title, description, link }) => (
   <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
@@ -21,6 +23,22 @@ const ResourceCard = ({ title, description, link }) => (
 )
 
 const EveningLab = () => {
+  const { isAuthenticated } = useAuth()
+
+  if (!isAuthenticated) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Evening Lab</h1>
+        <p className="text-xl text-gray-600 mb-8">
+          Please log in with an @berea.edu email to view this page :)
+        </p>
+        <Link to="/login" className="btn-primary inline-block">
+          Login
+        </Link>
+      </div>
+    )
+  }
+
   const resources = [
     {
       title: 'Python Tutor',
@@ -63,7 +81,7 @@ const EveningLab = () => {
             <ResourceCard key={index} {...resource} />
           ))}
         </div>
-      </section> */} 
+      </section> */}
 
       {/* Check into Lab Button Section
       <section className="mb-16 text-center">
@@ -88,11 +106,11 @@ const EveningLab = () => {
           </h2>
           <div className="prose max-w-none text-gray-600">
             <p className="mb-4">
-              Evening lab sessions are held in the computer lab in the CMIT Room 316. 
+              Evening lab sessions are held in the computer lab in the CMIT Room 316.
               TAs are available to help students with their assignments and answer questions.
             </p>
             <p>
-              This calendar shows all evening lab sessions and TA availability. 
+              This calendar shows all evening lab sessions and TA availability.
               TAs can edit this calendar to update their availability and schedule changes.
             </p>
           </div>

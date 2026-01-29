@@ -4,7 +4,8 @@
  */
 
 import { useState } from 'react'
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
+import { FaChevronUp, FaChevronDown } from 'react-icons/fa'
+import Text from '../atoms/Text'
 
 const DropdownSection = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,7 +16,7 @@ const DropdownSection = ({ title, children }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 flex items-center justify-between font-medium text-gray-900"
       >
-        <span>{title}</span>
+        <Text as="span" className="font-medium">{title}</Text>
         {isOpen ? (
           <FaChevronUp className="text-gray-500" />
         ) : (
