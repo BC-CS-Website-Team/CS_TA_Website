@@ -5,12 +5,15 @@
  */
 
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation, useNavigate, Link as RouterLink } from 'react-router-dom'
 import {
   FaHome, FaUsers, FaBriefcase, FaUserFriends,
   FaChalkboardTeacher, FaProjectDiagram,
-  FaClock, FaCaretDown, FaBars, FaTimes
+  FaClock, FaCaretDown, FaBars, FaTimes, FaExternalLinkAlt
 } from 'react-icons/fa'
+import { useAuth } from '../../context/AuthContext'
+import { NavItem } from '../molecules'
+import { Link, Button, Text } from '../atoms'
 
 const navItems = [
   {
@@ -38,7 +41,9 @@ const navItems = [
       { to: '/career-development', label: 'Overview' },
       { to: '/career-development/resources', label: 'Resources' },
       { to: '/career-development/conferences', label: 'Conferences' },
-      { to: '/career-development/internships', label: 'Internships' }
+      { to: '/career-development/internships', label: 'Internships' },
+      { to: '/career-development/opportunities', label: 'Opportunities' },
+
     ]
   },
   { to: '/clubs', icon: FaUserFriends, label: 'CS Clubs' },
@@ -47,64 +52,18 @@ const navItems = [
   { to: '/evening-lab', icon: FaClock, label: 'Evening Lab' }
 ]
 
-const NavItem = ({ item, onClick, mobile }) => {
-  const location = useLocation()
-  const isActive = location.pathname === item.to ||
-    (item.dropdown && location.pathname.startsWith(item.to))
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-
-  const toggleDropdown = (e) => {
-    if (mobile && item.dropdown) {
-      e.preventDefault()
-      setIsDropdownOpen(!isDropdownOpen)
-    }
-  }
-
-  return (
-    <div className={`relative group ${mobile ? 'w-full' : ''}`}>
-      <Link
-        to={item.to}
-        onClick={(e) => {
-          if (item.dropdown && mobile) {
-            toggleDropdown(e)
-          } else if (onClick) {
-            onClick()
-          }
-        }}
-        className={`nav-link flex items-center ${isActive ? 'nav-link-active' : ''} ${mobile ? 'w-full py-3 px-4 hover:bg-gray-50' : ''}`}
-      >
-        <item.icon className={`w-5 h-5 mr-2 ${mobile ? 'text-gray-500' : ''}`} />
-        <div className={`text-center ${mobile ? 'text-left flex-1' : ''}`}>{item.label}</div>
-        {item.dropdown && <FaCaretDown className={`ml-1 transition-transform ${isDropdownOpen && mobile ? 'rotate-180' : ''}`} />}
-      </Link>
-
-      {item.dropdown && (
-        <ul className={`
-          ${mobile
-            ? `${isDropdownOpen ? 'block' : 'hidden'} bg-gray-50 pl-8`
-            : 'dropdown-menu absolute hidden group-hover:block bg-white shadow-lg rounded-md py-2 min-w-[200px] z-50 left-0'}
-        `}>
-          {item.dropdown.map((dropdownItem) => (
-            <li key={dropdownItem.to}>
-              <Link
-                to={dropdownItem.to}
-                onClick={onClick}
-                className={`block ${mobile ? 'py-2 px-4 text-gray-600 hover:text-primary-600' : 'dropdown-item px-4 py-2 hover:bg-gray-100'}`}
-              >
-                {dropdownItem.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  )
-}
-
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen)
+
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false);
+    navigate('/');
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
@@ -122,14 +81,63 @@ const Navigation = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden xl:flex items-center space-x-4">
             {navItems.map((item) => (
               <NavItem key={item.to} item={item} />
             ))}
+
+            <div className="border-l pl-4 ml-4 flex items-center space-x-3">
+              {isAuthenticated ? (
+                <div className="relative group">
+                  <button
+                    className="nav-link flex items-center focus:outline-none"
+                    onClick={() => { }} // Optional: handle click if needed, but hover handles dropdown
+                  >
+                    <span className="text-gray-700 text-sm font-medium mr-1">Welcome, {user?.email}</span>
+                    <FaCaretDown className="ml-1 text-gray-500" />
+                  </button>
+                  <ul className="dropdown-menu right-0 left-auto">
+                    {user?.is_superuser && (
+                      <li>
+                        <Link
+                          to="/admin"
+                          className="dropdown-item font-semibold text-primary-700"
+                        >
+                          Admin Dashboard
+                        </Link>
+                      </li>
+                    )}
+                    <li>
+                      <Link
+                        to="/profile-settings" // Placeholder link
+                        className="dropdown-item"
+                      >
+                        Profile Settings
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={handleLogout}
+                        className="dropdown-item text-red-600 w-full text-left"
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <RouterLink
+                  to="/login"
+                  className="btn-primary"
+                >
+                  Login
+                </RouterLink>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
+          <div className="xl:hidden flex items-center">
             <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 focus:outline-none"
@@ -147,7 +155,7 @@ const Navigation = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`lg:hidden ${isOpen ? 'block' : 'hidden'} bg-white border-t border-gray-200 shadow-lg max-h-[80vh] overflow-y-auto`}>
+      <div className={`xl:hidden ${isOpen ? 'block' : 'hidden'} bg-white border-t border-gray-200 shadow-lg max-h-[80vh] overflow-y-auto`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
           {navItems.map((item) => (
             <NavItem
@@ -159,6 +167,46 @@ const Navigation = () => {
               }}
             />
           ))}
+
+          <div className="border-t pt-4 mt-4 px-2">
+            {isAuthenticated ? (
+              <div className="space-y-3">
+                <div className="px-4 text-gray-700 text-sm font-medium border-b pb-2 mb-2">
+                  Signed in as: <span className="block text-gray-900 truncate">{user?.email}</span>
+                </div>
+                {user?.is_superuser && (
+                  <Link
+                    to="/admin"
+                    onClick={() => setIsOpen(false)}
+                    className="block w-full text-left px-4 py-2 text-base font-bold text-primary-700 hover:bg-gray-50 rounded-md"
+                  >
+                    Admin Dashboard
+                  </Link>
+                )}
+                <Link
+                  to="/profile-settings"
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-left px-4 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 rounded-md"
+                >
+                  Profile Settings
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2 text-base font-medium text-red-600 hover:bg-red-50 rounded-md"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <RouterLink
+                to="/login"
+                onClick={() => setIsOpen(false)}
+                className="btn-primary w-full text-center block"
+              >
+                Login
+              </RouterLink>
+            )}
+          </div>
         </div>
       </div>
     </nav>

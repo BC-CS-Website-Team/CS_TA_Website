@@ -1,7 +1,5 @@
-import { Box } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
-import Navigation from '../organisms/Navigation'
-import Footer from '../organisms/Footer'
+import { Navigation, Footer } from '../organisms'
 
 const MainLayout = () => {
   return (

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import ProfileCard from '../../components/molecules/ProfileCard';
-import TeamMemberModal from '../../components/organisms/TeamMemberModal';
+import { ProfileCard } from '../../components/molecules'
+import { TeamMemberModal } from '../../components/organisms'
 import { loadTeamData2024_2025 } from '../../utils/csvLoader2024_2025';
 
 const PreviousYear2024_2025 = () => {
