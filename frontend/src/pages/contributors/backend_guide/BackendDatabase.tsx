@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading, Text, Card, CodeBlock } from '../../../components/atoms';
+import { Heading, Text, CodeBlock } from '../../../components/atoms'; // removed card mar 7
 
 const MODEL_CODE = `
 # backend/src/opportunities/models.py
