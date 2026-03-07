@@ -10,7 +10,7 @@ const ContributorsHome: React.FC = () => {
                     Become a Contributor
                 </h1>
                 <p className="text-lg text-gray-600">
-                    Welcome to the CS TA Website project! This guide is designed for students of all skill levels who are interested in contributing to the project. It is broken down into three main sections: Workflow, Frontend, and Backend. These pages are best viewed on a desktop or laptop.
+                    Welcome to the CS TA Website project! This guide is designed for students of all skill levels who are interested in contributing to the project. It is broken down into three main sections: Workflow, Frontend, and Backend. These pages are best viewed on a desktop or laptop. Please start with Workflow, then go to your desired section. There is a video guide attached below to learn how the entire application works!
                 </p>
             </div>
 
@@ -34,7 +34,7 @@ const ContributorsHome: React.FC = () => {
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2">Frontend</h3>
                     <p className="text-gray-600 mb-4 text-sm">
-                        Learn how we use React, Vite, and Atomic Design to build reusable components.
+                        Learn how we use React, Typescript, Vite, and Atomic Design to build reusable components.
                     </p>
                     <Link to="/contributors/frontend" className="text-blue-600 font-medium hover:text-blue-800 text-sm">
                         Explore Frontend &rarr;
