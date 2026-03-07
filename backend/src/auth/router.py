@@ -79,8 +79,8 @@ async def update_users_me(
     return updated_user
 
 # --- Role Management Endpoints (Admin Only) ---
-from auth.schemas import RoleCreate, RoleResponse, UserRoleAssign
-from auth.service import create_role, get_all_roles, get_all_users_with_roles, assign_roles_to_user
+from auth.schemas import RoleCreate, RoleResponse, UserRoleAssign, UserAdminUpdate
+from auth.service import create_role, get_all_roles, get_all_users_with_roles, assign_roles_to_user, set_user_admin_status
 
 @router.post("/roles", response_model=RoleResponse)
 async def create_new_role(
@@ -118,6 +118,22 @@ async def assign_user_roles(
     user = await assign_roles_to_user(db, user_id, role_data.role_ids)
     if not user:
          raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found",
+        )
+    return user
+
+@router.patch("/users/{user_id}/admin", response_model=UserResponse)
+async def update_user_admin_status(
+    user_id: int,
+    admin_data: UserAdminUpdate,
+    current_user: Annotated[User, Depends(get_current_superuser)],
+    db: Annotated[AsyncSession, Depends(get_db)],
+):
+    """Promote or demote a user to/from admin (Admin only)."""
+    user = await set_user_admin_status(db, user_id, admin_data.is_superuser)
+    if not user:
+        raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="User not found",
         )

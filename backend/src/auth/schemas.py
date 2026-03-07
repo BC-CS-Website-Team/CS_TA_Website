@@ -54,6 +54,9 @@ class RoleResponse(RoleBase):
 class UserRoleAssign(BaseModel):
     role_ids: list[int]
 
+class UserAdminUpdate(BaseModel):
+    is_superuser: bool
+
 
 # Properties to return per User
 class UserResponse(UserBase):

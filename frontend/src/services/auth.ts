@@ -155,6 +155,20 @@ export const assignUserRoles = async (userId, roleIds) => {
     return await response.json();
 };
 
+export const setUserAdminStatus = async (userId: number, isAdmin: boolean) => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/auth/users/${userId}/admin`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ is_superuser: isAdmin })
+    });
+    if (!response.ok) throw new Error('Failed to update admin status');
+    return await response.json();
+};
+
 export const uploadProfilePicture = async (file) => {
     const token = localStorage.getItem('token');
     const formData = new FormData();
