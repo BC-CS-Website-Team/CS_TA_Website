@@ -1,0 +1,15 @@
+FROM python:3.13-slim
+
+# Install uv.
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+# Copy the project into the image.
+ADD . /app
+
+# Sync the project into a new environment, using the frozen lockfile.
+WORKDIR /app
+RUN uv sync --frozen
+
+# Run the application in production mode using fastapi run (or uvicorn under the hood)
+# This removes the auto-reloading and optimizes for multiple workers.
+CMD ["uv", "run", "fastapi", "run", "src/main.py", "--host", "0.0.0.0", "--port", "8000"]

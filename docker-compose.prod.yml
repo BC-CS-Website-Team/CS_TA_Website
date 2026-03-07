@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:alpine
+    container_name: csta-postgres-prod
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-myuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: ${POSTGRES_DB:-fastapi_database}
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+    # Note: We do NOT expose port 5432 to the host in production for security.
+    # The backend container can still talk to it via the internal docker network.
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    container_name: csta-backend-prod
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-myuser}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-fastapi_database}
+    # Note: We do NOT expose port 8000 to the host. Nginx handles proxying to it.
+    # We do NOT mount local code volumes; the code is built into the image.
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: csta-frontend-prod
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    # Port 80 is exposed so the IT dept load balancer can map to it.
+
+volumes:
+  postgres_data_prod:
