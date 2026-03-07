@@ -34,3 +34,20 @@ export interface TeamMember {
     courses?: Course[];
     links?: Link[];
 }
+
+export interface Role {
+  id: number;
+  name: string;
+}
+
+export interface User {
+  id: number;
+  email: string;
+  first_name: string | null;
+  last_name: string | null;
+  profile_picture: string | null;
+  is_active: boolean;
+  is_superuser: boolean;
+  created_at: string;
+  roles: Role[];
+}

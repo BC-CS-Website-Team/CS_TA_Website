@@ -42,3 +42,7 @@ dmypy.json
 
 # Ruff
 .ruff_cache/
+
+# Uploaded files (stored on disk, not in git)
+uploads/
+static/

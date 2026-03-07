@@ -18,6 +18,7 @@ import PreviousYear2024_2025 from './pages/team/PreviousYear2024_2025'
 import MeetProgrammers from './pages/team/MeetProgrammers'
 import MeetRobotics from './pages/team/MeetRobotics'
 import MeetMakerspace from './pages/team/MeetMakerspace'
+import AlumniPage from './pages/team/Alumni'
 import CareerDevelopment from './pages/career/CareerDevelopment'
 import CareerResources from './pages/career/CareerResources'
 import Conferences from './pages/career/Conferences'
@@ -88,6 +89,7 @@ const App: React.FC = () => {
                 <Route path="programmers" element={<MeetProgrammers />} />
                 <Route path="robotics" element={<MeetRobotics />} />
                 <Route path="makerspace" element={<MeetMakerspace />} />
+                <Route path="alumni" element={<AlumniPage />} />
               </Route>
 
               {/* Career Development Routes */}

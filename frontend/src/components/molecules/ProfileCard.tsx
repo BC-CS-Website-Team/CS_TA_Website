@@ -8,6 +8,13 @@ import Image from '../atoms/Image';
 import Heading from '../atoms/Heading';
 import Text from '../atoms/Text';
 
+// Helper function to get a random dog image
+const getRandomDogImage = () => {
+    const dogImages = ['dog.jpg', 'dog2.jpg', 'dog3.jpg', 'dog4.jpg', 'dog5.jpg', 'dog6.jpg'];
+    const randomIndex = Math.floor(Math.random() * dogImages.length);
+    return `/images/${dogImages[randomIndex]}`;
+};
+
 export interface ProfileCardProps {
     image: string;
     name: string;
@@ -38,6 +45,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ image, name, role, onClick, v
                     src={image}
                     alt={name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    onError={(e) => {
+                        e.currentTarget.src = getRandomDogImage()
+                    }}
                 />
             </div>
             <div className={`w-full ${isRound ? 'text-center p-0' : 'p-4 text-center'}`}>

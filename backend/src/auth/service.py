@@ -120,6 +120,8 @@ async def update_user_profile_picture(db: AsyncSession, user_id: int, image_path
     
     if user:
         user.profile_picture = image_path
+        await db.commit()
+        await db.refresh(user)
     return user
 
 

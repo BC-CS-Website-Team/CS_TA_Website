@@ -24,6 +24,8 @@ services:
       - ./backend/.env
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-myuser}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-fastapi_database}
+    volumes:
+      - uploads_data_prod:/app/uploads
     # Note: We do NOT expose port 8000 to the host. Nginx handles proxying to it.
     # We do NOT mount local code volumes; the code is built into the image.
 
@@ -41,3 +43,4 @@ services:
 
 volumes:
   postgres_data_prod:
+  uploads_data_prod:

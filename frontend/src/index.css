@@ -38,7 +38,7 @@
   }
 
   .dropdown-menu {
-    @apply absolute top-full left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 z-50 focus:outline-none hidden group-hover:block;
+    @apply absolute top-full left-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 pt-3 pb-1 z-50 focus:outline-none hidden group-hover:block;
   }
 
   .dropdown-item {

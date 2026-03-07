@@ -4,10 +4,16 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 from database import engine
 import os
+from pathlib import Path
 
-# Ensure static directory exists
-os.makedirs("static/profile_pictures", exist_ok=True)
-os.makedirs("static/opportunity_images", exist_ok=True)
+# Define uploads directory - this will be persistent across container restarts
+UPLOADS_DIR = Path("uploads")
+PROFILE_PICTURES_DIR = UPLOADS_DIR / "profile_pictures"
+OPPORTUNITY_IMAGES_DIR = UPLOADS_DIR / "opportunity_images"
+
+# Ensure upload directories exist
+PROFILE_PICTURES_DIR.mkdir(parents=True, exist_ok=True)
+OPPORTUNITY_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -30,8 +36,8 @@ from config import settings
 
 app = FastAPI(lifespan=lifespan)
 
-# Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# Mount uploads directory to serve uploaded files
+app.mount("/uploads", StaticFiles(directory=str(UPLOADS_DIR)), name="uploads")
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -55,6 +61,9 @@ app.include_router(preferences_router)
 
 from slack.router import router as slack_router
 app.include_router(slack_router)
+
+from users.router import router as users_router
+app.include_router(users_router, prefix="/api")
 
 
 @app.get("/")

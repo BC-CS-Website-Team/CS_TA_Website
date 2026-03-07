@@ -30,7 +30,8 @@ const navItems = [
       { to: '/meet-the-team/tas', label: 'Meet CS TAs' },
       { to: '/meet-the-team/programmers', label: 'Meet Programmers' },
       { to: '/meet-the-team/robotics', label: 'Meet Robotics' },
-      { to: '/meet-the-team/makerspace', label: 'Meet Makerspace TAs' }
+      { to: '/meet-the-team/makerspace', label: 'Meet Makerspace TAs' },
+      { to: '/meet-the-team/alumni', label: 'Meet Alumni' }
     ]
   },
   {
@@ -93,7 +94,7 @@ const Navigation: React.FC = () => {
                     className="nav-link flex items-center focus:outline-none"
                     onClick={() => { }} // Optional: handle click if needed, but hover handles dropdown
                   >
-                    <span className="text-gray-700 text-sm font-medium mr-1">Welcome, {user?.email}</span>
+                    <span className="text-gray-700 text-sm font-medium mr-1">Welcome, {[user?.first_name, user?.last_name].filter(Boolean).join(' ') || user?.email}</span>
                     <FaCaretDown className="ml-1 text-gray-500" />
                   </button>
                   <ul className="dropdown-menu right-0 left-auto">

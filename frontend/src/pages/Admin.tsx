@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getRoles, getUsers, assignUserRoles, setUserAdminStatus } from '../services/auth'
-import { Button, Badge, Card } from '../components/atoms'
+import { Button, Badge, Card, Input } from '../components/atoms'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -20,12 +20,23 @@ interface AppUser {
     roles: Role[]
 }
 
+type SortField = 'name' | 'status'
+type SortDir = 'asc' | 'desc'
+
+const PAGE_SIZE = 8
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-/** Returns "First Last" if available, otherwise falls back to email. */
+/** Returns "First Last" when available, otherwise the user's email. */
 const displayName = (u: AppUser): string => {
     const full = [u.first_name, u.last_name].filter(Boolean).join(' ')
     return full || u.email
+}
+
+/** Sort indicator arrow for table headers. */
+const sortIcon = (field: SortField, sortField: SortField, sortDir: SortDir) => {
+    if (field !== sortField) return ' ↕'
+    return sortDir === 'asc' ? ' ↑' : ' ↓'
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -37,6 +48,12 @@ const Admin: React.FC = () => {
     const [selectedUser, setSelectedUser] = useState<AppUser | null>(null)
     const [selectedRoleIds, setSelectedRoleIds] = useState<number[]>([])
     const [message, setMessage] = useState({ type: '', text: '' })
+
+    // Table controls
+    const [search, setSearch] = useState('')
+    const [sortField, setSortField] = useState<SortField>('name')
+    const [sortDir, setSortDir] = useState<SortDir>('asc')
+    const [page, setPage] = useState(1)
 
     // ── Data Fetching ──────────────────────────────────────────────────────────
 
@@ -62,12 +79,42 @@ const Admin: React.FC = () => {
         setTimeout(() => setMessage({ type: '', text: '' }), 4000)
     }
 
+    // ── Filtered + Sorted + Paginated Users ───────────────────────────────────
+
+    const processedUsers = useMemo(() => {
+        const q = search.toLowerCase()
+        const filtered = users.filter(u =>
+            displayName(u).toLowerCase().includes(q) || u.email.toLowerCase().includes(q)
+        )
+        filtered.sort((a, b) => {
+            const cmp = sortField === 'name'
+                ? displayName(a).localeCompare(displayName(b))
+                : (Number(b.is_superuser) - Number(a.is_superuser))
+            return sortDir === 'asc' ? cmp : -cmp
+        })
+        return filtered
+    }, [users, search, sortField, sortDir])
+
+    const totalPages = Math.max(1, Math.ceil(processedUsers.length / PAGE_SIZE))
+    const paginatedUsers = processedUsers.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+
+    const handleSearch = (q: string) => { setSearch(q); setPage(1) }
+
+    const handleSort = (field: SortField) => {
+        if (field === sortField) {
+            setSortDir(d => d === 'asc' ? 'desc' : 'asc')
+        } else {
+            setSortField(field)
+            setSortDir('asc')
+        }
+        setPage(1)
+    }
+
     // ── Handlers ──────────────────────────────────────────────────────────────
 
-    const handleUserSelect = (userId: string) => {
-        const found = users.find(u => u.id === parseInt(userId))
-        setSelectedUser(found ?? null)
-        setSelectedRoleIds(found?.roles?.map(r => r.id) ?? [])
+    const handleSelectUser = (u: AppUser) => {
+        setSelectedUser(u)
+        setSelectedRoleIds(u.roles.map(r => r.id))
     }
 
     const handleRoleToggle = (roleId: number) => {
@@ -135,60 +182,128 @@ const Admin: React.FC = () => {
                 </div>
             )}
 
-            {/* Manage Users & Roles — full width */}
             <Card className="p-6">
-                <h2 className="text-xl font-bold mb-4 border-b pb-2">Manage Users & Roles</h2>
+                <h2 className="text-xl font-bold mb-4 border-b pb-2">Manage Users</h2>
 
-                {/* User selector */}
-                <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Select User</label>
-                    <select
-                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 border p-2"
-                        onChange={e => handleUserSelect(e.target.value)}
-                        value={selectedUser?.id ?? ''}
-                    >
-                        <option value="">-- Choose a User --</option>
-                        {users.map(u => (
-                            <option key={u.id} value={u.id}>
-                                {displayName(u)} {u.is_superuser ? '(Admin)' : ''}
-                            </option>
-                        ))}
-                    </select>
+                {/* Search */}
+                <div className="mb-4 max-w-sm">
+                    <Input
+                        id="user-search"
+                        placeholder="Search by name or email..."
+                        value={search}
+                        onChange={e => handleSearch(e.target.value)}
+                    />
                 </div>
 
-                {/* Selected user detail */}
-                {selectedUser && (
-                    <div className="animate-fade-in">
-
-                        {/* User info */}
-                        <div className="bg-gray-50 p-4 rounded-md mb-6 text-sm flex flex-wrap items-center gap-x-6 gap-y-2">
-                            <div>
-                                <span className="font-semibold text-gray-700">Name: </span>
-                                {displayName(selectedUser)}
-                            </div>
-                            {selectedUser.first_name && (
-                                <div>
-                                    <span className="font-semibold text-gray-700">Email: </span>
-                                    {selectedUser.email}
-                                </div>
+                {/* User Table */}
+                <div className="overflow-x-auto rounded-md border border-gray-200">
+                    <table className="min-w-full divide-y divide-gray-200 text-sm">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th
+                                    className="px-4 py-3 text-left font-semibold text-gray-600 cursor-pointer select-none hover:text-gray-900"
+                                    onClick={() => handleSort('name')}
+                                >
+                                    Name{sortIcon('name', sortField, sortDir)}
+                                </th>
+                                <th className="px-4 py-3 text-left font-semibold text-gray-600">Email</th>
+                                <th className="px-4 py-3 text-left font-semibold text-gray-600">Roles</th>
+                                <th
+                                    className="px-4 py-3 text-left font-semibold text-gray-600 cursor-pointer select-none hover:text-gray-900"
+                                    onClick={() => handleSort('status')}
+                                >
+                                    Status{sortIcon('status', sortField, sortDir)}
+                                </th>
+                                <th className="px-4 py-3" />
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-100 bg-white">
+                            {paginatedUsers.length > 0 ? paginatedUsers.map(u => (
+                                <tr
+                                    key={u.id}
+                                    className={`hover:bg-gray-50 transition-colors ${selectedUser?.id === u.id ? 'bg-primary-50 ring-1 ring-inset ring-primary-200' : ''}`}
+                                >
+                                    <td className="px-4 py-3 font-medium text-gray-900">{displayName(u)}</td>
+                                    <td className="px-4 py-3 text-gray-500">{u.email}</td>
+                                    <td className="px-4 py-3">
+                                        <div className="flex flex-wrap gap-1">
+                                            {u.roles.length > 0
+                                                ? u.roles.map(r => <Badge key={r.id} colorScheme="blue">{r.name}</Badge>)
+                                                : <span className="text-gray-400 italic">None</span>}
+                                        </div>
+                                    </td>
+                                    <td className="px-4 py-3">
+                                        <Badge colorScheme={u.is_superuser ? 'green' : 'gray'}>
+                                            {u.is_superuser ? 'Admin' : 'User'}
+                                        </Badge>
+                                    </td>
+                                    <td className="px-4 py-3 text-right">
+                                        <Button
+                                            variant="secondary"
+                                            className="text-xs py-1 px-3"
+                                            onClick={() => handleSelectUser(u)}
+                                        >
+                                            {selectedUser?.id === u.id ? 'Selected' : 'Manage'}
+                                        </Button>
+                                    </td>
+                                </tr>
+                            )) : (
+                                <tr>
+                                    <td colSpan={5} className="px-4 py-8 text-center text-gray-400 italic">
+                                        No users match your search.
+                                    </td>
+                                </tr>
                             )}
-                            <div className="flex items-center gap-2">
-                                <span className="font-semibold text-gray-700">Status:</span>
-                                <Badge colorScheme={selectedUser.is_superuser ? 'green' : 'gray'}>
-                                    {selectedUser.is_superuser ? 'Admin' : 'User'}
-                                </Badge>
-                            </div>
-                            <div>
-                                <span className="font-semibold text-gray-700">Current Roles: </span>
-                                {selectedUser.roles.length > 0
-                                    ? selectedUser.roles.map(r => r.name).join(', ')
-                                    : 'None'}
-                            </div>
+                        </tbody>
+                    </table>
+                </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                    <div className="flex items-center justify-between mt-4 text-sm text-gray-600">
+                        <span>Page {page} of {totalPages} ({processedUsers.length} users)</span>
+                        <div className="flex gap-2">
+                            <Button
+                                variant="secondary"
+                                className="text-xs py-1 px-3"
+                                onClick={() => setPage(p => p - 1)}
+                                disabled={page === 1}
+                            >
+                                Previous
+                            </Button>
+                            <Button
+                                variant="secondary"
+                                className="text-xs py-1 px-3"
+                                onClick={() => setPage(p => p + 1)}
+                                disabled={page === totalPages}
+                            >
+                                Next
+                            </Button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Management Panel — appears below table when a user is selected */}
+                {selectedUser && (
+                    <div className="mt-6 pt-6 border-t animate-fade-in">
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="font-semibold text-gray-800">
+                                Managing: {displayName(selectedUser)}
+                                {selectedUser.first_name && (
+                                    <span className="ml-2 text-sm font-normal text-gray-500">({selectedUser.email})</span>
+                                )}
+                            </h3>
+                            <button
+                                className="text-sm text-gray-400 hover:text-gray-600"
+                                onClick={() => setSelectedUser(null)}
+                            >
+                                ✕ Close
+                            </button>
                         </div>
 
-                        {/* Assign Roles */}
-                        <h3 className="font-semibold text-gray-700 mb-2">Assign Roles:</h3>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mb-6 border p-3 rounded bg-gray-50">
+                        {/* Role Checkboxes */}
+                        <p className="text-sm font-medium text-gray-700 mb-2">Assign Roles:</p>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mb-5 border p-3 rounded bg-gray-50">
                             {roles.map(role => (
                                 <label key={role.id} className="flex items-center space-x-2 cursor-pointer p-1 hover:bg-gray-100 rounded">
                                     <input
@@ -202,7 +317,7 @@ const Admin: React.FC = () => {
                             ))}
                         </div>
 
-                        {/* Actions row */}
+                        {/* Actions */}
                         <div className="flex flex-wrap gap-3">
                             <Button variant="primary" onClick={handleAssignRoles}>
                                 Update Roles
@@ -217,11 +332,10 @@ const Admin: React.FC = () => {
                                 {selectedUser.is_superuser ? 'Remove Admin' : 'Make Admin'}
                             </Button>
                         </div>
-
                     </div>
                 )}
-            </Card>
 
+            </Card>
         </div>
     )
 }
