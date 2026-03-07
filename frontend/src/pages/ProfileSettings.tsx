@@ -64,12 +64,22 @@ const ProfileSettings: React.FC = () => {
         setMessage({ type: '', text: '' })
 
         try {
-            await uploadProfilePicture(selectedFile)
+            console.log('Uploading file:', selectedFile.name)
+            const result = await uploadProfilePicture(selectedFile)
+            console.log('Upload result:', result)
+            console.log('New profile_picture from upload:', result.profile_picture)
+            
             await refreshUser()
+            
+            // Small delay to ensure state updates
+            await new Promise(resolve => setTimeout(resolve, 100))
+            console.log('User refreshed, current user:', user)
+            
             setMessage({ type: 'success', text: 'Profile picture updated successfully!' })
             setSelectedFile(null)
             setPreviewUrl(null)
         } catch (err: any) {
+            console.error('Upload error:', err)
             setMessage({ type: 'error', text: err.message || 'Failed to upload image.' })
         } finally {
             setUploading(false)
@@ -120,11 +130,11 @@ const ProfileSettings: React.FC = () => {
                             user?.profile_picture ? (
                                 <img
                                     className="h-24 w-24 rounded-full object-cover border-2 border-gray-200"
-                                    src={user.profile_picture.startsWith('http') ? user.profile_picture : `http://localhost:8000${user.profile_picture}`}
+                                    src={user.profile_picture.startsWith('http') ? user.profile_picture : `${API_URL}${user.profile_picture}`}
                                     alt="Profile"
                                     onError={(e: any) => {
-                                        console.error("Image load failed", e.target.src);
-                                        // Fallback to initial if image fails
+                                        console.error("Image load failed for:", e.target.src);
+                                        // Fallback to placeholder
                                         e.target.style.display = 'none';
                                         if (e.target.nextSibling) {
                                             (e.target.nextSibling as HTMLElement).style.display = 'flex';

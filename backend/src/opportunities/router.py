@@ -34,20 +34,23 @@ async def upload_opportunity_image(
     file: UploadFile = File(...),
 ):
     """Upload an image for an opportunity."""
+    # Validate file type
     if not file.content_type.startswith("image/"):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="File must be an image",
         )
     
-    # Create unique filename
+    # Create unique filename with UUID
     file_extension = Path(file.filename).suffix
     unique_filename = f"{current_user.id}_{uuid.uuid4()}{file_extension}"
-    file_path = f"static/opportunity_images/{unique_filename}"
     
-    # Save file
-    # NOTE: 
-    # this should be changed to upload to S3 or compatible object storage.
+    # Define upload directory and file path
+    upload_dir = Path("uploads/opportunity_images")
+    upload_dir.mkdir(parents=True, exist_ok=True)
+    file_path = upload_dir / unique_filename
+    
+    # Save file to disk
     try:
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
@@ -56,8 +59,9 @@ async def upload_opportunity_image(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Could not save file: {e}",
         )
-        
-    return {"url": f"/static/opportunity_images/{unique_filename}"}
+    
+    # Return the URL path (relative to backend URL)
+    return {"url": f"/uploads/opportunity_images/{unique_filename}"}
 
 @router.post("/", response_model=OpportunityResponse)
 async def create_new_opportunity(

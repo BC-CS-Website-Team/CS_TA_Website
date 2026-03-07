@@ -30,6 +30,8 @@ services:
       # Mount the code for hot reloading
       - ./backend:/app
       - /app/.venv
+      # Mount uploads directory to persist uploaded files
+      - ./backend/uploads:/app/uploads
 
   # frontend:
   #   build:

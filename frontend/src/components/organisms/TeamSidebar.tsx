@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { FaUsers, FaChalkboardTeacher, FaCode, FaRobot, FaTools, FaBars, FaTimes } from 'react-icons/fa'
+import { FaUsers, FaChalkboardTeacher, FaCode, FaRobot, FaTools, FaBars, FaTimes, FaUserGraduate } from 'react-icons/fa'
 
 const navItems = [
   {
@@ -33,6 +33,11 @@ const navItems = [
     to: '/meet-the-team/makerspace',
     icon: FaTools,
     text: 'Meet Makerspace TAs'
+  },
+  {
+    to: '/meet-the-team/alumni',
+    icon: FaUserGraduate,
+    text: 'Meet Our Alumni'
   }
 ]
 

@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from database import get_db
 from config import settings
 from auth.schemas import Token, UserCreate, UserResponse, UserUpdate
-from auth.service import authenticate_user, create_user, update_user
+from auth.service import authenticate_user, create_user, update_user, get_user_by_email
 from auth.dependencies import get_current_active_user, get_current_superuser
 from auth.models import User
 from auth.exceptions import UserAlreadyExists
@@ -65,8 +65,11 @@ async def login_for_access_token(
 @router.get("/me", response_model=UserResponse)
 async def read_users_me(
     current_user: Annotated[User, Depends(get_current_active_user)],
+    db: Annotated[AsyncSession, Depends(get_db)],
 ):
-    return current_user
+    # Refresh user from database to get latest data (including profile_picture)
+    refreshed_user = await get_user_by_email(db, current_user.email)
+    return refreshed_user
 
 @router.patch("/me", response_model=UserResponse)
 async def update_users_me(
@@ -79,8 +82,8 @@ async def update_users_me(
     return updated_user
 
 # --- Role Management Endpoints (Admin Only) ---
-from auth.schemas import RoleCreate, RoleResponse, UserRoleAssign
-from auth.service import create_role, get_all_roles, get_all_users_with_roles, assign_roles_to_user
+from auth.schemas import RoleCreate, RoleResponse, UserRoleAssign, UserAdminUpdate
+from auth.service import create_role, get_all_roles, get_all_users_with_roles, assign_roles_to_user, set_user_admin_status
 
 @router.post("/roles", response_model=RoleResponse)
 async def create_new_role(
@@ -123,6 +126,22 @@ async def assign_user_roles(
         )
     return user
 
+@router.patch("/users/{user_id}/admin", response_model=UserResponse)
+async def update_user_admin_status(
+    user_id: int,
+    admin_data: UserAdminUpdate,
+    current_user: Annotated[User, Depends(get_current_superuser)],
+    db: Annotated[AsyncSession, Depends(get_db)],
+):
+    """Promote or demote a user to/from admin (Admin only)."""
+    user = await set_user_admin_status(db, user_id, admin_data.is_superuser)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found",
+        )
+    return user
+
 # --- Profile Picture Upload ---
 from fastapi import File, UploadFile
 import shutil
@@ -137,31 +156,33 @@ async def upload_profile_picture(
     file: UploadFile = File(...),
 ):
     """Upload a profile picture for the current user."""
-    # simple validation
+    # Validate file type
     if not file.content_type.startswith("image/"):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="File must be an image",
         )
     
-    # Create unique filename
+    # Create unique filename with UUID
     file_extension = Path(file.filename).suffix
     unique_filename = f"{current_user.id}_{uuid.uuid4()}{file_extension}"
-    file_path = f"static/profile_pictures/{unique_filename}"
     
-    # Save file
-    # NOTE: 
-    # this should be changed to upload to S3 or compatible object storage. I have to decide for sure if db will be on school server
+    # Define upload directory and file path
+    upload_dir = Path("uploads/profile_pictures")
+    upload_dir.mkdir(parents=True, exist_ok=True)
+    file_path = upload_dir / unique_filename
+    
+    # Save file to disk
     try:
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
     except Exception as e:
-         raise HTTPException(
+        raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Could not save file: {e}",
         )
-        
-    # Update DB - store the URL path (relative to backend url)
-    # The frontend will prepend the backend URL.
-    db_path = f"/static/profile_pictures/{unique_filename}"
+    
+    # Store the URL path in database (relative to backend URL)
+    # This will be accessible at: http://backend:8000/uploads/profile_pictures/{unique_filename}
+    db_path = f"/uploads/profile_pictures/{unique_filename}"
     return await update_user_profile_picture(db, current_user.id, db_path)

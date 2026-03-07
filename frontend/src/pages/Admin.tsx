@@ -1,18 +1,62 @@
-import React, { useState, useEffect, FormEvent } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { createRole, getRoles, getUsers, assignUserRoles } from '../services/auth'
+import { getRoles, getUsers, assignUserRoles, setUserAdminStatus } from '../services/auth'
+import { Button, Badge, Card, Input } from '../components/atoms'
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+interface Role {
+    id: number
+    name: string
+}
+
+interface AppUser {
+    id: number
+    email: string
+    first_name: string | null
+    last_name: string | null
+    is_superuser: boolean
+    roles: Role[]
+}
+
+type SortField = 'name' | 'status'
+type SortDir = 'asc' | 'desc'
+
+const PAGE_SIZE = 8
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+/** Returns "First Last" when available, otherwise the user's email. */
+const displayName = (u: AppUser): string => {
+    const full = [u.first_name, u.last_name].filter(Boolean).join(' ')
+    return full || u.email
+}
+
+/** Sort indicator arrow for table headers. */
+const sortIcon = (field: SortField, sortField: SortField, sortDir: SortDir) => {
+    if (field !== sortField) return ' ↕'
+    return sortDir === 'asc' ? ' ↑' : ' ↓'
+}
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 const Admin: React.FC = () => {
     const { user, isAuthenticated } = useAuth()
-    const [roles, setRoles] = useState<any[]>([])
-    const [users, setUsers] = useState<any[]>([])
-    const [newRoleName, setNewRoleName] = useState('')
-    const [selectedUser, setSelectedUser] = useState<any | null>(null)
-    const [selectedRoleIds, setSelectedRoleIds] = useState<number[]>([]) // Array of role IDs for multi-select
+    const [roles, setRoles] = useState<Role[]>([])
+    const [users, setUsers] = useState<AppUser[]>([])
+    const [selectedUser, setSelectedUser] = useState<AppUser | null>(null)
+    const [selectedRoleIds, setSelectedRoleIds] = useState<number[]>([])
     const [message, setMessage] = useState({ type: '', text: '' })
 
-    // Fetch data on load
+    // Table controls
+    const [search, setSearch] = useState('')
+    const [sortField, setSortField] = useState<SortField>('name')
+    const [sortDir, setSortDir] = useState<SortDir>('asc')
+    const [page, setPage] = useState(1)
+
+    // ── Data Fetching ──────────────────────────────────────────────────────────
+
     useEffect(() => {
         if (isAuthenticated && user && 'is_superuser' in user && user.is_superuser) {
             fetchData()
@@ -30,47 +74,80 @@ const Admin: React.FC = () => {
         }
     }
 
-    const handleCreateRole = async (e: FormEvent) => {
-        e.preventDefault()
-        try {
-            await createRole(newRoleName)
-            setMessage({ type: 'success', text: `Role "${newRoleName}" created!` })
-            setNewRoleName('')
-            fetchData() // Refresh list
-        } catch (err: any) {
-            setMessage({ type: 'error', text: err.message })
-        }
+    const showMessage = (type: 'success' | 'error', text: string) => {
+        setMessage({ type, text })
+        setTimeout(() => setMessage({ type: '', text: '' }), 4000)
     }
 
-    const handleUserSelect = (userId: string) => {
-        const user = users.find(u => u.id === parseInt(userId))
-        setSelectedUser(user)
-        // Pre-select existing roles
-        setSelectedRoleIds(user?.roles?.map((r: any) => r.id) || [])
+    // ── Filtered + Sorted + Paginated Users ───────────────────────────────────
+
+    const processedUsers = useMemo(() => {
+        const q = search.toLowerCase()
+        const filtered = users.filter(u =>
+            displayName(u).toLowerCase().includes(q) || u.email.toLowerCase().includes(q)
+        )
+        filtered.sort((a, b) => {
+            const cmp = sortField === 'name'
+                ? displayName(a).localeCompare(displayName(b))
+                : (Number(b.is_superuser) - Number(a.is_superuser))
+            return sortDir === 'asc' ? cmp : -cmp
+        })
+        return filtered
+    }, [users, search, sortField, sortDir])
+
+    const totalPages = Math.max(1, Math.ceil(processedUsers.length / PAGE_SIZE))
+    const paginatedUsers = processedUsers.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+
+    const handleSearch = (q: string) => { setSearch(q); setPage(1) }
+
+    const handleSort = (field: SortField) => {
+        if (field === sortField) {
+            setSortDir(d => d === 'asc' ? 'desc' : 'asc')
+        } else {
+            setSortField(field)
+            setSortDir('asc')
+        }
+        setPage(1)
+    }
+
+    // ── Handlers ──────────────────────────────────────────────────────────────
+
+    const handleSelectUser = (u: AppUser) => {
+        setSelectedUser(u)
+        setSelectedRoleIds(u.roles.map(r => r.id))
     }
 
     const handleRoleToggle = (roleId: number) => {
-        setSelectedRoleIds(prev => {
-            if (prev.includes(roleId)) {
-                return prev.filter(id => id !== roleId)
-            } else {
-                return [...prev, roleId]
-            }
-        })
+        setSelectedRoleIds(prev =>
+            prev.includes(roleId) ? prev.filter(id => id !== roleId) : [...prev, roleId]
+        )
     }
 
     const handleAssignRoles = async () => {
         if (!selectedUser) return
         try {
             await assignUserRoles(selectedUser.id, selectedRoleIds)
-            setMessage({ type: 'success', text: 'Roles updated successfully!' })
-            fetchData() // Refresh user list to show updated roles
+            showMessage('success', 'Roles updated successfully!')
+            fetchData()
         } catch (err: any) {
-            setMessage({ type: 'error', text: err.message })
+            showMessage('error', err.message)
         }
     }
 
-    // If not logged in or not a superuser, show access denied message
+    const handleToggleAdmin = async () => {
+        if (!selectedUser) return
+        const promote = !selectedUser.is_superuser
+        try {
+            await setUserAdminStatus(selectedUser.id, promote)
+            showMessage('success', `${displayName(selectedUser)} is now ${promote ? 'an Admin' : 'a regular User'}.`)
+            fetchData()
+        } catch (err: any) {
+            showMessage('error', err.message)
+        }
+    }
+
+    // ── Access Guard ───────────────────────────────────────────────────────────
+
     if (!isAuthenticated || !user || !('is_superuser' in user) || !user.is_superuser) {
         return (
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
@@ -87,109 +164,180 @@ const Admin: React.FC = () => {
         )
     }
 
+    // ── Render ─────────────────────────────────────────────────────────────────
+
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+            {/* Header */}
             <div className="mb-8 border-b pb-4">
                 <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
                 <p className="text-gray-600 mt-2">Welcome, Administrator {user.email}</p>
             </div>
 
+            {/* Status Message */}
             {message.text && (
                 <div className={`p-4 mb-6 rounded-md ${message.type === 'error' ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'}`}>
                     {message.text}
                 </div>
             )}
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* 1. Create Role Section */}
-                <div className="bg-white p-6 rounded-lg shadow-md border hover:shadow-lg transition-shadow">
-                    <h2 className="text-xl font-bold mb-4 border-b pb-2">Create New Role</h2>
-                    <form onSubmit={handleCreateRole} className="space-y-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Role Name</label>
-                            <input
-                                type="text"
-                                className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 border p-2"
-                                placeholder="e.g. TA, Professor"
-                                value={newRoleName}
-                                onChange={(e) => setNewRoleName(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            className="w-full bg-primary-600 text-white py-2 px-4 rounded-md hover:bg-primary-700 transition-colors font-medium"
-                        >
-                            Create Role
-                        </button>
-                    </form>
+            <Card className="p-6">
+                <h2 className="text-xl font-bold mb-4 border-b pb-2">Manage Users</h2>
 
-                    <div className="mt-8">
-                        <h3 className="font-semibold text-gray-700 mb-2">Existing Roles:</h3>
-                        <div className="flex flex-wrap gap-2">
-                            {roles.length > 0 ? roles.map(role => (
-                                <span key={role.id} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                    {role.name}
-                                </span>
-                            )) : <span className="text-gray-500 italic">No roles created yet.</span>}
-                        </div>
-                    </div>
+                {/* Search */}
+                <div className="mb-4 max-w-sm">
+                    <Input
+                        id="user-search"
+                        placeholder="Search by name or email..."
+                        value={search}
+                        onChange={e => handleSearch(e.target.value)}
+                    />
                 </div>
 
-                {/* 2. Assign Roles Section */}
-                <div className="bg-white p-6 rounded-lg shadow-md border hover:shadow-lg transition-shadow">
-                    <h2 className="text-xl font-bold mb-4 border-b pb-2">Manage Users & Roles</h2>
+                {/* User Table */}
+                <div className="overflow-x-auto rounded-md border border-gray-200">
+                    <table className="min-w-full divide-y divide-gray-200 text-sm">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th
+                                    className="px-4 py-3 text-left font-semibold text-gray-600 cursor-pointer select-none hover:text-gray-900"
+                                    onClick={() => handleSort('name')}
+                                >
+                                    Name{sortIcon('name', sortField, sortDir)}
+                                </th>
+                                <th className="px-4 py-3 text-left font-semibold text-gray-600">Email</th>
+                                <th className="px-4 py-3 text-left font-semibold text-gray-600">Roles</th>
+                                <th
+                                    className="px-4 py-3 text-left font-semibold text-gray-600 cursor-pointer select-none hover:text-gray-900"
+                                    onClick={() => handleSort('status')}
+                                >
+                                    Status{sortIcon('status', sortField, sortDir)}
+                                </th>
+                                <th className="px-4 py-3" />
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-100 bg-white">
+                            {paginatedUsers.length > 0 ? paginatedUsers.map(u => (
+                                <tr
+                                    key={u.id}
+                                    className={`hover:bg-gray-50 transition-colors ${selectedUser?.id === u.id ? 'bg-primary-50 ring-1 ring-inset ring-primary-200' : ''}`}
+                                >
+                                    <td className="px-4 py-3 font-medium text-gray-900">{displayName(u)}</td>
+                                    <td className="px-4 py-3 text-gray-500">{u.email}</td>
+                                    <td className="px-4 py-3">
+                                        <div className="flex flex-wrap gap-1">
+                                            {u.roles.length > 0
+                                                ? u.roles.map(r => <Badge key={r.id} colorScheme="blue">{r.name}</Badge>)
+                                                : <span className="text-gray-400 italic">None</span>}
+                                        </div>
+                                    </td>
+                                    <td className="px-4 py-3">
+                                        <Badge colorScheme={u.is_superuser ? 'green' : 'gray'}>
+                                            {u.is_superuser ? 'Admin' : 'User'}
+                                        </Badge>
+                                    </td>
+                                    <td className="px-4 py-3 text-right">
+                                        <Button
+                                            variant="secondary"
+                                            className="text-xs py-1 px-3"
+                                            onClick={() => handleSelectUser(u)}
+                                        >
+                                            {selectedUser?.id === u.id ? 'Selected' : 'Manage'}
+                                        </Button>
+                                    </td>
+                                </tr>
+                            )) : (
+                                <tr>
+                                    <td colSpan={5} className="px-4 py-8 text-center text-gray-400 italic">
+                                        No users match your search.
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
 
-                    <div className="mb-6">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Select User</label>
-                        <select
-                            className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 border p-2"
-                            onChange={(e) => handleUserSelect(e.target.value)}
-                            value={selectedUser?.id || ''}
-                        >
-                            <option value="">-- Choose a User --</option>
-                            {users.map(u => (
-                                <option key={u.id} value={u.id}>{u.email} {u.is_superuser ? '(Admin)' : ''}</option>
-                            ))}
-                        </select>
-                    </div>
-
-                    {selectedUser && (
-                        <div className="animate-fade-in">
-                            <div className="bg-gray-50 p-4 rounded-md mb-4 text-sm">
-                                <p><strong>Email:</strong> {selectedUser.email}</p>
-                                <p><strong>Current Roles:</strong> {selectedUser.roles.length > 0
-                                    ? selectedUser.roles.map((r: any) => r.name).join(', ')
-                                    : 'None'}
-                                </p>
-                            </div>
-
-                            <h3 className="font-semibold text-gray-700 mb-2">Assign Roles:</h3>
-                            <div className="space-y-2 mb-6 max-h-40 overflow-y-auto border p-2 rounded bg-gray-50">
-                                {roles.map(role => (
-                                    <label key={role.id} className="flex items-center space-x-2 cursor-pointer p-1 hover:bg-gray-100 rounded">
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedRoleIds.includes(role.id)}
-                                            onChange={() => handleRoleToggle(role.id)}
-                                            className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 h-4 w-4"
-                                        />
-                                        <span className="text-gray-900">{role.name}</span>
-                                    </label>
-                                ))}
-                            </div>
-
-                            <button
-                                onClick={handleAssignRoles}
-                                className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors font-medium"
+                {/* Pagination */}
+                {totalPages > 1 && (
+                    <div className="flex items-center justify-between mt-4 text-sm text-gray-600">
+                        <span>Page {page} of {totalPages} ({processedUsers.length} users)</span>
+                        <div className="flex gap-2">
+                            <Button
+                                variant="secondary"
+                                className="text-xs py-1 px-3"
+                                onClick={() => setPage(p => p - 1)}
+                                disabled={page === 1}
                             >
-                                Update Roles for {selectedUser.email}
+                                Previous
+                            </Button>
+                            <Button
+                                variant="secondary"
+                                className="text-xs py-1 px-3"
+                                onClick={() => setPage(p => p + 1)}
+                                disabled={page === totalPages}
+                            >
+                                Next
+                            </Button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Management Panel — appears below table when a user is selected */}
+                {selectedUser && (
+                    <div className="mt-6 pt-6 border-t animate-fade-in">
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="font-semibold text-gray-800">
+                                Managing: {displayName(selectedUser)}
+                                {selectedUser.first_name && (
+                                    <span className="ml-2 text-sm font-normal text-gray-500">({selectedUser.email})</span>
+                                )}
+                            </h3>
+                            <button
+                                className="text-sm text-gray-400 hover:text-gray-600"
+                                onClick={() => setSelectedUser(null)}
+                            >
+                                ✕ Close
                             </button>
                         </div>
-                    )}
-                </div>
-            </div>
+
+                        {/* Role Checkboxes */}
+                        <p className="text-sm font-medium text-gray-700 mb-2">Assign Roles:</p>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mb-5 border p-3 rounded bg-gray-50">
+                            {roles.map(role => (
+                                <label key={role.id} className="flex items-center space-x-2 cursor-pointer p-1 hover:bg-gray-100 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedRoleIds.includes(role.id)}
+                                        onChange={() => handleRoleToggle(role.id)}
+                                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 h-4 w-4"
+                                    />
+                                    <span className="text-gray-900 text-sm">{role.name}</span>
+                                </label>
+                            ))}
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex flex-wrap gap-3">
+                            <Button variant="primary" onClick={handleAssignRoles}>
+                                Update Roles
+                            </Button>
+                            <Button
+                                variant={selectedUser.is_superuser ? 'danger' : 'secondary'}
+                                onClick={handleToggleAdmin}
+                                disabled={selectedUser.email === user.email}
+                                title={selectedUser.email === user.email ? 'You cannot change your own admin status' : undefined}
+                                className={selectedUser.email === user.email ? 'opacity-40 cursor-not-allowed' : ''}
+                            >
+                                {selectedUser.is_superuser ? 'Remove Admin' : 'Make Admin'}
+                            </Button>
+                        </div>
+                    </div>
+                )}
+
+            </Card>
         </div>
     )
 }
+
 export default Admin
