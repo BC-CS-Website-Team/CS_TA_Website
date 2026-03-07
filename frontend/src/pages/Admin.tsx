@@ -1,10 +1,10 @@
-import React, { useState, useEffect, FormEvent } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { createRole, getRoles, getUsers, assignUserRoles, setUserAdminStatus } from '../services/auth'
-import { Button, Badge, Card, Input } from '../components/atoms'
+import { getRoles, getUsers, assignUserRoles, setUserAdminStatus } from '../services/auth'
+import { Button, Badge, Card } from '../components/atoms'
 
-// ─── Types ───────────────────────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
 
 interface Role {
     id: number
@@ -14,8 +14,18 @@ interface Role {
 interface AppUser {
     id: number
     email: string
+    first_name: string | null
+    last_name: string | null
     is_superuser: boolean
     roles: Role[]
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+/** Returns "First Last" if available, otherwise falls back to email. */
+const displayName = (u: AppUser): string => {
+    const full = [u.first_name, u.last_name].filter(Boolean).join(' ')
+    return full || u.email
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -24,7 +34,6 @@ const Admin: React.FC = () => {
     const { user, isAuthenticated } = useAuth()
     const [roles, setRoles] = useState<Role[]>([])
     const [users, setUsers] = useState<AppUser[]>([])
-    const [newRoleName, setNewRoleName] = useState('')
     const [selectedUser, setSelectedUser] = useState<AppUser | null>(null)
     const [selectedRoleIds, setSelectedRoleIds] = useState<number[]>([])
     const [message, setMessage] = useState({ type: '', text: '' })
@@ -53,19 +62,7 @@ const Admin: React.FC = () => {
         setTimeout(() => setMessage({ type: '', text: '' }), 4000)
     }
 
-    // ── Role Handlers ──────────────────────────────────────────────────────────
-
-    const handleCreateRole = async (e: FormEvent) => {
-        e.preventDefault()
-        try {
-            await createRole(newRoleName)
-            showMessage('success', `Role "${newRoleName}" created!`)
-            setNewRoleName('')
-            fetchData()
-        } catch (err: any) {
-            showMessage('error', err.message)
-        }
-    }
+    // ── Handlers ──────────────────────────────────────────────────────────────
 
     const handleUserSelect = (userId: string) => {
         const found = users.find(u => u.id === parseInt(userId))
@@ -90,13 +87,12 @@ const Admin: React.FC = () => {
         }
     }
 
-    // ── Admin Promotion Handlers ───────────────────────────────────────────────
-
-    const handleToggleAdmin = async (targetUser: AppUser) => {
-        const promote = !targetUser.is_superuser
+    const handleToggleAdmin = async () => {
+        if (!selectedUser) return
+        const promote = !selectedUser.is_superuser
         try {
-            await setUserAdminStatus(targetUser.id, promote)
-            showMessage('success', `${targetUser.email} is now ${promote ? 'an Admin' : 'a regular User'}.`)
+            await setUserAdminStatus(selectedUser.id, promote)
+            showMessage('success', `${displayName(selectedUser)} is now ${promote ? 'an Admin' : 'a regular User'}.`)
             fetchData()
         } catch (err: any) {
             showMessage('error', err.message)
@@ -139,124 +135,93 @@ const Admin: React.FC = () => {
                 </div>
             )}
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Manage Users & Roles — full width */}
+            <Card className="p-6">
+                <h2 className="text-xl font-bold mb-4 border-b pb-2">Manage Users & Roles</h2>
 
-                {/* ── 1. Create Role ── */}
-                <Card className="p-6">
-                    <h2 className="text-xl font-bold mb-4 border-b pb-2">Create New Role</h2>
-                    <form onSubmit={handleCreateRole} className="space-y-4">
-                        <Input
-                            id="new-role-name"
-                            label="Role Name"
-                            placeholder="e.g. TA, Professor"
-                            value={newRoleName}
-                            onChange={e => setNewRoleName(e.target.value)}
-                            required
-                        />
-                        <Button type="submit" variant="primary" className="w-full">
-                            Create Role
-                        </Button>
-                    </form>
+                {/* User selector */}
+                <div className="mb-6">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Select User</label>
+                    <select
+                        className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 border p-2"
+                        onChange={e => handleUserSelect(e.target.value)}
+                        value={selectedUser?.id ?? ''}
+                    >
+                        <option value="">-- Choose a User --</option>
+                        {users.map(u => (
+                            <option key={u.id} value={u.id}>
+                                {displayName(u)} {u.is_superuser ? '(Admin)' : ''}
+                            </option>
+                        ))}
+                    </select>
+                </div>
 
-                    <div className="mt-8">
-                        <h3 className="font-semibold text-gray-700 mb-2">Existing Roles:</h3>
-                        <div className="flex flex-wrap gap-2">
-                            {roles.length > 0
-                                ? roles.map(role => <Badge key={role.id} colorScheme="gray">{role.name}</Badge>)
-                                : <span className="text-gray-500 italic">No roles created yet.</span>
-                            }
+                {/* Selected user detail */}
+                {selectedUser && (
+                    <div className="animate-fade-in">
+
+                        {/* User info */}
+                        <div className="bg-gray-50 p-4 rounded-md mb-6 text-sm flex flex-wrap items-center gap-x-6 gap-y-2">
+                            <div>
+                                <span className="font-semibold text-gray-700">Name: </span>
+                                {displayName(selectedUser)}
+                            </div>
+                            {selectedUser.first_name && (
+                                <div>
+                                    <span className="font-semibold text-gray-700">Email: </span>
+                                    {selectedUser.email}
+                                </div>
+                            )}
+                            <div className="flex items-center gap-2">
+                                <span className="font-semibold text-gray-700">Status:</span>
+                                <Badge colorScheme={selectedUser.is_superuser ? 'green' : 'gray'}>
+                                    {selectedUser.is_superuser ? 'Admin' : 'User'}
+                                </Badge>
+                            </div>
+                            <div>
+                                <span className="font-semibold text-gray-700">Current Roles: </span>
+                                {selectedUser.roles.length > 0
+                                    ? selectedUser.roles.map(r => r.name).join(', ')
+                                    : 'None'}
+                            </div>
                         </div>
-                    </div>
-                </Card>
 
-                {/* ── 2. Assign Roles ── */}
-                <Card className="p-6">
-                    <h2 className="text-xl font-bold mb-4 border-b pb-2">Manage Users & Roles</h2>
-
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Select User</label>
-                        <select
-                            className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 border p-2"
-                            onChange={e => handleUserSelect(e.target.value)}
-                            value={selectedUser?.id ?? ''}
-                        >
-                            <option value="">-- Choose a User --</option>
-                            {users.map(u => (
-                                <option key={u.id} value={u.id}>
-                                    {u.email} {u.is_superuser ? '(Admin)' : ''}
-                                </option>
+                        {/* Assign Roles */}
+                        <h3 className="font-semibold text-gray-700 mb-2">Assign Roles:</h3>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mb-6 border p-3 rounded bg-gray-50">
+                            {roles.map(role => (
+                                <label key={role.id} className="flex items-center space-x-2 cursor-pointer p-1 hover:bg-gray-100 rounded">
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedRoleIds.includes(role.id)}
+                                        onChange={() => handleRoleToggle(role.id)}
+                                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 h-4 w-4"
+                                    />
+                                    <span className="text-gray-900 text-sm">{role.name}</span>
+                                </label>
                             ))}
-                        </select>
-                    </div>
+                        </div>
 
-                    {selectedUser && (
-                        <div className="animate-fade-in">
-                            <div className="bg-gray-50 p-4 rounded-md mb-4 text-sm">
-                                <p><strong>Email:</strong> {selectedUser.email}</p>
-                                <p>
-                                    <strong>Current Roles:</strong>{' '}
-                                    {selectedUser.roles.length > 0
-                                        ? selectedUser.roles.map(r => r.name).join(', ')
-                                        : 'None'}
-                                </p>
-                            </div>
-
-                            <h3 className="font-semibold text-gray-700 mb-2">Assign Roles:</h3>
-                            <div className="space-y-2 mb-6 max-h-40 overflow-y-auto border p-2 rounded bg-gray-50">
-                                {roles.map(role => (
-                                    <label key={role.id} className="flex items-center space-x-2 cursor-pointer p-1 hover:bg-gray-100 rounded">
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedRoleIds.includes(role.id)}
-                                            onChange={() => handleRoleToggle(role.id)}
-                                            className="rounded border-gray-300 text-primary-600 focus:ring-primary-500 h-4 w-4"
-                                        />
-                                        <span className="text-gray-900">{role.name}</span>
-                                    </label>
-                                ))}
-                            </div>
-
-                            <Button variant="primary" onClick={handleAssignRoles} className="w-full">
-                                Update Roles for {selectedUser.email}
+                        {/* Actions row */}
+                        <div className="flex flex-wrap gap-3">
+                            <Button variant="primary" onClick={handleAssignRoles}>
+                                Update Roles
+                            </Button>
+                            <Button
+                                variant={selectedUser.is_superuser ? 'danger' : 'secondary'}
+                                onClick={handleToggleAdmin}
+                                disabled={selectedUser.email === user.email}
+                                title={selectedUser.email === user.email ? 'You cannot change your own admin status' : undefined}
+                                className={selectedUser.email === user.email ? 'opacity-40 cursor-not-allowed' : ''}
+                            >
+                                {selectedUser.is_superuser ? 'Remove Admin' : 'Make Admin'}
                             </Button>
                         </div>
-                    )}
-                </Card>
 
-                {/* ── 3. Manage Admins ── */}
-                <Card className="p-6 lg:col-span-2">
-                    <h2 className="text-xl font-bold mb-4 border-b pb-2">Manage Admins</h2>
-                    <p className="text-sm text-gray-500 mb-4">
-                        Promote any user to admin or remove their admin access. You cannot remove your own admin access.
-                    </p>
-
-                    <div className="divide-y divide-gray-100">
-                        {users.map(u => {
-                            const isSelf = u.email === user.email
-                            return (
-                                <div key={u.id} className="flex items-center justify-between py-3">
-                                    <div className="flex items-center gap-3">
-                                        <span className="text-sm text-gray-900">{u.email}</span>
-                                        <Badge colorScheme={u.is_superuser ? 'green' : 'gray'}>
-                                            {u.is_superuser ? 'Admin' : 'User'}
-                                        </Badge>
-                                    </div>
-                                    <Button
-                                        variant={u.is_superuser ? 'danger' : 'primary'}
-                                        onClick={() => handleToggleAdmin(u)}
-                                        disabled={isSelf}
-                                        title={isSelf ? 'You cannot change your own admin status' : undefined}
-                                        className={`text-sm px-3 py-1 ${isSelf ? 'opacity-40 cursor-not-allowed' : ''}`}
-                                    >
-                                        {u.is_superuser ? 'Remove Admin' : 'Make Admin'}
-                                    </Button>
-                                </div>
-                            )
-                        })}
                     </div>
-                </Card>
+                )}
+            </Card>
 
-            </div>
         </div>
     )
 }
