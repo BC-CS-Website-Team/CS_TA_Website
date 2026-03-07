@@ -18,13 +18,13 @@ const WorkflowFrontend: React.FC = () => {
                 Navigate to the frontend folder and install the required libraries:
             </p>
             <div className="bg-gray-800 text-white p-4 rounded-md not-prose mb-4">
-                <pre><code>cd frontend
-                    npm install</code></pre>
+                <pre><code>cd frontend</code></pre>
+                <pre><code>npm install</code></pre>
             </div>
 
             <h3>Step 3: Run the Development Server</h3>
             <div className="bg-gray-800 text-white p-4 rounded-md not-prose mb-4">
-                <pre><code>npm run dev</code></pre>
+                <pre><code>npm run dev -- --host</code></pre>
             </div>
             <p>
                 You should see a message saying the server is running at <code>http://localhost:5173</code>.

@@ -7,7 +7,7 @@ const WorkflowGuide: React.FC = () => {
         <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-6">Development Workflow</h1>
             <p className="text-lg text-gray-600 mb-8">
-                Learn how to set up your environment, manage the database, and contribute code to the project! Start with this page, then follow the Git page protocols so we can accept your changes as soon as possible!
+                Learn how to set up your environment, manage the database, and contribute code to the project! Start with this page, pick how you will run the backend and database, set up your local frontend, then follow the Git page protocols so we can accept your changes as soon as possible!
             </p>
 
             {/* Navigation Tabs */}

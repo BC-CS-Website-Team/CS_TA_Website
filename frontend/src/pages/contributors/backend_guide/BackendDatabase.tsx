@@ -1,132 +1,150 @@
 import React from 'react';
-import { FaTable, FaCode, FaTerminal, FaExclamationTriangle } from 'react-icons/fa';
-import Heading from '../../../components/atoms/Heading';
-import Text from '../../../components/atoms/Text';
-import Card from '../../../components/atoms/Card';
+import { Heading, Text, Card, CodeBlock } from '../../../components/atoms';
+
+const MODEL_CODE = `
+# backend/src/opportunities/models.py
+
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, func, ForeignKey, Enum as SAEnum
+from sqlalchemy.orm import relationship
+from database import Base
+from opportunities.constants import OpportunityType
+
+class Opportunity(Base):
+    __tablename__ = "opportunities"  # 1. The literal table name in PostgreSQL
+
+    # 2. Primary Key — auto-increments on every insert
+    id = Column(Integer, primary_key=True, index=True)
+
+    # 3. Standard columns
+    name = Column(String, nullable=True)
+    in_house = Column(Boolean, default=False, nullable=True)
+
+    # 4. Enum: restricts values to the OpportunityType class (e.g. "internship", "research")
+    opportunity_type = Column(SAEnum(OpportunityType), nullable=True)
+
+    # 5. Timestamp with an automatic server-side default
+    date_added = Column(DateTime(timezone=True), server_default=func.now(), nullable=True)
+
+    # 6. Foreign Key: stores the integer ID of the user who uploaded this
+    opportunity_uploader_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+
+    # 7. Relationship: lets you do opportunity.opportunity_uploader to get the full User object
+    opportunity_uploader = relationship("User", backref="opportunities")
+`.trim();
+
+const REGISTRY_CODE = `
+# backend/src/models.py
+# This is the ONLY file Alembic looks at to discover tables.
+# Every model you create must be imported here.
+
+from auth.models import User, Role
+from opportunities.models import Opportunity
+
+# When you add a new feature, add its import below:
+from events.models import Event
+`.trim();
+
+const MIGRATION_1 = `cd backend && uv run alembic revision --autogenerate -m "Added Event table"`.trim();
+const MIGRATION_2 = `uv run alembic upgrade head`.trim();
+const SCHEMA_EXPORT = `uv run alembic upgrade head --sql > schema.sql`.trim();
 
 const BackendDatabase: React.FC = () => {
     return (
         <div className="space-y-12 animate-fade-in">
             {/* Header */}
             <div>
-                <Heading level={2} className="text-gray-900 mb-4">Database & Migrations</Heading>
+                <Heading level={2} className="text-gray-900 mb-4">Database & Models</Heading>
                 <Text className="text-lg max-w-3xl">
-                    A practical guide to modifying the database schema. We use <strong>SQLAlchemy</strong> for determining the structure and <strong>Alembic</strong> for applying changes safely.
+                    A practical guide to modifying the database schema. We use <strong>SQLAlchemy 2.0</strong> to define Python classes (Models) that represent PostgreSQL tables, and <strong>Alembic</strong> to translate those class changes into safe, version-controlled SQL migrations.
                 </Text>
             </div>
 
-            {/* Section 1: Where to Edit */}
+            {/* Section 1: Real Model Example */}
             <section className="space-y-6">
-                <div className="flex items-center gap-4">
-                    <div className="p-3 bg-blue-100 rounded-lg text-blue-600">
-                        <FaTable className="w-6 h-6" />
-                    </div>
-                    <Heading level={2}>1. Where to Make Changes</Heading>
-                </div>
-                <div className="prose prose-lg text-gray-600 max-w-none">
-                    <Text>
-                        Tables are defined as Python classes (Models) inside the feature directories.
+                <Heading level={2}>1. How to Define a Table</Heading>
+                <div className="space-y-4">
+                    <Text className="text-gray-600">
+                        Instead of raw SQL, we define tables as Python classes that extend <code>Base</code>. Here is the real, annotated <code>Opportunity</code> model from the codebase — every line is explained:
                     </Text>
-                    <div className="grid md:grid-cols-2 gap-6 mt-6">
-                        <Card className="p-6 border-l-4 border-blue-500">
-                            <Heading level={4} className="mb-2">Auth & Users</Heading>
-                            <code className="bg-gray-100 px-2 py-1 rounded text-sm text-blue-700">backend/src/auth/models.py</code>
-                        </Card>
-                        <Card className="p-6 border-l-4 border-green-500">
-                            <Heading level={4} className="mb-2">New Features</Heading>
-                            <code className="bg-gray-100 px-2 py-1 rounded text-sm text-green-700">
-                                backend/src/[feature]/models.py
-                            </code>
-                        </Card>
+                    <CodeBlock code={MODEL_CODE} language="python" filename="backend/src/opportunities/models.py" />
+
+                    <div className="grid md:grid-cols-2 gap-6 mt-4">
+                        <div className="bg-gray-50 p-5 rounded-lg border border-gray-200">
+                            <Heading level={4} className="text-md mb-2 text-gray-800">nullable vs default</Heading>
+                            <Text className="text-sm text-gray-600">
+                                <code>nullable=True</code> means a row can exist with this column as NULL (empty).
+                                <code>default=False</code> sets a Python-level fallback before saving.
+                                Use <code>nullable=False</code> when a value is required.
+                            </Text>
+                        </div>
+                        <div className="bg-gray-50 p-5 rounded-lg border border-gray-200">
+                            <Heading level={4} className="text-md mb-2 text-gray-800">ForeignKey vs relationship</Heading>
+                            <Text className="text-sm text-gray-600">
+                                <code>ForeignKey("users.id")</code> enforces the link at the SQL level — it stores an integer.
+                                <code>relationship("User")</code> goes further and lets you access the full <code>User</code> Python object in your code without an extra query.
+                            </Text>
+                        </div>
                     </div>
                 </div>
             </section>
 
             {/* Section 2: Registration */}
             <section className="space-y-6">
-                <div className="flex items-center gap-4">
-                    <div className="p-3 bg-yellow-100 rounded-lg text-yellow-600">
-                        <FaExclamationTriangle className="w-6 h-6" />
-                    </div>
-                    <Heading level={2}>2. Registering New Models (Crucial)</Heading>
-                </div>
+                <Heading level={2}>2. Registering New Models (Critical Step)</Heading>
                 <div className="space-y-4">
                     <Text>
-                        We use a central <strong>Barrel File</strong> at <code className="text-red-500 font-bold">backend/src/models.py</code>.
-                        Alembic only looks at this one file to discover tables.
+                        Every new model file must be registered in the central barrel file at{' '}
+                        <code className="text-red-600 font-bold bg-red-50 px-1 py-0.5 rounded">backend/src/models.py</code>.
+                        Alembic only inspects this one file to detect what tables should exist.
                     </Text>
                     <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-                        <div className="flex">
-                            <div className="ml-3">
-                                <Text className="text-sm text-yellow-800 font-bold">
-                                    If you create a NEW model file, you MUST add it to this registry, or Alembic will ignore it.
-                                </Text>
-                            </div>
-                        </div>
+                        <Text className="text-sm text-yellow-800 font-bold">
+                            If you create a new <code>models.py</code> file for a feature and skip this step, Alembic will silently ignore it and your table will never be created.
+                        </Text>
                     </div>
-
-                    <Card className="bg-gray-900 border-gray-800 text-gray-300 p-6 font-mono text-sm shadow-xl overflow-x-auto">
-                        <pre>{`# backend/src/models.py
-
-# Import all your models here so Alembic can see them:
-from auth.models import User, Role
-from opportunities.models import Opportunity
-
-# ... add your new import here:
-from new_feature.models import NewTable`}</pre>
-                    </Card>
+                    <CodeBlock code={REGISTRY_CODE} language="python" filename="backend/src/models.py — Barrel Registry" />
                 </div>
             </section>
 
             {/* Section 3: Workflow */}
             <section className="space-y-6">
-                <div className="flex items-center gap-4">
-                    <div className="p-3 bg-purple-100 rounded-lg text-purple-600">
-                        <FaTerminal className="w-6 h-6" />
-                    </div>
-                    <Heading level={2}>3. Migration Workflow</Heading>
-                </div>
+                <Heading level={2}>3. Applying Changes to the Database</Heading>
                 <Text>
-                    Once you have edited your Python models and registered them, run these commands in the <code>backend/</code> directory.
+                    Once your Python model is written and registered, run these two commands from the <code>backend/</code> directory:
                 </Text>
 
                 <div className="space-y-8">
                     <div className="flex gap-4">
-                        <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 text-gray-600 font-bold text-sm">1</div>
+                        <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-gray-800 text-white font-bold text-sm">1</div>
                         <div className="space-y-2 w-full">
-                            <Heading level={3} className="text-lg">Generate Migration Script</Heading>
-                            <Text className="text-sm text-gray-500">Creates a new Python file in `migrations/versions` describing your changes.</Text>
-                            <Card className="bg-gray-800 text-green-400 p-4 font-mono text-sm">
-                                uv run alembic revision --autogenerate -m "Describe change"
-                            </Card>
+                            <Heading level={3} className="text-lg">Generate the Migration File</Heading>
+                            <Text className="text-sm text-gray-500">
+                                Alembic compares your Python models against the current database state and generates a patch file inside <code>backend/alembic/versions/</code>.
+                            </Text>
+                            <CodeBlock code={MIGRATION_1} language="bash" />
                         </div>
                     </div>
 
                     <div className="flex gap-4">
-                        <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 text-gray-600 font-bold text-sm">2</div>
+                        <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-gray-800 text-white font-bold text-sm">2</div>
                         <div className="space-y-2 w-full">
-                            <Heading level={3} className="text-lg">Apply Changes (Upgrade)</Heading>
-                            <Text className="text-sm text-gray-500">Executes the SQL to update your local database.</Text>
-                            <Card className="bg-gray-800 text-green-400 p-4 font-mono text-sm">
-                                uv run alembic upgrade head
-                            </Card>
+                            <Heading level={3} className="text-lg">Apply the Migration</Heading>
+                            <Text className="text-sm text-gray-500">
+                                Executes the generated SQL, actually altering your PostgreSQL database to match the new schema.
+                            </Text>
+                            <CodeBlock code={MIGRATION_2} language="bash" />
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Section 4: Visualization */}
+            {/* Section 4: Verify */}
             <section className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                <div className="flex items-center gap-3 mb-4">
-                    <FaCode className="text-gray-400" />
-                    <Heading level={3} className="text-lg text-gray-700">Visualizing the Schema</Heading>
-                </div>
-                <Text className="mb-3 text-sm">
-                    To see the raw SQL that creates your current database structure without running it:
+                <Heading level={3} className="text-lg text-gray-700 mb-3">Inspecting the Raw SQL</Heading>
+                <Text className="mb-4 text-sm">
+                    To preview exactly what SQL Alembic would run — without actually running it — export it to a file:
                 </Text>
-                <code className="bg-white border border-gray-300 px-3 py-2 rounded text-sm text-gray-600 block w-fit">
-                    uv run alembic upgrade head --sql {'>'} schema.sql
-                </code>
+                <CodeBlock code={SCHEMA_EXPORT} language="bash" />
             </section>
 
         </div>

@@ -10,18 +10,9 @@ import {
     Heading,
     Text,
     Image,
-    Link
-} from '../../../components/atoms'
-
-interface CodeBlockProps {
-    code: string;
-}
-
-const CodeBlock: React.FC<CodeBlockProps> = ({ code }) => (
-    <pre className="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm font-mono mt-4">
-        <code>{code}</code>
-    </pre>
-);
+    Link,
+    CodeBlock,
+} from '../../../components/atoms';
 
 interface SectionProps {
     title: string;
@@ -29,7 +20,7 @@ interface SectionProps {
     className?: string;
 }
 
-const Section: React.FC<SectionProps> = ({ title, children, className = "" }) => (
+const Section: React.FC<SectionProps> = ({ title, children, className = '' }) => (
     <section className={`mb-12 ${className}`}>
         <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">{title}</h2>
         {children}
@@ -48,7 +39,7 @@ const FrontendAtoms: React.FC = () => {
                     <Button variant="secondary">Secondary</Button>
                     <Button variant="danger">Danger</Button>
                 </div>
-                <CodeBlock code={`<Button variant="primary">Primary</Button>
+                <CodeBlock language="tsx" code={`<Button variant="primary">Primary</Button>
 <Button variant="secondary">Secondary</Button>
 <Button variant="danger">Danger</Button>`} />
             </Section>
@@ -63,7 +54,7 @@ const FrontendAtoms: React.FC = () => {
                     <Badge colorScheme="indigo">Indigo</Badge>
                     <Badge colorScheme="gray">Gray</Badge>
                 </div>
-                <CodeBlock code={`<Badge colorScheme="green">Success</Badge>
+                <CodeBlock language="tsx" code={`<Badge colorScheme="green">Success</Badge>
 <Badge colorScheme="purple">New</Badge>`} />
             </Section>
 
@@ -84,7 +75,7 @@ const FrontendAtoms: React.FC = () => {
                         <Link href="https://example.com" external>External Link</Link>
                     </div>
                 </div>
-                <CodeBlock code={`<Heading level={2}>Heading 2</Heading>
+                <CodeBlock language="tsx" code={`<Heading level={2}>Heading 2</Heading>
 <Text>Body text</Text>
 <Link to="/path">Internal Link</Link>`} />
             </Section>
@@ -105,7 +96,7 @@ const FrontendAtoms: React.FC = () => {
                             placeholder="Type longer text..."
                             rows={3}
                         />
-                        <CodeBlock code={`<Input label="Label" value={val} onChange={handleChange} />`} />
+                        <CodeBlock language="tsx" code={`<Input label="Label" value={val} onChange={handleChange} />`} />
                     </div>
                     <div className="space-y-4">
                         <Select
@@ -123,7 +114,7 @@ const FrontendAtoms: React.FC = () => {
                             id="demo-file"
                             onChange={(file) => console.log(file)}
                         />
-                        <CodeBlock code={`<Select label="Label" options={options} />
+                        <CodeBlock language="tsx" code={`<Select label="Label" options={options} />
 <FileUpload label="Upload" onChange={handleFile} />`} />
                     </div>
                 </div>
@@ -137,10 +128,12 @@ const FrontendAtoms: React.FC = () => {
                             <Heading level={4} className="mb-2">Card Title</Heading>
                             <Text>This is content inside a basic Card atom.</Text>
                         </Card>
-                        <CodeBlock code={`<Card className="p-4">
-<Heading>Title</Heading>
-<Text>Content</Text>
+                        <div className="mt-4">
+                            <CodeBlock language="tsx" code={`<Card className="p-4">
+  <Heading>Title</Heading>
+  <Text>Content</Text>
 </Card>`} />
+                        </div>
                     </div>
                     <div>
                         <h3 className="font-bold text-gray-700 mb-2">Image Atom</h3>
@@ -151,9 +144,50 @@ const FrontendAtoms: React.FC = () => {
                                 className="rounded-lg shadow-sm"
                             />
                         </div>
-                        <CodeBlock code={`<Image src="..." alt="..." className="rounded-lg" />`} />
+                        <div className="mt-4">
+                            <CodeBlock language="tsx" code={`<Image src="..." alt="..." className="rounded-lg" />`} />
+                        </div>
                     </div>
                 </div>
+            </Section>
+
+            <Section title="CodeBlock">
+                <Text className="mb-4 text-gray-600">
+                    The <code>CodeBlock</code> atom renders syntax-highlighted code using the <strong>One Dark</strong> theme. It accepts a <code>code</code> string, a <code>language</code> (e.g. <code>"python"</code>, <code>"typescript"</code>, <code>"bash"</code>), and an optional <code>filename</code> label shown above the block.
+                </Text>
+                <div className="mb-6 space-y-4">
+                    <p className="text-sm font-semibold text-gray-700">Python example with filename label:</p>
+                    <CodeBlock
+                        language="python"
+                        filename="backend/src/opportunities/models.py"
+                        code={`class Opportunity(Base):
+    __tablename__ = "opportunities"
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=True)`}
+                    />
+                    <p className="text-sm font-semibold text-gray-700">TypeScript example:</p>
+                    <CodeBlock
+                        language="typescript"
+                        code={`export interface Opportunity {
+    id: number;
+    name: string | null;
+}`}
+                    />
+                    <p className="text-sm font-semibold text-gray-700">Bash / shell commands:</p>
+                    <CodeBlock language="bash" code={`cd backend && uv run alembic upgrade head`} />
+                </div>
+                <CodeBlock language="tsx" code={`import { CodeBlock } from '../components/atoms';
+
+// With filename header
+<CodeBlock
+    language="python"
+    filename="models.py"
+    code={\`class MyModel(Base):
+    id = Column(Integer, primary_key=True)\`}
+/>
+
+// Inline bash command
+<CodeBlock language="bash" code="npm run dev" />`} />
             </Section>
         </div>
     );

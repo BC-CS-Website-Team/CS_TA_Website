@@ -1,56 +1,26 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { Link } from 'react-router-dom';
+import { Heading, Text, CodeBlock } from '../../../components/atoms';
 
-const markdownContent = `
-# Frontend Development: The "How-To" Guide
+// ─── Code constants ───────────────────────────────────────────────────────────
 
-This guide is your primary resource for the **practical** side of contributing. For the design philosophy and definitions of "Atomic Design", please see the [Overview](./).
-
----
-
-## 1. The Tech Stack
-
-Our frontend is built using three main technologies:
-
-*   **React (with Vite):** The library we use to build the UI elements. Vite is the tool that runs the local server and builds the app.
-*   **Tailwind CSS:** We use utility classes (e.g., \`text-center\`, \`p-4\`) directly in our HTML/JSX.
-*   **React Router:** Handles navigation and URL routing.
-
----
-
-## 2. Directory Structure Overview
-
-The \`src\` folder is organized by Atomic Design principles:
-
-\`\`\`text
+const DIRECTORY_STRUCTURE = `
 src/
 ├── components/
-│   ├── atoms/       # Smallest units (Buttons, Icons)
+│   ├── atoms/       # Smallest units (Buttons, Icons, CodeBlock)
 │   ├── molecules/   # Simple groups (SearchForm, ProfileCard)
 │   ├── organisms/   # Complex sections (Navbar, Footer)
 │   └── templates/   # Layouts (MainLayout)
-├── pages/           # Full page components (corresponding to URLs)
-├── context/         # Global state
+├── pages/           # Full page components mapped to URLs
+├── context/         # Global state (AuthContext)
 ├── data/            # Static data (CSVs)
-└── services/        # API calls
-\`\`\`
+└── services/        # API calls to the backend
+`.trim();
 
----
-
-## 3. How to Add a New Page
-
-Adding a new page involves three main steps.
-
-### Step 1: Create the Component
-
-Create a new file in \`src/pages/\`. Example: \`MyNewPage.jsx\`.
-
-\`\`\`jsx
-// src/pages/MyNewPage.jsx
+const NEW_PAGE_COMPONENT = `
+// src/pages/MyNewPage.tsx
 import React from 'react';
 
-const MyNewPage = () => {
+const MyNewPage: React.FC = () => {
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold">Hello World</h1>
@@ -60,30 +30,18 @@ const MyNewPage = () => {
 };
 
 export default MyNewPage;
-\`\`\`
+`.trim();
 
-### Step 2: Add the Route
-
-Open \`src/App.jsx\`. Import your component and add it to the routes list.
-
-\`\`\`jsx
+const NEW_PAGE_ROUTE = `
+// src/App.tsx
 import MyNewPage from './pages/MyNewPage';
 
 // Inside <Routes> ...
 <Route path="/my-new-page" element={<MyNewPage />} />
-\`\`\`
+`.trim();
 
-### Step 3: Test It
-
-Navigate to [http://localhost:5173/my-new-page](http://localhost:5173/my-new-page) to see your work.
-
----
-
-## 4. Fetching Data with TypeScript
-
-We use a simple \`useEffect\` pattern to load data. The key difference with TypeScript is that we explicitly define the shape of our data using an \`interface\`.
-
-\`\`\`tsx
+const FETCH_DATA_CODE = `
+// src/pages/MyDataPage.tsx
 import React, { useState, useEffect } from 'react';
 import { loadMakerspaceData } from '../../utils/makerspaceCsvLoader';
 
@@ -111,22 +69,10 @@ const MyDataPage: React.FC = () => {
 };
 
 export default MyDataPage;
-\`\`\`
+`.trim();
 
----
-
-## 5. Integrating Frontend and Backend with Types
-
-When the frontend communicates with the backend API, TypeScript behaves as a strict contract. To ensure everything works perfectly and to avoid runtime errors, the **data shapes (Interfaces) on the frontend** must exactly match the **Pydantic Models (Schemas) on the backend**.
-
-Here is a real-world example of how this integration works for an "Opportunity":
-
-### The Backend (Python / FastAPI / Pydantic)
-
-On the backend, we define a schema that dictates exactly what data the endpoint will return.
-
-\`\`\`python
-# backend/src/schemas.py
+const BACKEND_SCHEMA = `
+# backend/src/opportunities/schemas.py
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
@@ -144,50 +90,38 @@ class OpportunityResponse(BaseModel):
     deadline: Optional[datetime] = None
     opportunity_description: str
     link: Optional[str] = None
-\`\`\`
+`.trim();
 
-When the frontend calls \`/api/opportunities\`, the backend guarantees it will return JSON matching this exact structure.
-
-### The Frontend (TypeScript / React)
-
-On the frontend, we define an \`interface\` that mirrors the backend schema perfectly. This ensures that when we use the data in our React components, TypeScript knows exactly what fields are available, preventing typos and undefined properties.
-
-\`\`\`tsx
-// frontend/src/types/index.ts
+const FRONTEND_TYPES = `
+// frontend/src/types/index.ts — mirrors the backend schema exactly
 export interface User {
   first_name: string;
   last_name: string;
 }
 
 export interface Opportunity {
-  id: string | number;
+  id: number;
   name: string;
   opportunity_type: string;
   opportunity_uploader: User;
-  date_added: string;       // datetime from backend becomes an ISO string
+  date_added: string;       // datetime from backend arrives as ISO string
   deadline?: string;        // Optional fields use ?
   opportunity_description: string;
   link?: string;
 }
-\`\`\`
+`.trim();
 
-### The Component (Connecting the two together)
-
-Now, when we fetch the data, we tell TypeScript that the response will be an array of \`Opportunity\` objects. This is where TypeScript shines:
-
-\`\`\`tsx
+const COMPONENT_USAGE = `
 // frontend/src/pages/career/Opportunities.tsx
 import React, { useState, useEffect } from 'react';
-import { Opportunity } from '../../types';
+import type { Opportunity } from '../../types';
 import { fetchOpportunities } from '../../services/opportunities';
 
 const Opportunities: React.FC = () => {
-    // We explicitly type our state variable!
     const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
 
     useEffect(() => {
         const load = async () => {
-            // fetchOpportunities makes the API call to our backend
             const data: Opportunity[] = await fetchOpportunities();
             setOpportunities(data);
         };
@@ -198,11 +132,11 @@ const Opportunities: React.FC = () => {
         <div className="p-8">
             {opportunities.map(opp => (
                 <div key={opp.id} className="mb-4">
-                    {/* TypeScript knows 'opp' is an Opportunity, so autocomplete works perfectly! */}
-                    <h3 className="text-xl font-bold">{opp.name} ({opp.opportunity_type})</h3>
+                    {/* TypeScript knows 'opp' is Opportunity — autocomplete just works! */}
+                    <h3>{opp.name} ({opp.opportunity_type})</h3>
                     <p>Uploaded by: {opp.opportunity_uploader.first_name}</p>
-                    
-                    {/* If we tried to type opp.typo_name, the compiler would throw an error! */}
+
+                    {/* opp.typo_name would be flagged by the compiler immediately */}
                 </div>
             ))}
         </div>
@@ -210,28 +144,124 @@ const Opportunities: React.FC = () => {
 };
 
 export default Opportunities;
-\`\`\`
+`.trim();
 
-**Why is this important?**
-If a backend developer renames \`opportunity_type\` to \`type\` in the database and Pydantic schema, the frontend API call will suddenly receive data without \`opportunity_type\`. If we didn't use TypeScript, the React app might crash silently or display blank text in production. 
-
-With TypeScript, we update our interface to match the backend change, and our code editor immediately flags every component where we used the old \`opp.opportunity_type\`, telling us exactly where to fix the code before we ever build the app!
-`;
+// ─── Component ────────────────────────────────────────────────────────────────
 
 const FrontendExamples: React.FC = () => {
-  const components = {
-    a: ({ node, ...props }: any) => {
-      // Use React Router Link for internal links to preserve SPA navigation
-      if (props.href && props.href.startsWith('./')) {
-        return <Link to={props.href} {...props} />;
-      }
-      return <a {...props} />;
-    }
-  };
-
   return (
-    <div className="prose prose-blue max-w-none">
-      <ReactMarkdown components={components}>{markdownContent}</ReactMarkdown>
+    <div className="space-y-16 animate-fade-in">
+
+      <header className="border-b border-gray-200 pb-10">
+        <Heading level={2} className="text-gray-900 mb-4">How-To & Examples</Heading>
+        <Text className="text-lg text-gray-600 max-w-3xl">
+          Your practical resource for contributing. This guide covers the tech stack, directory structure,
+          how to add pages, fetch data with TypeScript, and how the frontend and backend types are kept in sync.
+        </Text>
+      </header>
+
+      {/* Section 1: Tech Stack */}
+      <section className="space-y-4">
+        <Heading level={2}>1. The Tech Stack</Heading>
+        <ul className="list-disc pl-5 space-y-2 text-gray-600">
+          <li><strong>React (with Vite):</strong> The UI library and local dev server/bundler.</li>
+          <li><strong>TypeScript:</strong> Strict typing throughout — every component and prop is typed.</li>
+          <li><strong>Tailwind CSS:</strong> Utility-first CSS classes applied directly in JSX.</li>
+          <li><strong>React Router:</strong> Handles all URL navigation inside the SPA.</li>
+        </ul>
+      </section>
+
+      {/* Section 2: Directory Structure */}
+      <section className="space-y-4">
+        <Heading level={2}>2. Directory Structure</Heading>
+        <Text className="text-gray-600">The <code>src/</code> folder is organized by Atomic Design principles:</Text>
+        <CodeBlock code={DIRECTORY_STRUCTURE} language="bash" filename="src/ — Directory Structure" />
+      </section>
+
+      {/* Section 3: Adding a Page */}
+      <section className="space-y-6">
+        <Heading level={2}>3. How to Add a New Page</Heading>
+
+        <div className="space-y-2">
+          <div className="flex items-center gap-3">
+            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-gray-800 text-white text-sm font-bold flex items-center justify-center">1</div>
+            <Heading level={3} className="text-lg">Create the Component</Heading>
+          </div>
+          <Text className="text-gray-600 pl-10">Create a new <code>.tsx</code> file inside <code>src/pages/</code>.</Text>
+          <div className="pl-10">
+            <CodeBlock code={NEW_PAGE_COMPONENT} language="typescript" filename="src/pages/MyNewPage.tsx" />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex items-center gap-3">
+            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-gray-800 text-white text-sm font-bold flex items-center justify-center">2</div>
+            <Heading level={3} className="text-lg">Register the Route</Heading>
+          </div>
+          <Text className="text-gray-600 pl-10">Open <code>src/App.tsx</code>, import your component, and add it to the <code>{`<Routes>`}</code> block.</Text>
+          <div className="pl-10">
+            <CodeBlock code={NEW_PAGE_ROUTE} language="typescript" filename="src/App.tsx" />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex items-center gap-3">
+            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-gray-800 text-white text-sm font-bold flex items-center justify-center">3</div>
+            <Heading level={3} className="text-lg">Test It</Heading>
+          </div>
+          <Text className="text-gray-600 pl-10">
+            Navigate to <code>http://localhost:5173/my-new-page</code> to see your work.
+          </Text>
+        </div>
+      </section>
+
+      {/* Section 4: Fetching Data */}
+      <section className="space-y-4">
+        <Heading level={2}>4. Fetching Data with TypeScript</Heading>
+        <Text className="text-gray-600">
+          We use a <code>useEffect</code> pattern to load data. With TypeScript, we define the data shape using an
+          <code> interface</code> first so the compiler can validate every access.
+        </Text>
+        <CodeBlock code={FETCH_DATA_CODE} language="typescript" filename="src/pages/MyDataPage.tsx" />
+      </section>
+
+      {/* Section 5: Frontend + Backend Integration */}
+      <section className="space-y-8">
+        <Heading level={2}>5. Frontend & Backend Type Integration</Heading>
+        <Text className="text-gray-600 max-w-3xl">
+          When the frontend calls the backend API, TypeScript acts as a strict contract.
+          The <strong>TypeScript interfaces on the frontend</strong> must exactly mirror the <strong>Pydantic schemas on the backend</strong>.
+        </Text>
+
+        <div>
+          <Heading level={3} className="text-lg mb-2">The Backend (Pydantic Schema)</Heading>
+          <Text className="text-sm text-gray-500 mb-3">This defines exactly what JSON shape the endpoint returns:</Text>
+          <CodeBlock code={BACKEND_SCHEMA} language="python" filename="backend/src/opportunities/schemas.py" />
+        </div>
+
+        <div>
+          <Heading level={3} className="text-lg mb-2">The Frontend (TypeScript Interface)</Heading>
+          <Text className="text-sm text-gray-500 mb-3">This mirrors the backend schema on the React side — field names and types must match:</Text>
+          <CodeBlock code={FRONTEND_TYPES} language="typescript" filename="frontend/src/types/index.ts" />
+        </div>
+
+        <div>
+          <Heading level={3} className="text-lg mb-2">Using it in a Component</Heading>
+          <Text className="text-sm text-gray-500 mb-3">
+            Typing the <code>useState</code> and fetch return value gives you full IDE autocomplete and compile-time safety:
+          </Text>
+          <CodeBlock code={COMPONENT_USAGE} language="typescript" filename="frontend/src/pages/career/Opportunities.tsx" />
+        </div>
+
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-5 rounded-r-lg">
+          <Text className="text-sm text-blue-800">
+            <strong>Why this matters:</strong> If a backend developer renames <code>opportunity_type</code> to <code>type</code>,
+            TypeScript immediately flags every component that references the old field name — before you build, before you deploy.
+            No silent runtime crashes.
+          </Text>
+        </div>
+      </section>
+
     </div>
   );
 };

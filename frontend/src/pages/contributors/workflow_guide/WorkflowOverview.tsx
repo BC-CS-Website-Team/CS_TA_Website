@@ -24,7 +24,7 @@ const WorkflowOverview: React.FC = () => {
                     <strong>Node.js (LTS Version):</strong> <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener noreferrer">Download Here</a>. Required for running the React frontend.
                 </li>
                 <li>
-                    <strong>Git &amp; VS Code:</strong> <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">Download Git</a> to get our code, and <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Download VS Code</a> to edit it.
+                    <strong>Git &amp; VS Code:</strong> <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">Download Git</a> to get our code, and <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Download VS Code</a> or a another IDE to edit it.
                 </li>
             </ul>
 
