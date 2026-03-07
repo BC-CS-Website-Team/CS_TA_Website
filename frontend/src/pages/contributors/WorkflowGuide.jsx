@@ -13,6 +13,9 @@ const WorkflowGuide = () => {
             <div className="flex space-x-2 sm:space-x-4 mb-8 overflow-x-auto pb-4">
                 {[
                     { path: '.', label: 'Overview', end: true },
+                    { path: 'docker', label: 'Backend (Docker)' },
+                    { path: 'local', label: 'Backend (Local)' },
+                    { path: 'frontend', label: 'Frontend Setup' },
                     { path: 'git', label: 'Git' },
                     { path: 'faq', label: 'FAQ' },
                 ].map(({ path, label, end }) => (

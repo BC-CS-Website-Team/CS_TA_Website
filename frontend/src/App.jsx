@@ -55,6 +55,9 @@ import BackendOverview from './pages/contributors/backend_guide/BackendOverview'
 import BackendDatabase from './pages/contributors/backend_guide/BackendDatabase'
 import WorkflowGuide from './pages/contributors/WorkflowGuide'
 import WorkflowOverview from './pages/contributors/workflow_guide/WorkflowOverview'
+import WorkflowDocker from './pages/contributors/workflow_guide/WorkflowDocker'
+import WorkflowLocal from './pages/contributors/workflow_guide/WorkflowLocal'
+import WorkflowFrontend from './pages/contributors/workflow_guide/WorkflowFrontend'
 import WorkflowGit from './pages/contributors/workflow_guide/WorkflowGit'
 import WorkflowFAQ from './pages/contributors/workflow_guide/WorkflowFAQ'
 import { AuthProvider } from './context/AuthContext'
@@ -133,6 +136,9 @@ function App() {
                 </Route>
                 <Route path="workflow" element={<WorkflowGuide />}>
                   <Route index element={<WorkflowOverview />} />
+                  <Route path="docker" element={<WorkflowDocker />} />
+                  <Route path="local" element={<WorkflowLocal />} />
+                  <Route path="frontend" element={<WorkflowFrontend />} />
                   <Route path="git" element={<WorkflowGit />} />
                   <Route path="faq" element={<WorkflowFAQ />} />
                 </Route>
