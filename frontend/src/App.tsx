@@ -54,6 +54,9 @@ import FrontendExamples from './pages/contributors/frontend_guide/FrontendExampl
 import BackendGuide from './pages/contributors/BackendGuide'
 import BackendOverview from './pages/contributors/backend_guide/BackendOverview'
 import BackendDatabase from './pages/contributors/backend_guide/BackendDatabase'
+import BackendAPI from './pages/contributors/backend_guide/BackendAPI'
+import BackendSecurity from './pages/contributors/backend_guide/BackendSecurity'
+import BackendFrontendIntegration from './pages/contributors/backend_guide/BackendFrontendIntegration'
 import WorkflowGuide from './pages/contributors/WorkflowGuide'
 import WorkflowOverview from './pages/contributors/workflow_guide/WorkflowOverview'
 import WorkflowDocker from './pages/contributors/workflow_guide/WorkflowDocker'
@@ -134,6 +137,9 @@ const App: React.FC = () => {
                 <Route path="backend" element={<BackendGuide />}>
                   <Route index element={<BackendOverview />} />
                   <Route path="database" element={<BackendDatabase />} />
+                  <Route path="api" element={<BackendAPI />} />
+                  <Route path="frontend-integration" element={<BackendFrontendIntegration />} />
+                  <Route path="security" element={<BackendSecurity />} />
                 </Route>
                 <Route path="workflow" element={<WorkflowGuide />}>
                   <Route index element={<WorkflowOverview />} />

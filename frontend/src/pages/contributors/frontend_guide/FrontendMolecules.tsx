@@ -1,17 +1,7 @@
 import React from 'react';
-import { ProfileCard, DropdownSection, NavItem, OpportunityCard } from '../../../components/molecules'
-import { FaHome, FaUser } from 'react-icons/fa'
-import { Text } from '../../../components/atoms'
-
-interface CodeBlockProps {
-    code: string;
-}
-
-const CodeBlock: React.FC<CodeBlockProps> = ({ code }) => (
-    <pre className="bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm font-mono mt-4">
-        <code>{code}</code>
-    </pre>
-);
+import { ProfileCard, DropdownSection, NavItem, OpportunityCard } from '../../../components/molecules';
+import { FaHome, FaUser } from 'react-icons/fa';
+import { Text, CodeBlock } from '../../../components/atoms';
 
 interface SectionProps {
     title: string;
@@ -19,7 +9,7 @@ interface SectionProps {
     className?: string;
 }
 
-const Section: React.FC<SectionProps> = ({ title, children, className = "" }) => (
+const Section: React.FC<SectionProps> = ({ title, children, className = '' }) => (
     <section className={`mb-12 ${className}`}>
         <h2 className="text-2xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-200">{title}</h2>
         {children}
@@ -31,7 +21,7 @@ const FrontendMolecules: React.FC = () => {
         <div className="animate-fade-in space-y-12">
             <Section title="Profile Card">
                 <p className="mb-6 text-gray-600">
-                    A `ProfileCard` combines `Image`, `Text`, and `Card` atoms to display user information.
+                    A <code>ProfileCard</code> combines <code>Image</code>, <code>Text</code>, and <code>Card</code> atoms to display user information.
                 </p>
                 <div className="grid md:grid-cols-2 gap-8">
                     <div className="max-w-xs">
@@ -51,17 +41,19 @@ const FrontendMolecules: React.FC = () => {
                         />
                     </div>
                 </div>
-                <CodeBlock code={`<ProfileCard
+                <div className="mt-4">
+                    <CodeBlock language="tsx" code={`<ProfileCard
   name="Jane Doe"
   role="Head TA"
   image="/path/to/image.jpg"
   variant="default" // or 'round'
 />`} />
+                </div>
             </Section>
 
             <Section title="Dropdown Section">
                 <p className="mb-6 text-gray-600">
-                    `DropdownSection` is an expandable section used primarily in sidebars or lists to toggle visibility of content.
+                    <code>DropdownSection</code> is an expandable section used in sidebars to toggle content visibility.
                 </p>
                 <div className="max-w-md">
                     <DropdownSection title="Click me to toggle">
@@ -69,14 +61,16 @@ const FrontendMolecules: React.FC = () => {
                         <Text className="mt-2 text-sm text-gray-500">You can put any content here.</Text>
                     </DropdownSection>
                 </div>
-                <CodeBlock code={`<DropdownSection title="Section Title">
+                <div className="mt-4">
+                    <CodeBlock language="tsx" code={`<DropdownSection title="Section Title">
   <p>Hidden content goes here...</p>
 </DropdownSection>`} />
+                </div>
             </Section>
 
             <Section title="Navigation Item">
                 <p className="mb-6 text-gray-600">
-                    `NavItem` is used in the `Navigation` organism. It handles links, icons, and dropdown menus.
+                    <code>NavItem</code> is used in the <code>Navigation</code> organism. It handles links, icons, and dropdown menus.
                 </p>
                 <div className="flex gap-4 bg-white p-4 rounded shadow-sm">
                     <NavItem
@@ -94,21 +88,23 @@ const FrontendMolecules: React.FC = () => {
                         }}
                     />
                 </div>
-                <CodeBlock code={`const item = {
+                <div className="mt-4">
+                    <CodeBlock language="typescript" code={`const item = {
   to: '/path',
   label: 'Link Label',
-  icon: FaIcon, // optional
-  dropdown: [ // optional
+  icon: FaIcon,       // optional
+  dropdown: [         // optional
     { to: '/sub-path', label: 'Sub Item' }
   ]
 };
 
 <NavItem item={item} />`} />
+                </div>
             </Section>
 
             <Section title="Opportunity Card">
                 <p className="mb-6 text-gray-600">
-                    `OpportunityCard` displays details about a job, internship, or event. It includes action buttons for editing and deleting.
+                    <code>OpportunityCard</code> displays details about a job, internship, or event, with action buttons for editing and deleting.
                 </p>
                 <div className="max-w-md">
                     <OpportunityCard
@@ -126,7 +122,8 @@ const FrontendMolecules: React.FC = () => {
                         onDelete={() => console.log('Delete clicked')}
                     />
                 </div>
-                <CodeBlock code={`<OpportunityCard
+                <div className="mt-4">
+                    <CodeBlock language="tsx" code={`<OpportunityCard
   opportunity={{
     name: "Job Title",
     opportunity_type: "Job",
@@ -137,6 +134,7 @@ const FrontendMolecules: React.FC = () => {
   onEdit={handleEdit}
   onDelete={handleDelete}
 />`} />
+                </div>
             </Section>
         </div>
     );
